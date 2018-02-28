@@ -1,0 +1,77 @@
+/* remove markdown paragraph symbol */
+a.anchor-link {
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+}
+
+/* change fonts */
+/* previously used playfair display */
+
+a{
+  font-family: 'Bree Serif', serif;
+}
+
+h1{
+  font-family: 'Bree Serif', serif;
+}
+
+h2{
+  font-family: 'Bree Serif', serif;
+}
+
+h3{
+  font-family: 'Bree Serif', serif;
+}
+
+h4{
+  font-family: 'Bree Serif', serif;
+}
+h5{
+  font-family: 'Bree Serif', serif;
+}
+h6{
+  font-family: 'Bree Serif', serif;
+}
+
+.h1{
+  font-family: 'Bree Serif', serif;
+}
+.h2{
+  font-family: 'Bree Serif', serif;
+}
+.h3{
+  font-family: 'Bree Serif', serif;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 17px;
+    line-height: 1.728571;
+    /*background: url('../images/white_wall_hash.png'); */
+}
+
+/* update nav bar*/
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 62px;
+    height: 62px;
+    padding-top: 0;
+}
+
+/* contact form*/
+/* an adaptation of http://tympanus.net/codrops/2015/01/08/inspiration-text-input-effects/ */
+
+#contain,.left{
+  width: 1200px;
+  margin-left:-10px;
+  font-size:85%;
+}
+
+/* reposition logo*/
+.img-responsive {
+  padding: 5px;
+  margin-top: 4px;
+}
+<img src="/images/Logomakr_1kNOIw.png">
+

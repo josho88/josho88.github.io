@@ -1,122 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Playfair+Display|Raleway" rel="stylesheet" type="text/css">
-    
-    <title>Simulating a Mortality Dataset in R - Josh Olney</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="http://josho88.github.io/Simulating Data.html">
-
-        <meta name="author" content="Josh Olney" />
-        <meta name="keywords" content="R,RStudio,Simulation" />
-        <meta name="description" content="In this post I will show you how to simulate a large dataset of mortality claims. Sometimes it is useful to use simulated data. For example, if you wanted to experiment with new modelling techniques pertaining to a specific problem, but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you wish to create, it&#39;s possible to create entire datasets from scratch." />
-
-        <meta property="og:site_name" content="Josh Olney" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Simulating a Mortality Dataset in R"/>
-        <meta property="og:url" content="http://josho88.github.io/Simulating Data.html"/>
-        <meta property="og:description" content="In this post I will show you how to simulate a large dataset of mortality claims. Sometimes it is useful to use simulated data. For example, if you wanted to experiment with new modelling techniques pertaining to a specific problem, but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you wish to create, it&#39;s possible to create entire datasets from scratch."/>
-        <meta property="article:published_time" content="2018-02-23" />
-            <meta property="article:section" content="Projects" />
-            <meta property="article:tag" content="R" />
-            <meta property="article:tag" content="RStudio" />
-            <meta property="article:tag" content="Simulation" />
-            <meta property="article:author" content="Josh Olney" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://josho88.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="http://josho88.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="http://josho88.github.io/theme/css/pygments/friendly.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://josho88.github.io/theme/css/style.css" type="text/css"/>
-        <link href="http://josho88.github.io/css/custom.css" rel="stylesheet">
-
-        <link href="http://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney ATOM Feed"/>
-
-
-
-        <link href="http://josho88.github.io/feeds/projects.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney Projects ATOM Feed"/>
-
-</head>
-<body>
-
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="http://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="http://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href=""> <i class="fa fa-"></i>  </a></li>
-                    <li><a href="/index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
-                    <li><a href="/pages/about.html"> <i class="fa fa-info"></i>  About</a></li>
-                    <li><a href="/pages/contact.html"> <i class="fa fa-envelope"></i>  Contact</a></li>
-                
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-</div> <!-- /.navbar -->
-<!-- Banner -->
-<!-- End Banner -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="http://josho88.github.io/Simulating Data.html"
-                       rel="bookmark"
-                       title="Permalink to Simulating a Mortality Dataset in R">
-                        Simulating a Mortality Dataset in R
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-02-23T20:00:00+00:00"> Fri 23 February 2018</time>
-    </span>
-
-
-
-        <span class="label label-default">Category</span>
-        <a href="http://josho88.github.io/category/projects.html">Projects</a>
-
-
-<span class="label label-default">Tags</span>
-	<a href="http://josho88.github.io/tag/r.html">R</a>
-        /
-	<a href="http://josho88.github.io/tag/rstudio.html">RStudio</a>
-        /
-	<a href="http://josho88.github.io/tag/simulation.html">Simulation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <style type="text/css">/*!
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Josh Olney - Projects</title><link href="http://josho88.github.io/" rel="alternate"></link><link href="http://josho88.github.io/feeds/projects.atom.xml" rel="self"></link><id>http://josho88.github.io/</id><updated>2018-02-23T20:00:00+00:00</updated><entry><title>Simulating a Mortality Dataset in R</title><link href="http://josho88.github.io/Simulating%20Data.html" rel="alternate"></link><published>2018-02-23T20:00:00+00:00</published><updated>2018-02-23T20:00:00+00:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-02-23:/Simulating Data.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In this post I will show you how to simulate a large dataset of mortality claims. Sometimes it is useful to use simulated data. For example, if you wanted to experiment with new modelling techniques pertaining to a specific problem, but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you wish to create, it's possible to create entire datasets from scratch.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -343,7 +231,7 @@ div.unrecognized_cell .inner_cell a:hover {
   text-decoration: none;
 }
 @media (max-width: 540px) {
-  div.unrecognized_cell > div.prompt {
+  div.unrecognized_cell &gt; div.prompt {
     display: none;
   }
 }
@@ -396,19 +284,19 @@ div.input_prompt {
   color: #303F9F;
   border-top: 1px solid transparent;
 }
-div.input_area > div.highlight {
+div.input_area &gt; div.highlight {
   margin: 0.4em;
   border: none;
   padding: 0px;
   background-color: transparent;
 }
-div.input_area > div.highlight > pre {
+div.input_area &gt; div.highlight &gt; pre {
   margin: 0px;
   border: none;
   padding: 0px;
   background-color: transparent;
 }
-/* The following gets added to the <head> if it is detected that the user has a
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
  * monospace font with inconsistent normal/bold/italic height.  See
  * notebookmain.js.  Such fonts will have keywords vertically offset with
  * respect to the rest of the text.  The user should select a better font.
@@ -454,7 +342,7 @@ div.input_area > div.highlight > pre {
 }
 /*
 
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
 Adapted from GitHub theme
 
 */
@@ -916,7 +804,7 @@ div.text_cell {
   align-items: stretch;
 }
 @media (max-width: 540px) {
-  div.text_cell > div.prompt {
+  div.text_cell &gt; div.prompt {
     display: none;
   }
 }
@@ -981,8 +869,8 @@ h6:hover .anchor-link {
   font-size: 100%;
   font-style: italic;
 }
-</style>
-<style type="text/css">.highlight .hll { background-color: #ffffcc }
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
@@ -1050,8 +938,8 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -1087,274 +975,274 @@ h6:hover .anchor-link {
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
 .ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this post I will show you how to simulate a large dataset of mortality claims. Sometimes it is useful to use simulated data. For example, if you wanted to experiment with new modelling techniques pertaining to a specific problem, but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you wish to create, it's possible to create entire datasets from scratch.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h2><p>Imagine that you wanted to experiment with fitting different predictive models to life insurance claims data (perhaps to practice your coding skills or to explore an idea) but didn't have all the data required. Rather than spend time searching for or collecting large volumes of data appropriate for your specific problem, you could simply (and quickly) create a simulated dataset.</p>
-<p>I will show you how to create a dataset representing a portfolio of lives with lump sum life insurance cover, but the following techniques can be used to create all sorts of data. We will end up with a large dataset where each row will represent one life and the columns will contain information about that persons age, salary, occupation, gender, location and, finally, whether or not that person died during a specific period.</p>
-<p>In order to do this we will need to come up with some assumptions about the variables we wish to create. The assumptions I will make will be very simple and are listed below.</p>
-<div class="alert alert-block alert-info"> Age: Normally distributed with mean age = 40 and variance = 25
-<br/>
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In this post I will show you how to simulate a large dataset of mortality claims. Sometimes it is useful to use simulated data. For example, if you wanted to experiment with new modelling techniques pertaining to a specific problem, but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you wish to create, it's possible to create entire datasets from scratch.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Example"&gt;Example&lt;a class="anchor-link" href="#Example"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Imagine that you wanted to experiment with fitting different predictive models to life insurance claims data (perhaps to practice your coding skills or to explore an idea) but didn't have all the data required. Rather than spend time searching for or collecting large volumes of data appropriate for your specific problem, you could simply (and quickly) create a simulated dataset.&lt;/p&gt;
+&lt;p&gt;I will show you how to create a dataset representing a portfolio of lives with lump sum life insurance cover, but the following techniques can be used to create all sorts of data. We will end up with a large dataset where each row will represent one life and the columns will contain information about that persons age, salary, occupation, gender, location and, finally, whether or not that person died during a specific period.&lt;/p&gt;
+&lt;p&gt;In order to do this we will need to come up with some assumptions about the variables we wish to create. The assumptions I will make will be very simple and are listed below.&lt;/p&gt;
+&lt;div class="alert alert-block alert-info"&gt; Age: Normally distributed with mean age = 40 and variance = 25
+&lt;br/&gt;
 Gender: 40% of the sample will be Male, 60% female
-<br/>
+&lt;br/&gt;
 Occupation: 3 categories representing different occupations. 50% of the lives will be in category 1, 20% in category 2 and 30% in category 3
-<br/>
+&lt;br/&gt;
 Location: 4 categories representing different areas of residence. 10% will be in category 1, 20% in category 2, 50% in category 3 and 20% in category 4
-<br/>
+&lt;br/&gt;
 Salary: Gamma distributed. I will assume that salary varies by age and occupation
-<br/>
+&lt;br/&gt;
 Exposure: This variable represents the length of time (in years) that each person was covered for. This will come from a uniform(0,3) distribution (i.e the maximum cover period is 3 years)
-<br/>
-Claim: I will assume that the probability of death is a formula linked to age and occupation. The base level of mortality will be $\frac{Age}{20000}$. Mortality increases by 20% for those in occupation category 1 and by 15% for those living in locations 3 or 4</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Creating-the-data-in-R">Creating the data in R<a class="anchor-link" href="#Creating-the-data-in-R">¶</a></h2><h3 id="Setting-Assumptions">Setting Assumptions<a class="anchor-link" href="#Setting-Assumptions">¶</a></h3><p>I will assume you have R Studio installed and some experience with basic R programming. If you have not used R before, I recommend visiting <a href="https://www.datacamp.com">https://www.datacamp.com</a> and taking the free intro to R course. We will be using the simstudy package. If you have not yet installed this package, run <code>install.packages('simstudy')</code> to do so.</p>
-<p>Simstudy first requires us to generate a table containing our assumptions. Each row in this table will contain information relating to one of our variables. We will need to specify a name for each variable, the distribution we wish to simulate from and formula for the mean of each variable (and in some cases, variance). To create the assumptions data, use the <code>defData()</code> function.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># load library</span>
-<span class="kn">library</span><span class="p">(</span>simstudy<span class="p">)</span>
-<span class="kp">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+&lt;br/&gt;
+Claim: I will assume that the probability of death is a formula linked to age and occupation. The base level of mortality will be $\frac{Age}{20000}$. Mortality increases by 20% for those in occupation category 1 and by 15% for those living in locations 3 or 4&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Creating-the-data-in-R"&gt;Creating the data in R&lt;a class="anchor-link" href="#Creating-the-data-in-R"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="Setting-Assumptions"&gt;Setting Assumptions&lt;a class="anchor-link" href="#Setting-Assumptions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;I will assume you have R Studio installed and some experience with basic R programming. If you have not used R before, I recommend visiting &lt;a href="https://www.datacamp.com"&gt;https://www.datacamp.com&lt;/a&gt; and taking the free intro to R course. We will be using the simstudy package. If you have not yet installed this package, run &lt;code&gt;install.packages('simstudy')&lt;/code&gt; to do so.&lt;/p&gt;
+&lt;p&gt;Simstudy first requires us to generate a table containing our assumptions. Each row in this table will contain information relating to one of our variables. We will need to specify a name for each variable, the distribution we wish to simulate from and formula for the mean of each variable (and in some cases, variance). To create the assumptions data, use the &lt;code&gt;defData()&lt;/code&gt; function.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# load library&lt;/span&gt;
+&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;simstudy&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;set.seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;123&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># initialise our assumptions table and add the Age variable</span>
-def <span class="o">=</span> defData<span class="p">(</span>varname <span class="o">=</span> <span class="s">'Age'</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">'normal'</span><span class="p">,</span> formula <span class="o">=</span> <span class="m">40</span><span class="p">,</span> variance <span class="o">=</span> <span class="m">25</span><span class="p">)</span>
+&lt;span class="c1"&gt;# initialise our assumptions table and add the Age variable&lt;/span&gt;
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'Age'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'normal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; variance &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># the assumptions table has now been created and can be viewed</span>
+&lt;span class="c1"&gt;# the assumptions table has now been created and can be viewed&lt;/span&gt;
 def
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Warning message:
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stderr output_text"&gt;
+&lt;pre&gt;Warning message:
 “package ‘simstudy’ was built under R version 3.4.3”Loading required package: data.table
 Warning message:
-“package ‘data.table’ was built under R version 3.4.2”</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
-<thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
-<tbody>
-<tr><td>Age     </td><td>40      </td><td>25      </td><td>normal  </td><td>identity</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To add to this table, use the <code>defData()</code> function again, but this time specifying the name of the table we've just created using the <code>dtDefs</code> argument. For example, add the gender, occupation, location and exposure variables as follows:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># add a binary variable to indicate gender - 40% of lives will be Male and will be represented by as 1's</span>
-def <span class="o">=</span> defData<span class="p">(</span>dtDefs <span class="o">=</span> def<span class="p">,</span>varname <span class="o">=</span> <span class="s">"Gender"</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">"binary"</span><span class="p">,</span> formula <span class="o">=</span> <span class="m">0.4</span><span class="p">)</span>
+“package ‘data.table’ was built under R version 3.4.2”&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-striped table table-hover"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Age     &lt;/td&gt;&lt;td&gt;40      &lt;/td&gt;&lt;td&gt;25      &lt;/td&gt;&lt;td&gt;normal  &lt;/td&gt;&lt;td&gt;identity&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To add to this table, use the &lt;code&gt;defData()&lt;/code&gt; function again, but this time specifying the name of the table we've just created using the &lt;code&gt;dtDefs&lt;/code&gt; argument. For example, add the gender, occupation, location and exposure variables as follows:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# add a binary variable to indicate gender - 40% of lives will be Male and will be represented by as 1's&lt;/span&gt;
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;dtDefs &lt;span class="o"&gt;=&lt;/span&gt; def&lt;span class="p"&gt;,&lt;/span&gt;varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Gender"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"binary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># add a categorical variable to define occupation type - there will be three classes</span>
-def <span class="o">=</span> defData<span class="p">(</span>dtDefs <span class="o">=</span> def<span class="p">,</span>varname <span class="o">=</span> <span class="s">"Occupation"</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">"categorical"</span><span class="p">,</span>formula <span class="o">=</span> <span class="s">"0.5;0.2;0.3"</span><span class="p">)</span>
+&lt;span class="c1"&gt;# add a categorical variable to define occupation type - there will be three classes&lt;/span&gt;
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;dtDefs &lt;span class="o"&gt;=&lt;/span&gt; def&lt;span class="p"&gt;,&lt;/span&gt;varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Occupation"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"categorical"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"0.5;0.2;0.3"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># add the location variable to the data table</span>
-def <span class="o">=</span> defData<span class="p">(</span>dtDefs <span class="o">=</span> def<span class="p">,</span>varname <span class="o">=</span> <span class="s">"Location"</span><span class="p">,</span>dist <span class="o">=</span> <span class="s">"categorical"</span><span class="p">,</span>formula <span class="o">=</span> <span class="s">"0.1;0.2;0.5;0.2"</span><span class="p">)</span>
+&lt;span class="c1"&gt;# add the location variable to the data table&lt;/span&gt;
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;dtDefs &lt;span class="o"&gt;=&lt;/span&gt; def&lt;span class="p"&gt;,&lt;/span&gt;varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Location"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"categorical"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"0.1;0.2;0.5;0.2"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># add a variable to indicate 'exposure years' - in other words, the length of time</span>
-<span class="c1"># an individual was insured</span>
-def <span class="o">=</span> defData<span class="p">(</span>def<span class="p">,</span> varname <span class="o">=</span> <span class="s">'Exposure'</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">"uniform"</span><span class="p">,</span> formula <span class="o">=</span> <span class="s">"0;3"</span><span class="p">)</span>
+&lt;span class="c1"&gt;# add a variable to indicate 'exposure years' - in other words, the length of time&lt;/span&gt;
+&lt;span class="c1"&gt;# an individual was insured&lt;/span&gt;
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;def&lt;span class="p"&gt;,&lt;/span&gt; varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'Exposure'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"uniform"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"0;3"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># the assumptions table now looks like:</span>
+&lt;span class="c1"&gt;# the assumptions table now looks like:&lt;/span&gt;
 def
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
-<thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
-<tbody>
-<tr><td>Age            </td><td>40             </td><td>25             </td><td>normal         </td><td>identity       </td></tr>
-<tr><td>Gender         </td><td>0.4            </td><td> 0             </td><td>binary         </td><td>identity       </td></tr>
-<tr><td>Occupation     </td><td>0.5;0.2;0.3    </td><td> 0             </td><td>categorical    </td><td>identity       </td></tr>
-<tr><td>Location       </td><td>0.1;0.2;0.5;0.2</td><td> 0             </td><td>categorical    </td><td>identity       </td></tr>
-<tr><td>Exposure       </td><td>0;3            </td><td> 0             </td><td>uniform        </td><td>identity       </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since salary and claim depend on other variables, the 'formula' argument for these variables will be a bit more complicated. I have used the <code>paste()</code> function to specify the formulas to be passed into <code>defData()</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># add a salary variable - the mean of which will increase with age and will vary by occupation class</span>
-<span class="c1"># use a gamma distribution</span>
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-striped table table-hover"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Age            &lt;/td&gt;&lt;td&gt;40             &lt;/td&gt;&lt;td&gt;25             &lt;/td&gt;&lt;td&gt;normal         &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Gender         &lt;/td&gt;&lt;td&gt;0.4            &lt;/td&gt;&lt;td&gt; 0             &lt;/td&gt;&lt;td&gt;binary         &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Occupation     &lt;/td&gt;&lt;td&gt;0.5;0.2;0.3    &lt;/td&gt;&lt;td&gt; 0             &lt;/td&gt;&lt;td&gt;categorical    &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location       &lt;/td&gt;&lt;td&gt;0.1;0.2;0.5;0.2&lt;/td&gt;&lt;td&gt; 0             &lt;/td&gt;&lt;td&gt;categorical    &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Exposure       &lt;/td&gt;&lt;td&gt;0;3            &lt;/td&gt;&lt;td&gt; 0             &lt;/td&gt;&lt;td&gt;uniform        &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Since salary and claim depend on other variables, the 'formula' argument for these variables will be a bit more complicated. I have used the &lt;code&gt;paste()&lt;/code&gt; function to specify the formulas to be passed into &lt;code&gt;defData()&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# add a salary variable - the mean of which will increase with age and will vary by occupation class&lt;/span&gt;
+&lt;span class="c1"&gt;# use a gamma distribution&lt;/span&gt;
 
-salary_formula <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span><span class="s">"ifelse(Occupation == 1, Age * 800, </span>
-<span class="s">                        ifelse(Occupation == 2, Age * 1200, Age * 1350))"</span><span class="p">)</span>
+salary_formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"ifelse(Occupation == 1, Age * 800, &lt;/span&gt;
+&lt;span class="s"&gt;                        ifelse(Occupation == 2, Age * 1200, Age * 1350))"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-def <span class="o">=</span> defData<span class="p">(</span>def<span class="p">,</span>varname <span class="o">=</span> <span class="s">"Salary"</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">"gamma"</span><span class="p">,</span>formula <span class="o">=</span> salary_formula<span class="p">,</span>variance <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span>
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;def&lt;span class="p"&gt;,&lt;/span&gt;varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Salary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"gamma"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;formula &lt;span class="o"&gt;=&lt;/span&gt; salary_formula&lt;span class="p"&gt;,&lt;/span&gt;variance &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># Now, add the binary claim indicator - the probability of death varies as specified earlier</span>
-claim_formula <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span><span class="s">"(Age * 1/20000)"</span><span class="p">,</span>
-                      <span class="s">" * ifelse(Occupation == 1,1.2,1)"</span><span class="p">,</span>
-                      <span class="s">" * ifelse(Location %in% c(3,4), 1.15,1)"</span><span class="p">,</span>
-                      sep <span class="o">=</span> <span class="s">""</span><span class="p">)</span>
+&lt;span class="c1"&gt;# Now, add the binary claim indicator - the probability of death varies as specified earlier&lt;/span&gt;
+claim_formula &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"(Age * 1/20000)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      &lt;span class="s"&gt;" * ifelse(Occupation == 1,1.2,1)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      &lt;span class="s"&gt;" * ifelse(Location %in% c(3,4), 1.15,1)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                      sep &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;""&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-def <span class="o">=</span> defData<span class="p">(</span>def<span class="p">,</span> varname <span class="o">=</span> <span class="s">"Claim"</span><span class="p">,</span> dist <span class="o">=</span> <span class="s">"binary"</span><span class="p">,</span>formula <span class="o">=</span> claim_formula<span class="p">)</span>
+def &lt;span class="o"&gt;=&lt;/span&gt; defData&lt;span class="p"&gt;(&lt;/span&gt;def&lt;span class="p"&gt;,&lt;/span&gt; varname &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"Claim"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; dist &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"binary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;formula &lt;span class="o"&gt;=&lt;/span&gt; claim_formula&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># the final assumptions table now looks like:</span>
+&lt;span class="c1"&gt;# the final assumptions table now looks like:&lt;/span&gt;
 def
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
-<thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
-<tbody>
-<tr><td>Age                                                                                                          </td><td>40                                                                                                           </td><td>25.0                                                                                                         </td><td>normal                                                                                                       </td><td>identity                                                                                                     </td></tr>
-<tr><td>Gender                                                                                                       </td><td>0.4                                                                                                          </td><td> 0.0                                                                                                         </td><td>binary                                                                                                       </td><td>identity                                                                                                     </td></tr>
-<tr><td>Occupation                                                                                                   </td><td>0.5;0.2;0.3                                                                                                  </td><td> 0.0                                                                                                         </td><td>categorical                                                                                                  </td><td>identity                                                                                                     </td></tr>
-<tr><td>Location                                                                                                     </td><td>0.1;0.2;0.5;0.2                                                                                              </td><td> 0.0                                                                                                         </td><td>categorical                                                                                                  </td><td>identity                                                                                                     </td></tr>
-<tr><td>Exposure                                                                                                     </td><td>0;3                                                                                                          </td><td> 0.0                                                                                                         </td><td>uniform                                                                                                      </td><td>identity                                                                                                     </td></tr>
-<tr><td>Salary                                                                                                       </td><td>ifelse(Occupation == 1, Age * 800, 
-                        ifelse(Occupation == 2, Age * 1200, Age * 1350))</td><td> 0.2                                                                                                         </td><td>gamma                                                                                                        </td><td>identity                                                                                                     </td></tr>
-<tr><td>Claim                                                                                                        </td><td>(Age * 1/20000) * ifelse(Occupation == 1,1.2,1) * ifelse(Location %in% c(3,4), 1.15,1)                       </td><td> 0.0                                                                                                         </td><td>binary                                                                                                       </td><td>identity                                                                                                     </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Generating-the-Data">Generating the Data<a class="anchor-link" href="#Generating-the-Data">¶</a></h3><p>Now, actually generating the data is easy. Do this using the <code>genData()</code> function. The first argument, n, is how many records you want to simulate. Then just pass in the name of the assumptions table. I will simulate 1.5m records.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># simulate 1.5m records</span>
-dt <span class="o">=</span> genData<span class="p">(</span>n <span class="o">=</span> <span class="m">1500000</span><span class="p">,</span>def<span class="p">)</span>
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-striped table table-hover"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Age                                                                                                          &lt;/td&gt;&lt;td&gt;40                                                                                                           &lt;/td&gt;&lt;td&gt;25.0                                                                                                         &lt;/td&gt;&lt;td&gt;normal                                                                                                       &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Gender                                                                                                       &lt;/td&gt;&lt;td&gt;0.4                                                                                                          &lt;/td&gt;&lt;td&gt; 0.0                                                                                                         &lt;/td&gt;&lt;td&gt;binary                                                                                                       &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Occupation                                                                                                   &lt;/td&gt;&lt;td&gt;0.5;0.2;0.3                                                                                                  &lt;/td&gt;&lt;td&gt; 0.0                                                                                                         &lt;/td&gt;&lt;td&gt;categorical                                                                                                  &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location                                                                                                     &lt;/td&gt;&lt;td&gt;0.1;0.2;0.5;0.2                                                                                              &lt;/td&gt;&lt;td&gt; 0.0                                                                                                         &lt;/td&gt;&lt;td&gt;categorical                                                                                                  &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Exposure                                                                                                     &lt;/td&gt;&lt;td&gt;0;3                                                                                                          &lt;/td&gt;&lt;td&gt; 0.0                                                                                                         &lt;/td&gt;&lt;td&gt;uniform                                                                                                      &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary                                                                                                       &lt;/td&gt;&lt;td&gt;ifelse(Occupation == 1, Age * 800, 
+                        ifelse(Occupation == 2, Age * 1200, Age * 1350))&lt;/td&gt;&lt;td&gt; 0.2                                                                                                         &lt;/td&gt;&lt;td&gt;gamma                                                                                                        &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Claim                                                                                                        &lt;/td&gt;&lt;td&gt;(Age * 1/20000) * ifelse(Occupation == 1,1.2,1) * ifelse(Location %in% c(3,4), 1.15,1)                       &lt;/td&gt;&lt;td&gt; 0.0                                                                                                         &lt;/td&gt;&lt;td&gt;binary                                                                                                       &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Generating-the-Data"&gt;Generating the Data&lt;a class="anchor-link" href="#Generating-the-Data"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Now, actually generating the data is easy. Do this using the &lt;code&gt;genData()&lt;/code&gt; function. The first argument, n, is how many records you want to simulate. Then just pass in the name of the assumptions table. I will simulate 1.5m records.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# simulate 1.5m records&lt;/span&gt;
+dt &lt;span class="o"&gt;=&lt;/span&gt; genData&lt;span class="p"&gt;(&lt;/span&gt;n &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1500000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;def&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># view the first few rows</span>
-<span class="kp">head</span><span class="p">(</span>dt<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
-<thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th></tr></thead>
-<tbody>
-<tr><td>1        </td><td>37.19762 </td><td>1        </td><td>3        </td><td>4        </td><td>2.8019758</td><td>61010.78 </td><td>0        </td></tr>
-<tr><td>2        </td><td>38.84911 </td><td>1        </td><td>1        </td><td>3        </td><td>2.4055016</td><td>58132.73 </td><td>0        </td></tr>
-<tr><td>3        </td><td>47.79354 </td><td>0        </td><td>1        </td><td>3        </td><td>2.8939270</td><td>42853.31 </td><td>0        </td></tr>
-<tr><td>4        </td><td>40.35254 </td><td>1        </td><td>1        </td><td>3        </td><td>0.5860885</td><td>59369.07 </td><td>0        </td></tr>
-<tr><td>5        </td><td>40.64644 </td><td>1        </td><td>3        </td><td>3        </td><td>1.3679983</td><td>58268.46 </td><td>0        </td></tr>
-<tr><td>6        </td><td>48.57532 </td><td>1        </td><td>1        </td><td>1        </td><td>0.3328969</td><td>22582.35 </td><td>0        </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exploring-the-Simulated-Data">Exploring the Simulated Data<a class="anchor-link" href="#Exploring-the-Simulated-Data">¶</a></h3><p>Now, we can summarise and visualise the dataset that has been created to check that everything is as expected. The <code>summary()</code> and <code>table()</code> functions are very useful and the ggplot2 library is particularly good for creating visualisations. Use the <code>ggplot()</code> function to create density plots, bar charts and scatter plots to check that distributions have been created according to our specified assumptions and to check the relationships between variables. If you have not installed ggplot2, execute <code>install.packages('ggplot2')</code></p>
-<p>First, use <code>summary()</code> to see statistics for the entire dataset. Then use <code>table()</code> and <code>prop.table()</code> to see how claims vary by occupation and/or location.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [7]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Summary stats</span>
-<span class="kp">summary</span><span class="p">(</span>dt<span class="p">)</span>
+&lt;span class="c1"&gt;# view the first few rows&lt;/span&gt;
+&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-striped table table-hover"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Gender&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;37.19762 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;td&gt;2.8019758&lt;/td&gt;&lt;td&gt;61010.78 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt;38.84911 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;2.4055016&lt;/td&gt;&lt;td&gt;58132.73 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;47.79354 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;2.8939270&lt;/td&gt;&lt;td&gt;42853.31 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4        &lt;/td&gt;&lt;td&gt;40.35254 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;0.5860885&lt;/td&gt;&lt;td&gt;59369.07 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5        &lt;/td&gt;&lt;td&gt;40.64644 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;1.3679983&lt;/td&gt;&lt;td&gt;58268.46 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6        &lt;/td&gt;&lt;td&gt;48.57532 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;0.3328969&lt;/td&gt;&lt;td&gt;22582.35 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Exploring-the-Simulated-Data"&gt;Exploring the Simulated Data&lt;a class="anchor-link" href="#Exploring-the-Simulated-Data"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Now, we can summarise and visualise the dataset that has been created to check that everything is as expected. The &lt;code&gt;summary()&lt;/code&gt; and &lt;code&gt;table()&lt;/code&gt; functions are very useful and the ggplot2 library is particularly good for creating visualisations. Use the &lt;code&gt;ggplot()&lt;/code&gt; function to create density plots, bar charts and scatter plots to check that distributions have been created according to our specified assumptions and to check the relationships between variables. If you have not installed ggplot2, execute &lt;code&gt;install.packages('ggplot2')&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;First, use &lt;code&gt;summary()&lt;/code&gt; to see statistics for the entire dataset. Then use &lt;code&gt;table()&lt;/code&gt; and &lt;code&gt;prop.table()&lt;/code&gt; to see how claims vary by occupation and/or location.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Summary stats&lt;/span&gt;
+&lt;span class="kp"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="kp">print</span><span class="p">(</span><span class="s">"Claim rate by occupation"</span><span class="p">)</span>
-<span class="c1"># prop table can be used to convert the tables above to percentages</span>
-<span class="kp">print</span><span class="p">(</span><span class="s">"Occupation"</span><span class="p">)</span>
-<span class="kp">round</span><span class="p">(</span><span class="kp">prop.table</span><span class="p">(</span><span class="kp">table</span><span class="p">(</span>dt<span class="o">$</span>Occupation<span class="p">,</span> dt<span class="o">$</span>Claim<span class="p">),</span> margin<span class="o">=</span> <span class="m">1</span><span class="p">),</span><span class="m">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_text output_subarea ">
-<pre>       id               Age            Gender         Occupation 
+&lt;span class="kp"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Claim rate by occupation"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# prop table can be used to convert the tables above to percentages&lt;/span&gt;
+&lt;span class="kp"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Occupation"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;prop.table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="o"&gt;$&lt;/span&gt;Occupation&lt;span class="p"&gt;,&lt;/span&gt; dt&lt;span class="o"&gt;$&lt;/span&gt;Claim&lt;span class="p"&gt;),&lt;/span&gt; margin&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;       id               Age            Gender         Occupation 
  Min.   :      1   Min.   :16.00   Min.   :0.0000   Min.   :1.0  
  1st Qu.: 375001   1st Qu.:36.62   1st Qu.:0.0000   1st Qu.:1.0  
  Median : 750000   Median :40.00   Median :0.0000   Median :2.0  
@@ -1367,60 +1255,60 @@ dt <span class="o">=</span> genData<span class="p">(</span>n <span class="o">=</
  Median :3.000   Median :1.4982829   Median : 37217   Median :0.000000  
  Mean   :2.801   Mean   :1.4988954   Mean   : 41787   Mean   :0.002402  
  3rd Qu.:3.000   3rd Qu.:2.2485773   3rd Qu.: 53111   3rd Qu.:0.000000  
- Max.   :4.000   Max.   :2.9999989   Max.   :265628   Max.   :1.000000  </pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] "Claim rate by occupation"
+ Max.   :4.000   Max.   :2.9999989   Max.   :265628   Max.   :1.000000  &lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[1] "Claim rate by occupation"
 [1] "Occupation"
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_text output_subarea ">
-<pre>   
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;   
           0       1
   1 0.99732 0.00268
   2 0.99782 0.00218
-  3 0.99792 0.00208</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, we can use density plots to check that ages are normally distributed and that salaries are a) gamma distributed and b) vary by occupation.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+  3 0.99792 0.00208&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Next, we can use density plots to check that ages are normally distributed and that salaries are a) gamma distributed and b) vary by occupation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;ggplot2&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># view distribution of ages</span>
-ggplot<span class="p">(</span>dt<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>Age<span class="p">))</span> <span class="o">+</span> geom_density<span class="p">()</span> <span class="o">+</span> theme_bw<span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
+&lt;span class="c1"&gt;# view distribution of ages&lt;/span&gt;
+ggplot&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;,&lt;/span&gt; aes&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="o"&gt;=&lt;/span&gt;Age&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_density&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; theme_bw&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
 OI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9
 oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvu
 uWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd
@@ -2321,44 +2209,44 @@ nTp1kgoVKsgPP/xgnjHSMY+CdRWei12xCgIIIICAgwQIkBxUWWQVAQQQQCC8Ajt27JBJkybJ
 7AABBBBAAAEEEEAAAQScIkCA5JSaIp8IIIAAAggggAACCCAQcQECpIgTswMEEEAAAQQQQAAB
 BBBwigABklNqinwigAACCCCAAAIIIIBAxAUIkCJOzA4QQAABBBBAAAEEEEDAKQIESE6pKfKJ
 AAIIIIAAAggggAACERcgQIo4MTtAAAEEEEAAAQQQQAABpwgQIDmlpsgnAggggAACCCCAAAII
-RFzg/wDjYUf1zhMTIwAAAABJRU5ErkJggg=="/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like age has been simulated as expected. The curve is bell shaped, the mean age is clearly 40 and most people are aged between 30 - 50, which is also in line with expectations given the variance we specified. To check that salary has been correctly simulated, repeat the <code>ggplot()</code> function but replace Age with Salary in the <code>aes()</code> (aesthetic) argument. We will also include an additional argument - <code>facet_wrap()</code> - to generate different density plots for each occupation group.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># view distribution of salary by occupation class</span>
-ggplot<span class="p">(</span>dt<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> Salary<span class="p">))</span> <span class="o">+</span> 
-  geom_density<span class="p">()</span> <span class="o">+</span> 
-  facet_wrap<span class="p">(</span><span class="o">~</span>Occupation<span class="p">)</span> <span class="o">+</span>
-  theme_bw<span class="p">()</span> <span class="o">+</span>
-ggtitle<span class="p">(</span><span class="s">"Salary Dist. by Occupation Category"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
+RFzg/wDjYUf1zhMTIwAAAABJRU5ErkJggg=="/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;It looks like age has been simulated as expected. The curve is bell shaped, the mean age is clearly 40 and most people are aged between 30 - 50, which is also in line with expectations given the variance we specified. To check that salary has been correctly simulated, repeat the &lt;code&gt;ggplot()&lt;/code&gt; function but replace Age with Salary in the &lt;code&gt;aes()&lt;/code&gt; (aesthetic) argument. We will also include an additional argument - &lt;code&gt;facet_wrap()&lt;/code&gt; - to generate different density plots for each occupation group.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# view distribution of salary by occupation class&lt;/span&gt;
+ggplot&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;,&lt;/span&gt; aes&lt;span class="p"&gt;(&lt;/span&gt;x &lt;span class="o"&gt;=&lt;/span&gt; Salary&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+  geom_density&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+  facet_wrap&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;Occupation&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+  theme_bw&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+ggtitle&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Salary Dist. by Occupation Category"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
 OI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9
 oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvu
 uWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd
@@ -3537,43 +3425,43 @@ vn//3u3TdPz4cYSjDJ5Pug4BCGQ3AXyQsnt+GR0EIAABCKQBAWmKGjZsaI0aNbLdu3fbqFGj
 BMIRQEAKR4VzEIAABCAAAQhAAAIQgEBOEkBAyslpZ9AQgAAEIAABCEAAAhCAQDgCCEjhqHAO
 AhCAAAQgAAEIQAACEMhJAghIOTntDBoCEIAABCAAAQhAAAIQCEcAASkcFc5BAAIQgAAEIAAB
 CEAAAjlJAAEpJ6edQUMAAhCAAAQgAAEIQAAC4QggIIWjwjkIQAACEIAABCAAAQhAICcJ/Ati
-9yrfp2m3MgAAAABJRU5ErkJggg=="/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>These look like gamma distributions and salary seems to be highest for occupation category 3 - which is correct!</p>
-<p>In our assumptions table we state that salary should increase with age. We can check this using a scatter plot. Use <code>ggplot()</code> again but with <code>geom_point()</code> instead of density. Also, add <code>y = Salary</code> to the aesthetic.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># plot sample of age against salary</span>
-<span class="c1"># (plot first 1000 rows for a better visual. 'pch = 21' controls the type of point)</span>
-ggplot<span class="p">(</span>dt<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">1000</span><span class="p">,],</span> aes<span class="p">(</span>x <span class="o">=</span> Age<span class="p">,</span> y <span class="o">=</span> Salary<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">(</span>pch <span class="o">=</span> <span class="m">21</span><span class="p">)</span> <span class="o">+</span> theme_bw<span class="p">()</span> <span class="o">+</span> 
-ggtitle<span class="p">(</span><span class="s">"Age/Salary Scatter"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
+9yrfp2m3MgAAAABJRU5ErkJggg=="/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;These look like gamma distributions and salary seems to be highest for occupation category 3 - which is correct!&lt;/p&gt;
+&lt;p&gt;In our assumptions table we state that salary should increase with age. We can check this using a scatter plot. Use &lt;code&gt;ggplot()&lt;/code&gt; again but with &lt;code&gt;geom_point()&lt;/code&gt; instead of density. Also, add &lt;code&gt;y = Salary&lt;/code&gt; to the aesthetic.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# plot sample of age against salary&lt;/span&gt;
+&lt;span class="c1"&gt;# (plot first 1000 rows for a better visual. 'pch = 21' controls the type of point)&lt;/span&gt;
+ggplot&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,],&lt;/span&gt; aes&lt;span class="p"&gt;(&lt;/span&gt;x &lt;span class="o"&gt;=&lt;/span&gt; Age&lt;span class="p"&gt;,&lt;/span&gt; y &lt;span class="o"&gt;=&lt;/span&gt; Salary&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_point&lt;span class="p"&gt;(&lt;/span&gt;pch &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;21&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; theme_bw&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+ggtitle&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Age/Salary Scatter"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
 OI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9
 oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvu
 uWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd
@@ -6099,43 +5987,43 @@ r18/W3vttW3ixIk2bdo0o+ZRJOqQke6qGyIgAiIgAiUSkIFUIkAdLgIiIAIi0PoJfPTRRy7M
 EuDpUBEQAREQAREQAREQAREQgdZFQAZS6xpP3Y0IiIAIiIAIiIAIiIAIiEAJBGQglQBPh4qA
 CIiACIiACIiACIiACLQuAjKQWtd46m5EQAREQAREQAREQAREQARKICADqQR4OlQEREAEREAE
 REAEREAERKB1EZCB1LrGU3cjAiIgAiIgAiIgAiIgAiJQAgEZSCXA06EiIAIiIAIiIAIiIAIi
-IAKti4AMpNY1nrobERABERABERABERABERCBEgj8f33xR7XQn8nAAAAAAElFTkSuQmCC"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, view a bar chart showing counts of each location category. This time use <code>geom_bar()</code> and add <code>facet_wrap()</code> to view separate bar charts for each occupation class.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># distribution of locations by occupation</span>
-ggplot<span class="p">(</span>dt<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>Location<span class="p">)))</span> <span class="o">+</span> geom_bar<span class="p">()</span> <span class="o">+</span> theme_bw<span class="p">()</span> <span class="o">+</span> 
-  facet_wrap<span class="p">(</span><span class="o">~</span>Occupation<span class="p">)</span> <span class="o">+</span> 
-xlab<span class="p">(</span><span class="s">"Location"</span><span class="p">)</span> <span class="o">+</span> 
-ggtitle<span class="p">(</span><span class="s">"Location by Occupation Category"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_png output_subarea ">
-<img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
+IAKti4AMpNY1nrobERABERABERABERABERCBEgj8f33xR7XQn8nAAAAAAElFTkSuQmCC"/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Finally, view a bar chart showing counts of each location category. This time use &lt;code&gt;geom_bar()&lt;/code&gt; and add &lt;code&gt;facet_wrap()&lt;/code&gt; to view separate bar charts for each occupation class.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# distribution of locations by occupation&lt;/span&gt;
+ggplot&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;,&lt;/span&gt; aes&lt;span class="p"&gt;(&lt;/span&gt;x &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;factor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;Location&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; geom_bar&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; theme_bw&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+  facet_wrap&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;Occupation&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+xlab&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Location"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; 
+ggtitle&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Location by Occupation Category"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img class="img-responsive" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAYAAAD958/bAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
 OI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9
 oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvu
 uWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd
@@ -6828,87 +6716,87 @@ i2PRRRfN1lH5L27w2tHYKu/xlwABAgSKIdCj+QvDFaDFaAtRECBAgMAsCsRob3HdUYwGF2eC
 1E9AglQ/ayURIECAAAECBAgQIFBwgS8fOit4wMIjQIAAAQIECBAgQIBAVwlIkLpK1noJECBA
 gAABAgQIEGg4AQlSwzWZgAkQIECAAAECBAgQ6CoBCVJXyVovAQIECBAgQIAAAQINJyBBargm
 EzABAgQIECBAgAABAl0lIEHqKlnrJUCAAAECBAgQIECg4QQkSA3XZAImQIAAAQIECBAgQKCr
-BP4fDN9poykTFDwAAAAASUVORK5CYII="/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Creating-new-Features">Creating new Features<a class="anchor-link" href="#Creating-new-Features">¶</a></h3><p>This last section will demonstrate how we could add some simple extra features to the dataset. These new features will be created using existing variables. Currently, age is exact and so we have lots of unique values. To reduce the number of distinct values I will create an 'Age_Last' variable. In addition, sometimes it is useful to transform numerical variables to categorical and so I will show you how to create a 'Salary_Band' feature from the numerical salary variable. This will group salary into a number of different categories which we will treat as nominal(you may also wish to treat these as ordinal factors).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># create an 'Age_Last' variable from Age exact that we simulated earlier</span>
-dt<span class="o">$</span>Age_Last <span class="o">=</span> <span class="kp">floor</span><span class="p">(</span>dt<span class="o">$</span>Age<span class="p">)</span>
+BP4fDN9poykTFDwAAAAASUVORK5CYII="/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Creating-new-Features"&gt;Creating new Features&lt;a class="anchor-link" href="#Creating-new-Features"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This last section will demonstrate how we could add some simple extra features to the dataset. These new features will be created using existing variables. Currently, age is exact and so we have lots of unique values. To reduce the number of distinct values I will create an 'Age_Last' variable. In addition, sometimes it is useful to transform numerical variables to categorical and so I will show you how to create a 'Salary_Band' feature from the numerical salary variable. This will group salary into a number of different categories which we will treat as nominal(you may also wish to treat these as ordinal factors).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# create an 'Age_Last' variable from Age exact that we simulated earlier&lt;/span&gt;
+dt&lt;span class="o"&gt;$&lt;/span&gt;Age_Last &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;floor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="o"&gt;$&lt;/span&gt;Age&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># we can also create a categorical variable from the raw numeric </span>
-<span class="c1"># salary variable - e.g group into bins</span>
-<span class="c1"># We will create groups using a helper function and custom defined breaks</span>
-<span class="c1"># Bins can include, for example, those earning &lt;25k, 25-35k, 35-45k, 45-75k,75k+</span>
-<span class="c1"># (I've just arbitrarily picked these)</span>
+&lt;span class="c1"&gt;# we can also create a categorical variable from the raw numeric &lt;/span&gt;
+&lt;span class="c1"&gt;# salary variable - e.g group into bins&lt;/span&gt;
+&lt;span class="c1"&gt;# We will create groups using a helper function and custom defined breaks&lt;/span&gt;
+&lt;span class="c1"&gt;# Bins can include, for example, those earning &amp;lt;25k, 25-35k, 35-45k, 45-75k,75k+&lt;/span&gt;
+&lt;span class="c1"&gt;# (I've just arbitrarily picked these)&lt;/span&gt;
 
-quant_bin <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> breaks<span class="p">){</span>
-  bin <span class="o">=</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">cut</span><span class="p">(</span>x<span class="p">,</span>
-                       breaks <span class="o">=</span> breaks<span class="p">,</span>
-                       include.lowest <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> right <span class="o">=</span> <span class="bp">T</span><span class="p">))</span>
+quant_bin &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt; breaks&lt;span class="p"&gt;){&lt;/span&gt;
+  bin &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;as.numeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;cut&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;x&lt;span class="p"&gt;,&lt;/span&gt;
+                       breaks &lt;span class="o"&gt;=&lt;/span&gt; breaks&lt;span class="p"&gt;,&lt;/span&gt;
+                       include.lowest &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; right &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;T&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
   bin
-<span class="p">}</span>
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-breaks <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">25000</span><span class="p">,</span><span class="m">35000</span><span class="p">,</span><span class="m">45000</span><span class="p">,</span><span class="m">75000</span><span class="p">,</span> <span class="kp">max</span><span class="p">(</span>dt<span class="o">$</span>Salary<span class="p">))</span>
+breaks &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;25000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;35000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;45000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;75000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="o"&gt;$&lt;/span&gt;Salary&lt;span class="p"&gt;))&lt;/span&gt;
 
-dt<span class="o">$</span>Salary_Band <span class="o">=</span> quant_bin<span class="p">(</span>dt<span class="o">$</span>Salary<span class="p">,</span> breaks<span class="p">)</span>
+dt&lt;span class="o"&gt;$&lt;/span&gt;Salary_Band &lt;span class="o"&gt;=&lt;/span&gt; quant_bin&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="o"&gt;$&lt;/span&gt;Salary&lt;span class="p"&gt;,&lt;/span&gt; breaks&lt;span class="p"&gt;)&lt;/span&gt;
 
-<span class="c1"># Now, view the first few rows of the data again</span>
-<span class="kp">head</span><span class="p">(</span>dt<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
-<thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
-<tbody>
-<tr><td>1        </td><td>37.19762 </td><td>1        </td><td>3        </td><td>4        </td><td>2.8019758</td><td>61010.78 </td><td>0        </td><td>37       </td><td>4        </td></tr>
-<tr><td>2        </td><td>38.84911 </td><td>1        </td><td>1        </td><td>3        </td><td>2.4055016</td><td>58132.73 </td><td>0        </td><td>38       </td><td>4        </td></tr>
-<tr><td>3        </td><td>47.79354 </td><td>0        </td><td>1        </td><td>3        </td><td>2.8939270</td><td>42853.31 </td><td>0        </td><td>47       </td><td>3        </td></tr>
-<tr><td>4        </td><td>40.35254 </td><td>1        </td><td>1        </td><td>3        </td><td>0.5860885</td><td>59369.07 </td><td>0        </td><td>40       </td><td>4        </td></tr>
-<tr><td>5        </td><td>40.64644 </td><td>1        </td><td>3        </td><td>3        </td><td>1.3679983</td><td>58268.46 </td><td>0        </td><td>40       </td><td>4        </td></tr>
-<tr><td>6        </td><td>48.57532 </td><td>1        </td><td>1        </td><td>1        </td><td>0.3328969</td><td>22582.35 </td><td>0        </td><td>48       </td><td>1        </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><p>In summary, you should now be able to:</p>
-<ul>
-<li>Generate a table of assumptions</li>
-<li>Simulate a large dataset using the assumptions table</li>
-<li>Check summary statistics and visualise the data</li>
-<li>Create some simple new features</li>
-</ul>
-</div>
-</div>
-</div>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+&lt;span class="c1"&gt;# Now, view the first few rows of the data again&lt;/span&gt;
+&lt;span class="kp"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;dt&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-striped table table-hover"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Gender&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;th scope="col"&gt;Age_Last&lt;/th&gt;&lt;th scope="col"&gt;Salary_Band&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;37.19762 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;td&gt;2.8019758&lt;/td&gt;&lt;td&gt;61010.78 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;37       &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2        &lt;/td&gt;&lt;td&gt;38.84911 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;2.4055016&lt;/td&gt;&lt;td&gt;58132.73 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;38       &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;47.79354 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;2.8939270&lt;/td&gt;&lt;td&gt;42853.31 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;47       &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4        &lt;/td&gt;&lt;td&gt;40.35254 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;0.5860885&lt;/td&gt;&lt;td&gt;59369.07 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;40       &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5        &lt;/td&gt;&lt;td&gt;40.64644 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;1.3679983&lt;/td&gt;&lt;td&gt;58268.46 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;40       &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6        &lt;/td&gt;&lt;td&gt;48.57532 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;0.3328969&lt;/td&gt;&lt;td&gt;22582.35 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;48       &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Summary"&gt;Summary&lt;a class="anchor-link" href="#Summary"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In summary, you should now be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Generate a table of assumptions&lt;/li&gt;
+&lt;li&gt;Simulate a large dataset using the assumptions table&lt;/li&gt;
+&lt;li&gt;Check summary statistics and visualise the data&lt;/li&gt;
+&lt;li&gt;Create some simple new features&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
@@ -6935,125 +6823,5 @@ dt<span class="o">$</span>Salary_Band <span class="o">=</span> quant_bin<span cl
         "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
-
-            </div>
-            <!-- /.entry-content -->
-    <hr/>
-    <section class="comments" id="comments">
-        <h2>Comments</h2>
-
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'josho88-github-io.'; // required: replace example with your forum shortname
-
-                    var disqus_identifier = 'Simulating Data';
-                var disqus_url = 'http://josho88.github.io/Simulating Data.html';
-
-            var disqus_config = function () {
-                this.language = "en";
-            };
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    </section>
-        </article>
-    </section>
-
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-<!-- Sidebar -->
-<section class="well well-sm">
-  <ul class="list-group list-group-flush">
-
-<!-- Sidebar/Social -->
-<li class="list-group-item">
-  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-  <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="https://www.linkedin.com/in/josh-olney-b7800870"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
-    <li class="list-group-item"><a href="http://github.com/josho88"><i class="fa fa-github-square fa-lg"></i> github</a></li>
-    <li class="list-group-item"><a href="https://www.instagram.com/p_doughboy/"><i class="fa fa-instagram fa-lg"></i> instagram</a></li>
-    <li class="list-group-item"><a href="https://stackoverflow.com/users/7799277/joshua-olney"><i class="fa fa-stack-overflow fa-lg"></i> stack-overflow</a></li>
-  </ul>
-</li>
-<!-- End Sidebar/Social -->
-
-<!-- Sidebar/Recent Posts -->
-<li class="list-group-item">
-  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
-  <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="http://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
-  </ul>
-</li>
-<!-- End Sidebar/Recent Posts -->
-
-<!-- Sidebar/Categories -->
-<li class="list-group-item">
-  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
-  <ul class="list-group" id="categories">
-    <li class="list-group-item">
-      <a href="http://josho88.github.io/category/projects.html"><i class="fa fa-folder-open fa-lg"></i>Projects</a>
-    </li>
-  </ul>
-</li>
-<!-- End Sidebar/Categories -->
-  </ul>
-</section>
-<!-- End Sidebar -->            </aside>
-        </div>
-    </div>
-</div>
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2018 Josh Olney
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
-      </div>
-   </div>
-</footer>
-<script src="http://josho88.github.io/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="http://josho88.github.io/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="http://josho88.github.io/theme/js/respond.min.js"></script>
-
-    <script src="http://josho88.github.io/js/custom_java_contact.js"></script>
-
-    <!-- Disqus -->
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'josho88-github-io.'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function () {
-            var s = document.createElement('script');
-            s.async = true;
-            s.type = 'text/javascript';
-            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
-    </script>
-    <!-- End Disqus Code -->
-
-
-</body>
-</html>
+&lt;/script&gt;
+</content><category term="R"></category><category term="RStudio"></category><category term="Simulation"></category></entry></feed>
