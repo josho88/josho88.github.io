@@ -18,21 +18,19 @@
         <meta property="og:site_name" content="Josh Olney" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Josh Olney"/>
-        <meta property="og:url" content="https://josho88.github.io"/>
+        <meta property="og:url" content="."/>
         <meta property="og:description" content="Josh Olney"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://josho88.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="https://josho88.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://josho88.github.io/theme/css/pygments/friendly.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://josho88.github.io/theme/css/style.css" type="text/css"/>
-        <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
+    <link href="./theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./css/custom.css" rel="stylesheet">
 
-        <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney ATOM Feed"/>
 
 
 
@@ -49,13 +47,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
+            <a href="./" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="./images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href=""> <i class="fa fa-"></i>  </a></li>
-                    <li><a href="/index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
+                    <li><a href="/index.html"> <i class="fa fa-location-arrow"></i>  Home</a></li>
+                    <li><a href="/blog_index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
                     <li><a href="/pages/about.html"> <i class="fa fa-info"></i>  About</a></li>
                     <li><a href="/pages/contact.html"> <i class="fa fa-envelope"></i>  Contact</a></li>
                 
@@ -77,12 +76,24 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-misc">Misc <span class="badge pull-right">1</span></a>
+                    </h4>
+                </div>
+                <div id="collapse-misc" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p><span class="categories-timestamp"><time datetime="2018-02-21T20:00:00+00:00">Wed 21 February 2018</time></span> <a href="./Test.html">Test Post</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse-projects">Projects <span class="badge pull-right">1</span></a>
                     </h4>
                 </div>
                 <div id="collapse-projects" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <p><span class="categories-timestamp"><time datetime="2018-02-23T20:00:00+00:00">Fri 23 February 2018</time></span> <a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></p>
+                        <p><span class="categories-timestamp"><time datetime="2018-02-23T20:00:00+00:00">Fri 23 February 2018</time></span> <a href="./Simulating Data.html">Simulating a Mortality Dataset in R</a></p>
                     </div>
                 </div>
             </div>
@@ -103,7 +114,6 @@
     <li class="list-group-item"><a href="https://www.linkedin.com/in/josh-olney-b7800870"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
     <li class="list-group-item"><a href="http://github.com/josho88"><i class="fa fa-github-square fa-lg"></i> github</a></li>
     <li class="list-group-item"><a href="https://www.instagram.com/p_doughboy/"><i class="fa fa-instagram fa-lg"></i> instagram</a></li>
-    <li class="list-group-item"><a href="https://stackoverflow.com/users/7799277/joshua-olney"><i class="fa fa-stack-overflow fa-lg"></i> stack-overflow</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
@@ -112,7 +122,8 @@
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
+    <li class="list-group-item"><a href="./Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
+    <li class="list-group-item"><a href="./Test.html">Test Post</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -122,7 +133,10 @@
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
   <ul class="list-group" id="categories">
     <li class="list-group-item">
-      <a href="https://josho88.github.io/category/projects.html"><i class="fa fa-folder-open fa-lg"></i>Projects</a>
+      <a href="./category/misc.html"><i class="fa fa-folder-open fa-lg"></i>Misc</a>
+    </li>
+    <li class="list-group-item">
+      <a href="./category/projects.html"><i class="fa fa-folder-open fa-lg"></i>Projects</a>
     </li>
   </ul>
 </li>
@@ -145,15 +159,14 @@
       </div>
    </div>
 </footer>
-<script src="https://josho88.github.io/theme/js/jquery.min.js"></script>
+<script src="./theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://josho88.github.io/theme/js/bootstrap.min.js"></script>
+<script src="./theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://josho88.github.io/theme/js/respond.min.js"></script>
+<script src="./theme/js/respond.min.js"></script>
 
-    <script src="https://josho88.github.io/js/custom_java_contact.js"></script>
 
     <!-- Disqus -->
     <script type="text/javascript">

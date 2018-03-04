@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Playfair+Display|Raleway" rel="stylesheet" type="text/css">
     
-    <title>Authors - Josh Olney</title>
+    <title>About - Josh Olney</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -12,24 +12,25 @@
 
 
 
-        <meta name="author" content="Josh Olney" />
+    <meta name="author" content="Josh Olney" />
+    <meta name="keywords" content="About" />
 
     <!-- Open Graph tags -->
         <meta property="og:site_name" content="Josh Olney" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Josh Olney"/>
-        <meta property="og:url" content="."/>
+        <meta property="og:url" content=""/>
         <meta property="og:description" content="Josh Olney"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="./theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="./theme/css/pygments/friendly.css" rel="stylesheet">
-    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
-        <link href="./css/custom.css" rel="stylesheet">
+    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/css/custom.css" rel="stylesheet">
 
 
 
@@ -47,14 +48,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="./" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="./images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href=""> <i class="fa fa-"></i>  </a></li>
-                    <li><a href="/index.html"> <i class="fa fa-location-arrow"></i>  Home</a></li>
-                    <li><a href="/blog_index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
+                    <li><a href="/index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
                     <li><a href="/pages/about.html"> <i class="fa fa-info"></i>  About</a></li>
                     <li><a href="/pages/contact.html"> <i class="fa fa-envelope"></i>  Contact</a></li>
                 
@@ -70,8 +70,23 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-  <h1>Authors on Josh Olney</h1>
-        <li><a href="./author/josh-olney.html">Josh Olney</a> (2)</li>
+            <article>
+                <h2><a href="/about.html">About</a></h2>
+                <div class="summary"><div class="about-me">
+<div class="col-left">
+<h2>let me introduce myself.</h2>
+<img alt="profile" class="img-responsive" src="/images/josh.jpg"/>
+</div>
+<div class="col-right">
+<h4> Josh Olney </h4>
+<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.  </p>
+<p> 
+        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using …</p></div></div>
+                    <a class="btn btn-default btn-xs" href="/about.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
@@ -94,8 +109,7 @@
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="./Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
-    <li class="list-group-item"><a href="./Test.html">Test Post</a></li>
+    <li class="list-group-item"><a href="/about.html">About</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -105,10 +119,13 @@
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
   <ul class="list-group" id="categories">
     <li class="list-group-item">
-      <a href="./category/misc.html"><i class="fa fa-folder-open fa-lg"></i>Misc</a>
+      <a href="/category/about.html"><i class="fa fa-folder-open fa-lg"></i>About</a>
     </li>
     <li class="list-group-item">
-      <a href="./category/projects.html"><i class="fa fa-folder-open fa-lg"></i>Projects</a>
+      <a href="/category/misc.html"><i class="fa fa-folder-open fa-lg"></i>Misc</a>
+    </li>
+    <li class="list-group-item">
+      <a href="/category/projects.html"><i class="fa fa-folder-open fa-lg"></i>Projects</a>
     </li>
   </ul>
 </li>
@@ -123,7 +140,7 @@
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 Josh Olney
+         <div class="col-xs-10">&copy; 2010 Josh Olney
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -131,14 +148,15 @@
       </div>
    </div>
 </footer>
-<script src="./theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="./theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
+    <script src="/js/custom_java_contact.js"></script>
 
     <!-- Disqus -->
     <script type="text/javascript">
