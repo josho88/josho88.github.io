@@ -234,7 +234,8 @@ h6{
   margin-top:1.5%;
   margin-left:2%;
   margin-right:1.5%;
-  background-image:url(/images/josh.png);
+  /*background-image:url(/images/josh.png); changed as interfered with chrome*/ 
+  background:url(/images/josh.png);
   background-size:cover;
 }
 
@@ -250,7 +251,7 @@ h6{
   margin-top:1.5%;
   margin-left:1.5%;
   margin-right:2%;
-  background-image:url(/images/josh.png);
+  background:url(/images/josh.png);
   background-size:cover;
 }
 
