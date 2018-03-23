@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Josh Olney - Statistical Modelling</title><link href="https://josho88.github.io/" rel="alternate"></link><link href="https://josho88.github.io/feeds/statistical-modelling.atom.xml" rel="self"></link><id>https://josho88.github.io/</id><updated>2018-03-20T20:00:00+00:00</updated><entry><title>H2O’s GLM Algorithm for Insurance Data: Part 1</title><link href="https://josho88.github.io/Mortality%20GLM.html" rel="alternate"></link><published>2018-03-20T20:00:00+00:00</published><updated>2018-03-20T20:00:00+00:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-03-20:/Mortality GLM.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Josh Olney - Statistical Modelling</title><link href="https://josho88.github.io/" rel="alternate"></link><link href="https://josho88.github.io/feeds/statistical-modelling.atom.xml" rel="self"></link><id>https://josho88.github.io/</id><updated>2018-03-20T20:00:00+00:00</updated><entry><title>Life Insurance GLM with H2O: Part 1</title><link href="https://josho88.github.io/Mortality%20GLM.html" rel="alternate"></link><published>2018-03-20T20:00:00+00:00</published><updated>2018-03-20T20:00:00+00:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-03-20:/Mortality GLM.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1060,7 +1060,7 @@ dt &lt;span class="o"&gt;=&lt;/span&gt; read.csv&lt;span class="p"&gt;(&lt;/span
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table-striped table-hover table"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Male&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;th scope="col"&gt;Age_Last&lt;/th&gt;&lt;th scope="col"&gt;Salary_Band&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;1       &lt;/td&gt;&lt;td&gt;37.19762&lt;/td&gt;&lt;td&gt;1       &lt;/td&gt;&lt;td&gt;3       &lt;/td&gt;&lt;td&gt;45585.80&lt;/td&gt;&lt;td&gt;4       &lt;/td&gt;&lt;td&gt;1.260529&lt;/td&gt;&lt;td&gt;0       &lt;/td&gt;&lt;td&gt;37      &lt;/td&gt;&lt;td&gt;4       &lt;/td&gt;&lt;/tr&gt;
@@ -1276,7 +1276,7 @@ holdout_aggregated &lt;span class="o"&gt;=&lt;/span&gt; as.h2o&lt;span class="p"
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table-striped table-hover table"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Male&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Salary_Band&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;th scope="col"&gt;Expected_Deaths&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;18         &lt;/td&gt;&lt;td&gt;0          &lt;/td&gt;&lt;td&gt;1          &lt;/td&gt;&lt;td&gt;1          &lt;/td&gt;&lt;td&gt;1          &lt;/td&gt;&lt;td&gt; 2.085132  &lt;/td&gt;&lt;td&gt;0          &lt;/td&gt;&lt;td&gt;0.002085132&lt;/td&gt;&lt;/tr&gt;
@@ -1393,7 +1393,7 @@ mod1_ratings &lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table-striped table-hover table"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;names&lt;/th&gt;&lt;th scope="col"&gt;coefficients&lt;/th&gt;&lt;th scope="col"&gt;std_error&lt;/th&gt;&lt;th scope="col"&gt;z_value&lt;/th&gt;&lt;th scope="col"&gt;p_value&lt;/th&gt;&lt;th scope="col"&gt;standardized_coefficients&lt;/th&gt;&lt;th scope="col"&gt;rating&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Intercept    &lt;/td&gt;&lt;td&gt; 0.230       &lt;/td&gt;&lt;td&gt;0.084        &lt;/td&gt;&lt;td&gt; 2.748       &lt;/td&gt;&lt;td&gt;0.006        &lt;/td&gt;&lt;td&gt; 0.230       &lt;/td&gt;&lt;td&gt;1.259        &lt;/td&gt;&lt;/tr&gt;
@@ -1439,7 +1439,7 @@ mod1_ratings &lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table-striped table-hover table"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Male&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;th scope="col"&gt;Age_Last&lt;/th&gt;&lt;th scope="col"&gt;Salary_Band&lt;/th&gt;&lt;th scope="col"&gt;Base_Rate&lt;/th&gt;&lt;th scope="col"&gt;Expected_Deaths&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;9          &lt;/td&gt;&lt;td&gt;36.56574   &lt;/td&gt;&lt;td&gt;1          &lt;/td&gt;&lt;td&gt;2          &lt;/td&gt;&lt;td&gt;57991.43   &lt;/td&gt;&lt;td&gt;4          &lt;/td&gt;&lt;td&gt;1.124758   &lt;/td&gt;&lt;td&gt;0          &lt;/td&gt;&lt;td&gt;36         &lt;/td&gt;&lt;td&gt;4          &lt;/td&gt;&lt;td&gt;0.001      &lt;/td&gt;&lt;td&gt;0.001124758&lt;/td&gt;&lt;/tr&gt;

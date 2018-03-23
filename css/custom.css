@@ -6,7 +6,7 @@ a.anchor-link {
 }
 
 /* change fonts */
-/* previously used playfair display */
+/* previously used Bree Serif & Raleway*/
 
 body {
     font-family: 'Raleway', sans-serif;
@@ -16,39 +16,39 @@ body {
 
 
 a{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 h1{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 h2{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 h3{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 h4{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 h5{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 h6{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 .h1{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 .h2{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 .h3{
-  font-family: 'Bree Serif', serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 /* update nav bar*/
