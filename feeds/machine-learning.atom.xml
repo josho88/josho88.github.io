@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Josh Olney - Machine Learning</title><link href="https://josho88.github.io/" rel="alternate"></link><link href="https://josho88.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>https://josho88.github.io/</id><updated>2018-04-30T20:00:00+01:00</updated><entry><title>Life Insurance GLM with H2O: Part 2</title><link href="https://josho88.github.io/Mortality%20GLM%202.html" rel="alternate"></link><published>2018-04-30T20:00:00+01:00</published><updated>2018-04-30T20:00:00+01:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-04-30:/Mortality GLM 2.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Following on from a previous post, this article discusses:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Assessing how well the GLM generalises to new data with cross validation&lt;/li&gt;
+&lt;li&gt;Automated GLM selection using grid search&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Previously, we looked at using H2O's GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered &lt;a href="https://josho88.github.io/Mortality%20GLM.html"&gt;here&lt;/a&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Following on from a previous post, this article discusses:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Assessing how well the GLM generalises to new data with cross validation&lt;/li&gt;
+&lt;li&gt;Automated GLM selection using grid search&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Previously, we looked at using H2O's GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered &lt;a href="https://josho88.github.io/Mortality%20GLM.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The previous model was built using a simulated dataset containing 1.5m records. Each record represents an individual and the columns contain their age, gender, occupation, location, salary details, exposure (how long, in years, the individual was insured) and whether or not a claim was made under their policy.&lt;/p&gt;
+&lt;p&gt;The dataset was split into training data (60%), test data (20%) and holdout data (20%). However, the model we extracted actually only used the training data. Next, I'll use the test and holdout sets, as well as cross validation, to refine the model and check that it actually generalises well to new data.&lt;/p&gt;
+&lt;p&gt;First, check the performance of the baseline model against the test and holdout datasets - this will allow us to see if any changes we make have a positive effect on the model.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Check performance of baseline model against holdout&lt;/span&gt;
+h2o.performance&lt;span class="p"&gt;(&lt;/span&gt;mod1&lt;span class="p"&gt;,&lt;/span&gt; newdata &lt;span class="o"&gt;=&lt;/span&gt; holdout_aggregated&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;H2ORegressionMetrics: glm
+
+MSE:  0.1958794
+RMSE:  0.4425826
+MAE:  0.2249019
+RMSLE:  0.2507581
+Mean Residual Deviance :  0.458425
+R^2 :  0.3866104
+Null Deviance :1726.763
+Null D.o.F. :3758
+Residual Deviance :1723.22
+Residual D.o.F. :3748
+AIC :2897.024
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Adding-Regularisation"&gt;Adding Regularisation&lt;a class="anchor-link" href="#Adding-Regularisation"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now, we can experiment with adding regularisation to see if the model can be improved. A detailed discussion of regularisation is beyond the scope of this post. Effectively though, it serves to simplify the GLM and reduces the chance of overfitting to the training set.&lt;/p&gt;
+&lt;p&gt;Regularisation involves adding a penalty to the loss function used during coefficient estimation. There are two types of penalty that can be applied, $l_1$ and $l_2$. In both cases, adding a penalty shrinks the model coefficients. However, the shrinkage is applied differently depending on which penalty is used.&lt;/p&gt;
+&lt;p&gt;The $l_1$ (LASSO) penalty penalises the sum of the absolute coefficients. Coefficients will shrink in absolute terms and therefore when a sufficiently large penalty is applied coefficients will reduce to 0 (reducing parameters to 0 removes them from the model). Essentially, this stops the model fitting to noise in the data by removing certain features.&lt;/p&gt;
+&lt;p&gt;The $l_2$ (ridge) penalty shrinks coefficients proportionally and does not remove any coefficients from the model.&lt;/p&gt;
+&lt;p&gt;According to the h2o documentaion, a combination of the $l_1$ and $l_2$ penalty (elastic net) is beneficial because $l_1$ induces sparsity, while $l_2$ gives stability and encourages the grouping effect (where a group of correlated variables tend to be dropped or added into the model simultaneously).&lt;/p&gt;
+&lt;p&gt;H2O allows us to fit an elastic net GLM by passing additional parameters into the model. The $\lambda$ parameter controls the strength of the penalty we wish to apply and the $\alpha$ parameter controls the distribution between the $l_1$ and $l_2$ penalties.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alpha - a value of 1.0 for alpha represents LASSO, and an alpha value of 0.0 produces ridge reguression.&lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;Lambda - The lambda parameter controls the amount of regularization applied. If lambda is 0.0, no regularization is applied, and the alpha parameter is ignored. &lt;/li&gt;
+&lt;li&gt;If no value is specified for alpha and/or lambda, h2o will use default settings. Default alpha = 0.5, default lambda is calculated by h2o.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We don't know beforehand which parameters for $\alpha$ and $\lambda$ will be optimal. Rather than manually trying lots of different values for these parameters it is much easier to use grid search over $\alpha$ in h2o and set lambda_search = TRUE (this will automatically try and select the optimal value for $\lambda$ for a model). Grid search allows us to try lots of different values for $\alpha$ and assess which model performs best against a validation frame.&lt;/p&gt;
+&lt;p&gt;The following code will build a 'grid' of models. First, we need to define which values of $\alpha$ to try. This is achieved with the &lt;code&gt;seq()&lt;/code&gt; function which is defined below to generate a sequence of numbers from 0.01 to 0.95 in increments of 0.01. Trying all of these values for $\alpha$ will result in 96 models being built. These values are stored as a list variable called 'hypers'. Next, instead of &lt;code&gt;h2o.glm()&lt;/code&gt; use &lt;code&gt;h2o.grid()&lt;/code&gt;. This requires that we specify the algorithm as 'glm'. Also, pass in the 'hypers' list with the hyper_params argument. Note that lambda_search is set to TRUE.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Add regularisation - does this improve the model?&lt;/span&gt;
+
+hypers &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;alpha &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;seq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0.95&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+grid &lt;span class="o"&gt;=&lt;/span&gt; h2o.grid&lt;span class="p"&gt;(&lt;/span&gt;algorithm &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'glm'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                grid_id &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'GLMgrid'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                x &lt;span class="o"&gt;=&lt;/span&gt; predictors&lt;span class="p"&gt;,&lt;/span&gt;
+                y &lt;span class="o"&gt;=&lt;/span&gt; response&lt;span class="p"&gt;,&lt;/span&gt;
+                training_frame &lt;span class="o"&gt;=&lt;/span&gt; train_aggregated&lt;span class="p"&gt;,&lt;/span&gt;
+                validation_frame &lt;span class="o"&gt;=&lt;/span&gt; test_aggregated&lt;span class="p"&gt;,&lt;/span&gt;
+                family &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'poisson'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                offset_column &lt;span class="o"&gt;=&lt;/span&gt; offset&lt;span class="p"&gt;,&lt;/span&gt;
+                lambda_search &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                hyper_params &lt;span class="o"&gt;=&lt;/span&gt; hypers&lt;span class="p"&gt;,&lt;/span&gt;
+                seed &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;123&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# sort the grid in terms of mse (low --&amp;gt; high) and pick out the best performing model&lt;/span&gt;
+sortedGrid &lt;span class="o"&gt;=&lt;/span&gt; h2o.getGrid&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'GLMgrid'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; sort_by &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'mse'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; decreasing &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;F&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Extract the 'best' model&lt;/span&gt;
+&lt;span class="c1"&gt;# (i.e the model stored at the top of the grid)&lt;/span&gt;
+mod2 &lt;span class="o"&gt;=&lt;/span&gt; h2o.getModel&lt;span class="p"&gt;(&lt;/span&gt;sortedGrid&lt;span class="o"&gt;@&lt;/span&gt;model_ids&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# The sorted grid looks like:&lt;/span&gt;
+sortedGrid
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;H2O Grid Details
+================
+
+Grid ID: GLMgrid 
+Used hyper parameters: 
+  -  alpha 
+Number of models: 96 
+Number of failed models: 0 
+
+Hyper-Parameter Search Summary: ordered by increasing mse
+   alpha       model_ids                 mse
+1 [0.08] GLMgrid_model_8 0.19413408070930224
+2 [0.06] GLMgrid_model_6  0.1941498061682495
+3 [0.07] GLMgrid_model_7  0.1941535475088932
+4 [0.09] GLMgrid_model_9 0.19416204194644499
+5 [0.05] GLMgrid_model_5 0.19416543267945913
+
+---
+    alpha        model_ids                 mse
+91 [0.01]  GLMgrid_model_1 0.19422795701805917
+92 [0.11] GLMgrid_model_11  0.1942491959396608
+93 [0.12] GLMgrid_model_12 0.19425718714512488
+94 [0.03]  GLMgrid_model_3 0.19425860139279355
+95 [0.04]  GLMgrid_model_4 0.19425889315723813
+96 [0.13] GLMgrid_model_13 0.19426459133010185&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Extracting the ratings&lt;/span&gt;
+mod2_ratings &lt;span class="o"&gt;=&lt;/span&gt; mod2&lt;span class="o"&gt;@&lt;/span&gt;model&lt;span class="o"&gt;$&lt;/span&gt;coefficients_table
+mod2_ratings&lt;span class="o"&gt;$&lt;/span&gt;rating &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;mod2_ratings&lt;span class="o"&gt;$&lt;/span&gt;coefficients&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# View the table of coefficients&lt;/span&gt;
+&lt;span class="c1"&gt;# (some rounding has been applied using dplyr mutate function)&lt;/span&gt;
+mod2_ratings &lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt; 
+    mutate_if&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;is.numeric&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; funs&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-hover table table-striped"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;names&lt;/th&gt;&lt;th scope="col"&gt;coefficients&lt;/th&gt;&lt;th scope="col"&gt;standardized_coefficients&lt;/th&gt;&lt;th scope="col"&gt;rating&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Intercept    &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt;1.245        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary_Band.1&lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary_Band.2&lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary_Band.3&lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary_Band.4&lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Salary_Band.5&lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location.1   &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location.2   &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location.3   &lt;/td&gt;&lt;td&gt; 0.011       &lt;/td&gt;&lt;td&gt; 0.011       &lt;/td&gt;&lt;td&gt;1.011        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Location.4   &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Occupation.1 &lt;/td&gt;&lt;td&gt; 0.063       &lt;/td&gt;&lt;td&gt; 0.063       &lt;/td&gt;&lt;td&gt;1.065        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Occupation.2 &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Occupation.3 &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt; 0.000       &lt;/td&gt;&lt;td&gt;1.000        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Male.0       &lt;/td&gt;&lt;td&gt; 0.008       &lt;/td&gt;&lt;td&gt; 0.008       &lt;/td&gt;&lt;td&gt;1.008        &lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Male.1       &lt;/td&gt;&lt;td&gt;-0.008       &lt;/td&gt;&lt;td&gt;-0.008       &lt;/td&gt;&lt;td&gt;0.992        &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Check performance of both models against validation &amp;amp; holdout data&lt;/span&gt;
+perf1 &lt;span class="o"&gt;=&lt;/span&gt; h2o.performance&lt;span class="p"&gt;(&lt;/span&gt;mod1&lt;span class="p"&gt;,&lt;/span&gt; holdout_aggregated&lt;span class="p"&gt;)&lt;/span&gt;
+perf2 &lt;span class="o"&gt;=&lt;/span&gt; h2o.performance&lt;span class="p"&gt;(&lt;/span&gt;mod2&lt;span class="p"&gt;,&lt;/span&gt; holdout_aggregated&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Check MSE of original model&lt;/span&gt;
+&lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;h2o.mse&lt;span class="p"&gt;(&lt;/span&gt;perf1&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+0.19588
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# And now, MSE of regularised model, automatically 'tuned'&lt;/span&gt;
+&lt;span class="kp"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;h2o.mse&lt;span class="p"&gt;(&lt;/span&gt;perf2&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+0.19632
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Since the MSE of the new model is larger than that under the original model, the 'tuning' may have actually resulted in overfitting. However, the holdout dataset is only one sample and so it's difficult to draw too many conclusions from this result. This is where cross validation comes in. We can use cross validation to see which model generalises better to new data by examining performance across multiple test datasets.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Cross-Validation"&gt;Cross Validation&lt;a class="anchor-link" href="#Cross-Validation"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;So far, the model has only been validated using one test set. K-fold cross validation can be used to check that the $\alpha$ parameter selected is generally sound and that the model will generalise well to a number of unseen data sets. The basic idea is as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Partition the data into k subsets&lt;/li&gt;
+&lt;li&gt;Use k-1 subsets as the training data&lt;/li&gt;
+&lt;li&gt;Test the model on the remaining subset&lt;/li&gt;
+&lt;li&gt;Repeat until all subsets have been used as a test set once&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will give us mean performance measures across the k subsets, as well as a standard deviation. The 'best' model (from a number of competing models) might be considered to be the one which has the best mean cross validation performance. The next steps describe how to cross validate an existing model in h2o. The alternative is to set the nfolds argument to be non negative when fitting the models in the first place. However, since this will build n+1 models this may be computationally expensive if using grid search (and depending on the size of the dataset and which model you are fitting - GLM is normally quite fast).&lt;/p&gt;
+&lt;p&gt;We can select the best performing models in the grid and cross validate each of these to check which has the best mean performance. We can do this using the train and test sets combined. I will use 5 fold cross validation in the following code blocks.&lt;/p&gt;
+&lt;p&gt;Note - the cross validation performance metrics will not be directly comparable with those computed on the earlier holdout data, since the testing examples in each k fold will be different to those in the holdout set.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Combine train &amp;amp; test data and cross validate the models at the top&lt;/span&gt;
+&lt;span class="c1"&gt;# of the grid.&lt;/span&gt;
+&lt;span class="c1"&gt;# Again, use lambda search to choose optimal lambda.&lt;/span&gt;
+
+&lt;span class="c1"&gt;# The following code is based on a tutorial taken from the H2O website&lt;/span&gt;
+df &lt;span class="o"&gt;=&lt;/span&gt; h2o.rbind&lt;span class="p"&gt;(&lt;/span&gt;train_aggregated&lt;span class="p"&gt;,&lt;/span&gt;test_aggregated&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kr"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;i &lt;span class="kr"&gt;in&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+  glm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; h2o.getModel&lt;span class="p"&gt;(&lt;/span&gt;sortedGrid&lt;span class="o"&gt;@&lt;/span&gt;model_ids&lt;span class="p"&gt;[[&lt;/span&gt;i&lt;span class="p"&gt;]])&lt;/span&gt;
+  cvglm &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;h2o.glm&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="p"&gt;{&lt;/span&gt;
+                     p &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; glm&lt;span class="o"&gt;@&lt;/span&gt;parameters
+                     p&lt;span class="o"&gt;$&lt;/span&gt;model_id &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;         
+                     p&lt;span class="o"&gt;$&lt;/span&gt;training_frame &lt;span class="o"&gt;=&lt;/span&gt; df  &lt;span class="c1"&gt;# no validation frame&lt;/span&gt;
+                     p&lt;span class="o"&gt;$&lt;/span&gt;validation_frame &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;  
+                     p&lt;span class="o"&gt;$&lt;/span&gt;offset_column &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'Offset'&lt;/span&gt;
+                     p&lt;span class="o"&gt;$&lt;/span&gt;nfolds &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;          &lt;span class="c1"&gt;# add the cross validation   &lt;/span&gt;
+                     p&lt;span class="o"&gt;$&lt;/span&gt;lambda_search &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;T&lt;/span&gt;
+                     p
+                   &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kp"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;glm&lt;span class="o"&gt;@&lt;/span&gt;model_id&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kp"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;cvglm&lt;span class="o"&gt;@&lt;/span&gt;model&lt;span class="o"&gt;$&lt;/span&gt;cross_validation_metrics_summary&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,])&lt;/span&gt; &lt;span class="c1"&gt;# print out mse row&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[1] "GLMgrid_model_8"
+Cross-Validation Metrics Summary: 
+          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39514202 0.02417593 0.41696805  0.4179402 0.39798224 0.41450343
+    cv_5_valid
+mse 0.32831618
+[1] "GLMgrid_model_6"
+Cross-Validation Metrics Summary: 
+         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.3952421 0.024238229 0.41700536 0.41825843  0.3980208  0.4146654
+    cv_5_valid
+mse 0.32826048
+[1] "GLMgrid_model_7"
+Cross-Validation Metrics Summary: 
+         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.3951722 0.024202611  0.4169403   0.418074  0.3980001  0.4145702
+    cv_5_valid
+mse 0.32827646
+[1] "GLMgrid_model_9"
+Cross-Validation Metrics Summary: 
+          mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39519712 0.024199862 0.41699398 0.41802925  0.3979665  0.4146775
+    cv_5_valid
+mse 0.32831836
+[1] "GLMgrid_model_5"
+Cross-Validation Metrics Summary: 
+          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39520955 0.02424613 0.41696036  0.4182716 0.39804438  0.4145749
+    cv_5_valid
+mse 0.32819656
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-r"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Compare these to cross validated version of baseline model:&lt;/span&gt;
+mod1_cv &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kp"&gt;do.call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;h2o.glm&lt;span class="p"&gt;,&lt;/span&gt;
+                         
+                         &lt;span class="p"&gt;{&lt;/span&gt;
+                           p &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; mod1&lt;span class="o"&gt;@&lt;/span&gt;parameters
+                           p&lt;span class="o"&gt;$&lt;/span&gt;model_id &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;          
+                           p&lt;span class="o"&gt;$&lt;/span&gt;training_frame &lt;span class="o"&gt;=&lt;/span&gt; df      
+                           p&lt;span class="o"&gt;$&lt;/span&gt;validation_frame &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;NULL&lt;/span&gt;  
+                           p&lt;span class="o"&gt;$&lt;/span&gt;nfolds &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt;              
+                           p&lt;span class="o"&gt;$&lt;/span&gt;offset_column &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'Offset'&lt;/span&gt;
+                           p
+                         &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+mod1_cv&lt;span class="o"&gt;@&lt;/span&gt;model&lt;span class="o"&gt;$&lt;/span&gt;cross_validation_metrics_summary&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table class="table-hover table table-striped"&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope="col"&gt;mean&lt;/th&gt;&lt;th scope="col"&gt;sd&lt;/th&gt;&lt;th scope="col"&gt;cv_1_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_2_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_3_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_4_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_5_valid&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;th scope="row"&gt;mse&lt;/th&gt;&lt;td&gt;0.40253404 &lt;/td&gt;&lt;td&gt;0.026616871&lt;/td&gt;&lt;td&gt;0.4350453  &lt;/td&gt;&lt;td&gt;0.41589925 &lt;/td&gt;&lt;td&gt;0.42091507 &lt;/td&gt;&lt;td&gt;0.4119179  &lt;/td&gt;&lt;td&gt;0.32889268 &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Conclusion"&gt;Conclusion&lt;a class="anchor-link" href="#Conclusion"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;It looks like the tuned model performs better if we look at cross validation performance rather than performance against a single holdout set. So, we might determine that the regularised model generalises best to unseen data. The rating plan we extract should be based on this second model.&lt;/p&gt;
+&lt;p&gt;Regularisation has led to a much simpler model. In fact, the only real loadings picked up are for location 3 and occupation class 1 (the effect of gender is negligible).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</content><category term="R"></category><category term="h2o"></category><category term="modelling"></category><category term="GLM"></category><category term="grid search"></category><category term="regularisation"></category></entry></feed>

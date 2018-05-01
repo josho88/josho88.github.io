@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Life Insurance GLM with H2O: Part 1 - Josh Olney</title>
+    <title>Life Insurance GLM with H2O: Part 2 - Josh Olney</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,23 +11,25 @@
 
 
 
-<link rel="canonical" href="https://josho88.github.io/Mortality GLM.html">
+<link rel="canonical" href="https://josho88.github.io/Mortality GLM 2.html">
 
         <meta name="author" content="Josh Olney" />
-        <meta name="keywords" content="R,h2o,modelling,GLM" />
-        <meta name="description" content="Here I will show you how to use generalised linear models (GLM) with mortality claims data. We will fit a poisson GLM to model count data using the h2o package. This post will cover: Preparing data Basic h2o functions Use of offsets Fitting a basic GLM Extracting a rating plan from the model This article will be split into two parts - part 1 will cover the above and part 2 will cover cross validation and &#39;tuning&#39; a GLM using h2o&#39;s grid search functionality. Finally, in a later post we will look at how to build simple pricing apps using the models we develop." />
+        <meta name="keywords" content="R,h2o,modelling,GLM,grid search,regularisation" />
+        <meta name="description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here" />
 
         <meta property="og:site_name" content="Josh Olney" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Life Insurance GLM with H2O: Part 1"/>
-        <meta property="og:url" content="https://josho88.github.io/Mortality GLM.html"/>
-        <meta property="og:description" content="Here I will show you how to use generalised linear models (GLM) with mortality claims data. We will fit a poisson GLM to model count data using the h2o package. This post will cover: Preparing data Basic h2o functions Use of offsets Fitting a basic GLM Extracting a rating plan from the model This article will be split into two parts - part 1 will cover the above and part 2 will cover cross validation and &#39;tuning&#39; a GLM using h2o&#39;s grid search functionality. Finally, in a later post we will look at how to build simple pricing apps using the models we develop."/>
-        <meta property="article:published_time" content="2018-03-20" />
-            <meta property="article:section" content="Statistical Modelling" />
+        <meta property="og:title" content="Life Insurance GLM with H2O: Part 2"/>
+        <meta property="og:url" content="https://josho88.github.io/Mortality GLM 2.html"/>
+        <meta property="og:description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here"/>
+        <meta property="article:published_time" content="2018-04-30" />
+            <meta property="article:section" content="Machine Learning" />
             <meta property="article:tag" content="R" />
             <meta property="article:tag" content="h2o" />
             <meta property="article:tag" content="modelling" />
             <meta property="article:tag" content="GLM" />
+            <meta property="article:tag" content="grid search" />
+            <meta property="article:tag" content="regularisation" />
             <meta property="article:author" content="Josh Olney" />
 
 
@@ -45,8 +47,8 @@
 
 
 
-        <link href="https://josho88.github.io/feeds/statistical-modelling.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney Statistical Modelling ATOM Feed"/>
+        <link href="https://josho88.github.io/feeds/machine-learning.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Josh Olney Machine Learning ATOM Feed"/>
 
 </head>
 <body>
@@ -87,10 +89,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://josho88.github.io/Mortality GLM.html"
+                    <a href="https://josho88.github.io/Mortality GLM 2.html"
                        rel="bookmark"
-                       title="Permalink to Life Insurance GLM with H2O: Part 1">
-                        Life Insurance GLM with H2O: Part 1
+                       title="Permalink to Life Insurance GLM with H2O: Part 2">
+                        Life Insurance GLM with H2O: Part 2
                     </a>
                 </h1>
             </header>
@@ -100,13 +102,13 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-03-20T20:00:00+00:00"> Tue 20 March 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-04-30T20:00:00+01:00"> Mon 30 April 2018</time>
     </span>
 
 
 
         <span class="label label-default">Category</span>
-        <a href="https://josho88.github.io/category/statistical-modelling.html">Statistical Modelling</a>
+        <a href="https://josho88.github.io/category/machine-learning.html">Machine Learning</a>
 
 
 <span class="label label-default">Tags</span>
@@ -117,6 +119,10 @@
 	<a href="https://josho88.github.io/tag/modelling.html">modelling</a>
         /
 	<a href="https://josho88.github.io/tag/glm.html">GLM</a>
+        /
+	<a href="https://josho88.github.io/tag/grid-search.html">grid search</a>
+        /
+	<a href="https://josho88.github.io/tag/regularisation.html">regularisation</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1096,13 +1102,10 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I will show you how to use generalised linear models (GLM) with mortality claims data. We will fit a poisson GLM to model count data using the h2o package. This post will cover:</p>
+<p>Following on from a previous post, this article discusses:</p>
 <ul>
-<li>Preparing data</li>
-<li>Basic h2o functions</li>
-<li>Use of offsets</li>
-<li>Fitting a basic GLM</li>
-<li>Extracting a rating plan from the model</li>
+<li>Assessing how well the GLM generalises to new data with cross validation</li>
+<li>Automated GLM selection using grid search</li>
 </ul>
 </div>
 </div>
@@ -1111,47 +1114,26 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This article will be split into two parts - part 1 will cover the above and part 2 will cover cross validation and 'tuning' a GLM using h2o's grid search functionality. Finally, in a later post we will look at how to build simple pricing apps using the models we develop.</p>
+<p>Previously, we looked at using H2O's GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered <a href="https://josho88.github.io/Mortality%20GLM.html">here</a>.</p>
+<p>The previous model was built using a simulated dataset containing 1.5m records. Each record represents an individual and the columns contain their age, gender, occupation, location, salary details, exposure (how long, in years, the individual was insured) and whether or not a claim was made under their policy.</p>
+<p>The dataset was split into training data (60%), test data (20%) and holdout data (20%). However, the model we extracted actually only used the training data. Next, I'll use the test and holdout sets, as well as cross validation, to refine the model and check that it actually generalises well to new data.</p>
+<p>First, check the performance of the baseline model against the test and holdout datasets - this will allow us to see if any changes we make have a positive effect on the model.</p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing code_cell rendered">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Background">Background<a class="anchor-link" href="#Background">¶</a></h2><p>Imagine a portfolio of lives with lump sum death benefit cover - we want to be able to model how many claims will arise from this portfolio. The number of claims will obviously vary depending on how long each life has insurance cover in place.</p>
-<p>GLMs are widely used by actuaries to set rating plans that are used to price insurance products - particularly in general insurance (personal lines etc). One of the benefits of using GLMs is that it's usually easy to extract an interpretable, often simple, rating plan from the model (this is discussed in more detail later). A GLM also allows us to update an existing rating plan rather than set an entirely new one. An existing rating plan may have been set, for example, using standard tables.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h2><p>I'll use a simulated dataset created <a href="https://josho88.github.io/Simulating%20Data.html">in a previous post</a>. This dataset contains 1.5m records. Each record represents an individual and the columns contain their age, gender, occupation, location, salary details, exposure (how long, in years, the individual was insured) and whether or not a claim was made under their policy. To create this dataset you can follow the previous <a href="https://josho88.github.io/Simulating%20Data.html">tutorial</a> or alternatively any similar dataset should be fine.</p>
-</div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Read in the data</span>
-dt <span class="o">=</span> read.csv<span class="p">(</span><span class="s">'SimData.csv'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>dt<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Check performance of baseline model against holdout</span>
+h2o.performance<span class="p">(</span>mod1<span class="p">,</span> newdata <span class="o">=</span> holdout_aggregated<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1160,18 +1142,21 @@ dt <span class="o">=</span> read.csv<span class="p">(</span><span class="s">'Sim
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-hover table table-striped">
-<thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
-<tbody>
-<tr><td>1       </td><td>37.19762</td><td>1       </td><td>3       </td><td>45585.80</td><td>4       </td><td>1.260529</td><td>0       </td><td>37      </td><td>4       </td></tr>
-<tr><td>2       </td><td>38.84911</td><td>1       </td><td>1       </td><td>55209.32</td><td>3       </td><td>1.496348</td><td>0       </td><td>38      </td><td>4       </td></tr>
-<tr><td>3       </td><td>47.79354</td><td>0       </td><td>1       </td><td>40840.58</td><td>3       </td><td>0.607670</td><td>0       </td><td>47      </td><td>3       </td></tr>
-<tr><td>4       </td><td>40.35254</td><td>1       </td><td>1       </td><td>32138.86</td><td>3       </td><td>2.968844</td><td>0       </td><td>40      </td><td>2       </td></tr>
-<tr><td>5       </td><td>40.64644</td><td>1       </td><td>3       </td><td>60397.61</td><td>1       </td><td>1.021152</td><td>0       </td><td>40      </td><td>4       </td></tr>
-<tr><td>6       </td><td>48.57532</td><td>1       </td><td>1       </td><td>25626.29</td><td>1       </td><td>2.915284</td><td>0       </td><td>48      </td><td>2       </td></tr>
-</tbody>
-</table>
+<div class="output_text output_subarea ">
+<pre>H2ORegressionMetrics: glm
+
+MSE:  0.1958794
+RMSE:  0.4425826
+MAE:  0.2249019
+RMSLE:  0.2507581
+Mean Residual Deviance :  0.458425
+R^2 :  0.3866104
+Null Deviance :1726.763
+Null D.o.F. :3758
+Residual Deviance :1723.22
+Residual D.o.F. :3748
+AIC :2897.024
+</pre>
 </div>
 </div>
 </div>
@@ -1181,59 +1166,97 @@ dt <span class="o">=</span> read.csv<span class="p">(</span><span class="s">'Sim
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For ideas on exploring this dataset using summary statistics and visualisations, refer to <a href="https://josho88.github.io/Simulating%20Data.html">this post</a>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Import-Libraries">Import Libraries<a class="anchor-link" href="#Import-Libraries">¶</a></h2><p>The h2o package will be used extensively. Dplyr will also be needed. Import these libraries using the following commands:</p>
-<div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>h2o<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
-</pre></div>
+<h2 id="Adding-Regularisation">Adding Regularisation<a class="anchor-link" href="#Adding-Regularisation">¶</a></h2><p>Now, we can experiment with adding regularisation to see if the model can be improved. A detailed discussion of regularisation is beyond the scope of this post. Effectively though, it serves to simplify the GLM and reduces the chance of overfitting to the training set.</p>
+<p>Regularisation involves adding a penalty to the loss function used during coefficient estimation. There are two types of penalty that can be applied, $l_1$ and $l_2$. In both cases, adding a penalty shrinks the model coefficients. However, the shrinkage is applied differently depending on which penalty is used.</p>
+<p>The $l_1$ (LASSO) penalty penalises the sum of the absolute coefficients. Coefficients will shrink in absolute terms and therefore when a sufficiently large penalty is applied coefficients will reduce to 0 (reducing parameters to 0 removes them from the model). Essentially, this stops the model fitting to noise in the data by removing certain features.</p>
+<p>The $l_2$ (ridge) penalty shrinks coefficients proportionally and does not remove any coefficients from the model.</p>
+<p>According to the h2o documentaion, a combination of the $l_1$ and $l_2$ penalty (elastic net) is beneficial because $l_1$ induces sparsity, while $l_2$ gives stability and encourages the grouping effect (where a group of correlated variables tend to be dropped or added into the model simultaneously).</p>
+<p>H2O allows us to fit an elastic net GLM by passing additional parameters into the model. The $\lambda$ parameter controls the strength of the penalty we wish to apply and the $\alpha$ parameter controls the distribution between the $l_1$ and $l_2$ penalties.</p>
+<ul>
+<li>Alpha - a value of 1.0 for alpha represents LASSO, and an alpha value of 0.0 produces ridge reguression.<br/></li>
+<li>Lambda - The lambda parameter controls the amount of regularization applied. If lambda is 0.0, no regularization is applied, and the alpha parameter is ignored. </li>
+<li>If no value is specified for alpha and/or lambda, h2o will use default settings. Default alpha = 0.5, default lambda is calculated by h2o.</li>
+</ul>
+<p>We don't know beforehand which parameters for $\alpha$ and $\lambda$ will be optimal. Rather than manually trying lots of different values for these parameters it is much easier to use grid search over $\alpha$ in h2o and set lambda_search = TRUE (this will automatically try and select the optimal value for $\lambda$ for a model). Grid search allows us to try lots of different values for $\alpha$ and assess which model performs best against a validation frame.</p>
+<p>The following code will build a 'grid' of models. First, we need to define which values of $\alpha$ to try. This is achieved with the <code>seq()</code> function which is defined below to generate a sequence of numbers from 0.01 to 0.95 in increments of 0.01. Trying all of these values for $\alpha$ will result in 96 models being built. These values are stored as a list variable called 'hypers'. Next, instead of <code>h2o.glm()</code> use <code>h2o.grid()</code>. This requires that we specify the algorithm as 'glm'. Also, pass in the 'hypers' list with the hyper_params argument. Note that lambda_search is set to TRUE.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to use h2o functions, we need to initialise an h2o cluster. Use the <code>h2o.init()</code> function. For example:</p>
-<div class="highlight"><pre><span></span>h2o.init<span class="p">(</span>nthreads <span class="o">=</span> <span class="m">-1</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Add regularisation - does this improve the model?</span>
+
+hypers <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0.95</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span>
+
+grid <span class="o">=</span> h2o.grid<span class="p">(</span>algorithm <span class="o">=</span> <span class="s">'glm'</span><span class="p">,</span>
+                grid_id <span class="o">=</span> <span class="s">'GLMgrid'</span><span class="p">,</span>
+                x <span class="o">=</span> predictors<span class="p">,</span>
+                y <span class="o">=</span> response<span class="p">,</span>
+                training_frame <span class="o">=</span> train_aggregated<span class="p">,</span>
+                validation_frame <span class="o">=</span> test_aggregated<span class="p">,</span>
+                family <span class="o">=</span> <span class="s">'poisson'</span><span class="p">,</span>
+                offset_column <span class="o">=</span> offset<span class="p">,</span>
+                lambda_search <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+                hyper_params <span class="o">=</span> hypers<span class="p">,</span>
+                seed <span class="o">=</span> <span class="m">123</span><span class="p">)</span>
+
+<span class="c1"># sort the grid in terms of mse (low --&gt; high) and pick out the best performing model</span>
+sortedGrid <span class="o">=</span> h2o.getGrid<span class="p">(</span><span class="s">'GLMgrid'</span><span class="p">,</span> sort_by <span class="o">=</span> <span class="s">'mse'</span><span class="p">,</span> decreasing <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+
+<span class="c1"># Extract the 'best' model</span>
+<span class="c1"># (i.e the model stored at the top of the grid)</span>
+mod2 <span class="o">=</span> h2o.getModel<span class="p">(</span>sortedGrid<span class="o">@</span>model_ids<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># convert data to h2o frame</span>
-h2o_data <span class="o">=</span> as.h2o<span class="p">(</span>dt<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># The sorted grid looks like:</span>
+sortedGrid
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_text output_subarea ">
+<pre>H2O Grid Details
+================
+
+Grid ID: GLMgrid 
+Used hyper parameters: 
+  -  alpha 
+Number of models: 96 
+Number of failed models: 0 
+
+Hyper-Parameter Search Summary: ordered by increasing mse
+   alpha       model_ids                 mse
+1 [0.08] GLMgrid_model_8 0.19413408070930224
+2 [0.06] GLMgrid_model_6  0.1941498061682495
+3 [0.07] GLMgrid_model_7  0.1941535475088932
+4 [0.09] GLMgrid_model_9 0.19416204194644499
+5 [0.05] GLMgrid_model_5 0.19416543267945913
+
+---
+    alpha        model_ids                 mse
+91 [0.01]  GLMgrid_model_1 0.19422795701805917
+92 [0.11] GLMgrid_model_11  0.1942491959396608
+93 [0.12] GLMgrid_model_12 0.19425718714512488
+94 [0.03]  GLMgrid_model_3 0.19425860139279355
+95 [0.04]  GLMgrid_model_4 0.19425889315723813
+96 [0.13] GLMgrid_model_13 0.19426459133010185</pre>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Existing-Plan">Existing Plan<a class="anchor-link" href="#Existing-Plan">¶</a></h2><p>Often, a rating plan is already in place and rather than start from scratch we may just want to add to (or update) this existing model. For example, we might already have a best estimate of claim rates for the general population which aren't being updated as part of this exercise, but we want to use the GLM to refine these rates. In this example I'll define the existing estimate of claim rates to be:</p>
-<ul>
-<li>Individuals under 40 will be assumed, on average, to claim at a rate of $\frac{1}{1000}$</li>
-<li>Individuals aged 40-49 have a claim rate of $\frac{1.5}{1000}$</li>
-<li>Ages 50 + have a claim rate of $\frac{2}{1000}$</li>
-</ul>
-<p>These baseline rates vary by age but not gender, occupation and so on. The GLM can be used to refine these initial estimates so that the final predicted claim count allows for our other predictor variables.</p>
-<p>Next, we need to add these base rates to each record. Of course, each individual won't necessarily have been the same age for the entire period they were covered under a policy! However, for simplicity here I'm going to assume that age is the average age over the exposure period and just set our best estimate of mortality based on this average age. In reality, a more realistic expectation of mortality may be used - based on age varying over the exposure period.</p>
 </div>
 </div>
 </div>
@@ -1242,248 +1265,13 @@ h2o_data <span class="o">=</span> as.h2o<span class="p">(</span>dt<span class="p
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>ages <span class="o">=</span> <span class="kp">as.vector</span><span class="p">(</span>h2o_data<span class="o">$</span>Age_Last<span class="p">)</span>
-Base_Rate <span class="o">=</span> <span class="kp">ifelse</span><span class="p">(</span>ages <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">39</span><span class="p">),</span> <span class="m">0.001</span><span class="p">,</span>
-            <span class="kp">ifelse</span><span class="p">(</span>ages <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="m">40</span><span class="o">:</span><span class="m">49</span><span class="p">),</span> <span class="m">0.0015</span><span class="p">,</span> <span class="m">0.002</span><span class="p">))</span>
-h2o_data<span class="o">$</span>Base_Rate <span class="o">=</span> h2o.asnumeric<span class="p">(</span>as.h2o<span class="p">(</span>Base_Rate<span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To allow for these base rates in the GLM model an offset column needs to be added.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Adding-an-Offset-Column">Adding an Offset Column<a class="anchor-link" href="#Adding-an-Offset-Column">¶</a></h2><p>An offset is a covariate in the model with a coefficient constrained to be one (rather than being estimated). In this model, we need to add two offsets - one to allow for exposure and one to allow for the fact that we do not wish to update our base rates as part of this process.</p>
-<h3 id="Why-use-an-offset-to-allow-for-exposure?">Why use an offset to allow for exposure?<a class="anchor-link" href="#Why-use-an-offset-to-allow-for-exposure?">¶</a></h3><p>Mathematically, the poisson model takes the form:</p>
-<p>$$log(\mu) = \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>However, since our response variable is actually claims per unit of exposure, we are modelling a rate. Which takes the form:</p>
-<p>$$log(\frac{\mu}{exposure}) = \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>This is equivalent to:</p>
-<p>$$log(\mu) - log(exposure) = \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>Finally, $log(exposure)$ enters the right hand side of the equation as an offset with coefficient constrained to one, giving:</p>
-<p>$$log(\mu) = log(exposure) + \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<h3 id="Why-use-an-offset-for-base-rates?">Why use an offset for base rates?<a class="anchor-link" href="#Why-use-an-offset-for-base-rates?">¶</a></h3><p>As mentioned earlier, our base rates are derived outside of this model and are not being updated here. However, these base rates will still form part of the overall rating plan and so the GLM model needs to be made aware of them. The other loadings will be optimised once our base rates have been applied. Therefore, base_rate enters the RHS of the equation as follows:</p>
-<p>$$log(\mu) = log(exposure) + log(base\_rate) + \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>And since $log(a) + log(b) = log(ab)$ this can be simplified as:</p>
-<p>$$log(\mu) = log(exposure\times base\_rate) + \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>Which is equivalent to:</p>
-<p>$$log(\mu) = log(\mathbb{E}[deaths]) + \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$$</p>
-<p>Therefore, the final offset to be included in the model is $log(\mathbb{E}[deaths])$</p>
-<p>So, next we need to calculate $\mathbb{E}[deaths]$ for each record. This will be our base rate multiplied by the exposure period. Then the data can be split into train, test and holdout sets and the offset columns are added.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Calculate the 'expected deaths' for each record</span>
-h2o_data<span class="o">$</span>Expected_Deaths <span class="o">=</span> h2o_data<span class="o">$</span>Exposure <span class="o">*</span> h2o_data<span class="o">$</span>Base_Rate
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># First, set Occupation and Location variables as nominal factor variables</span>
-<span class="c1"># (salary band isn't strictly nominal but we'll treat it as such here)</span>
-h2o_data<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="s">'Occupation'</span><span class="p">,</span> <span class="s">'Location'</span><span class="p">,</span> <span class="s">'Salary_Band'</span><span class="p">)]</span> <span class="o">=</span>
-    h2o.asfactor<span class="p">(</span>h2o_data<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="s">'Occupation'</span><span class="p">,</span> <span class="s">'Location'</span><span class="p">,</span> <span class="s">'Salary_Band'</span><span class="p">)])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Separate into a train, test and holdout set</span>
-<span class="c1"># 60% in training and 20% in test &amp; holdout respectively</span>
-split <span class="o">=</span> h2o.splitFrame<span class="p">(</span>h2o_data<span class="p">,</span> ratios <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.6</span><span class="p">,</span><span class="m">0.2</span><span class="p">),</span> seed <span class="o">=</span> <span class="m">123</span><span class="p">)</span>
-train <span class="o">=</span> <span class="kp">split</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
-test <span class="o">=</span> <span class="kp">split</span><span class="p">[[</span><span class="m">2</span><span class="p">]]</span>
-holdout <span class="o">=</span> <span class="kp">split</span><span class="p">[[</span><span class="m">3</span><span class="p">]]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since the dataset is large and the claim event is rare I am going to reduce the datasets using aggregation. In the aggregated datasets each row will represent a feature set and the claims and exposure columns will be the sum of all claims/exposure in that given set. In practice, for a poisson GLM it doesn't make a difference to the model whether we use aggregated or full individual data.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Define a helper function to aggregate the train, test and holdout sets</span>
-
-agg <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>h2o_frame<span class="p">){</span>
-  dat <span class="o">=</span> <span class="kp">as.data.frame</span><span class="p">(</span>h2o_frame<span class="p">)</span>
-  agg_data <span class="o">=</span> aggregate<span class="p">(</span>x <span class="o">=</span> dat<span class="p">[</span><span class="kt">c</span><span class="p">(</span><span class="s">'Exposure'</span><span class="p">,</span><span class="s">'Claim'</span><span class="p">,</span><span class="s">'Expected_Deaths'</span><span class="p">)],</span>
-                       by <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>Age <span class="o">=</span> dat<span class="o">$</span>Age_Last<span class="p">,</span>
-                                 Male <span class="o">=</span> dat<span class="o">$</span>Male<span class="p">,</span>
-                                 Occupation <span class="o">=</span> dat<span class="o">$</span>Occupation<span class="p">,</span>
-                                 Location <span class="o">=</span> dat<span class="o">$</span>Location<span class="p">,</span>
-                                 Salary_Band <span class="o">=</span> dat<span class="o">$</span>Salary_Band<span class="p">),</span>
-                       FUN <span class="o">=</span> <span class="kp">sum</span><span class="p">)</span>
-  agg_data
-<span class="p">}</span>
-
-<span class="c1"># create aggregated versions of datasets</span>
-train_aggregated <span class="o">=</span> as.h2o<span class="p">(</span>agg<span class="p">(</span>train<span class="p">))</span>
-test_aggregated <span class="o">=</span> as.h2o<span class="p">(</span>agg<span class="p">(</span>test<span class="p">))</span>
-holdout_aggregated <span class="o">=</span> as.h2o<span class="p">(</span>agg<span class="p">(</span>holdout<span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [13]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Aggregated data now looks like:</span>
-<span class="kp">head</span><span class="p">(</span>train_aggregated<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-hover table table-striped">
-<thead><tr><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Salary_Band</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Expected_Deaths</th></tr></thead>
-<tbody>
-<tr><td>18         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td> 2.085132  </td><td>0          </td><td>0.002085132</td></tr>
-<tr><td>21         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td> 2.631169  </td><td>0          </td><td>0.002631169</td></tr>
-<tr><td>22         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td> 5.514519  </td><td>0          </td><td>0.005514519</td></tr>
-<tr><td>23         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td>15.261279  </td><td>0          </td><td>0.015261279</td></tr>
-<tr><td>24         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td>14.850105  </td><td>0          </td><td>0.014850105</td></tr>
-<tr><td>25         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td>35.883652  </td><td>0          </td><td>0.035883652</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [14]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Now, add the offsets to train, test and holdout sets</span>
-train_aggregated<span class="o">$</span>Offset <span class="o">=</span> <span class="kp">log</span><span class="p">(</span>train_aggregated<span class="o">$</span>Expected_Deaths<span class="p">)</span>
-test_aggregated<span class="o">$</span>Offset <span class="o">=</span> <span class="kp">log</span><span class="p">(</span>test_aggregated<span class="o">$</span>Expected_Deaths<span class="p">)</span>
-holdout_aggregated<span class="o">$</span>Offset <span class="o">=</span> <span class="kp">log</span><span class="p">(</span>holdout_aggregated<span class="o">$</span>Expected_Deaths<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [15]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Finally, let's just make sure we set all our factor variables properly in the</span>
-<span class="c1"># aggregated data sets</span>
-
-factorVars <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">'Salary_Band'</span><span class="p">,</span> <span class="s">'Occupation'</span><span class="p">,</span> <span class="s">'Location'</span><span class="p">,</span> <span class="s">'Male'</span><span class="p">)</span>
-train_aggregated<span class="p">[</span>factorVars<span class="p">]</span> <span class="o">=</span> h2o.asfactor<span class="p">(</span>train_aggregated<span class="p">[</span>factorVars<span class="p">])</span>
-test_aggregated<span class="p">[</span>factorVars<span class="p">]</span> <span class="o">=</span> h2o.asfactor<span class="p">(</span>test_aggregated<span class="p">[</span>factorVars<span class="p">])</span>
-holdout_aggregated<span class="p">[</span>factorVars<span class="p">]</span> <span class="o">=</span> h2o.asfactor<span class="p">(</span>holdout_aggregated<span class="p">[</span>factorVars<span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Fitting-the-GLM">Fitting the GLM<a class="anchor-link" href="#Fitting-the-GLM">¶</a></h2><p>The GLM will be built using the h2o package. First, define the set of predictors we will use and the name of the column to be used as an offset. Then, the model is fit using <code>h2o.glm()</code>. Be careful to define the 'family' as poisson. Setting lambda = 0 means that this baseline model will not apply any regularisation. To check the performance against holdout data use <code>h2o.performance()</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [16]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Fit a basic GLM - with NO regularisation (discussed in part 2)</span>
-<span class="c1"># Need to set alpha = 0 and lambda = 0 as h2o uses regularisation by default.</span>
-<span class="c1"># Setting these to 0 overrides this.</span>
-
-predictors <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">'Salary_Band'</span><span class="p">,</span> <span class="s">'Occupation'</span><span class="p">,</span> <span class="s">'Location'</span><span class="p">,</span> <span class="s">'Male'</span><span class="p">)</span>
-response <span class="o">=</span> <span class="s">'Claim'</span>
-offset <span class="o">=</span> <span class="s">'Offset'</span>
-
-mod1 <span class="o">=</span> h2o.glm<span class="p">(</span>x <span class="o">=</span> predictors<span class="p">,</span>
-               y <span class="o">=</span> response<span class="p">,</span>
-               training_frame <span class="o">=</span> train_aggregated<span class="p">,</span>
-               validation_frame <span class="o">=</span> test_aggregated<span class="p">,</span>
-               family <span class="o">=</span> <span class="s">'poisson'</span><span class="p">,</span>
-               offset_column <span class="o">=</span> offset<span class="p">,</span>
-               alpha <span class="o">=</span> <span class="m">0</span><span class="p">,</span>lambda <span class="o">=</span> <span class="m">0</span><span class="p">,</span>
-               intercept <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-               compute_p_values <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-               seed <span class="o">=</span> <span class="m">123</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Extracting-the-Ratings">Extracting the Ratings<a class="anchor-link" href="#Extracting-the-Ratings">¶</a></h2><p>To set a rating plan we need to extract the coefficient estimates from the model and convert these to ratings. Since the poisson GLM uses a log link function we can get to the final ratings by taking exponentials of both sides of the GLM equation. For example, to derive $\mu$ our equation becomes:</p>
-<p>$$\mu = \exp(log(\mathbb{E}[deaths]) + \alpha + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n) $$</p>
-<p>Which is equivalent to:</p>
-<p>$$\mu = \mathbb{E}[deaths] \times \exp(\alpha) \times \exp(\beta_1 x_1) \times \exp(\beta_2 x_2) \times ... \times \exp(\beta_n x_n)$$</p>
-<p>We can see that the final rating plan will therefore be multiplicative.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [17]:</div>
-<div class="inner_cell">
-<div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Extracting the ratings</span>
-mod1_ratings <span class="o">=</span> mod1<span class="o">@</span>model<span class="o">$</span>coefficients_table
-mod1_ratings<span class="o">$</span>rating <span class="o">=</span> <span class="kp">exp</span><span class="p">(</span>mod1_ratings<span class="o">$</span>coefficients<span class="p">)</span>
+mod2_ratings <span class="o">=</span> mod2<span class="o">@</span>model<span class="o">$</span>coefficients_table
+mod2_ratings<span class="o">$</span>rating <span class="o">=</span> <span class="kp">exp</span><span class="p">(</span>mod2_ratings<span class="o">$</span>coefficients<span class="p">)</span>
 
 <span class="c1"># View the table of coefficients</span>
 <span class="c1"># (some rounding has been applied using dplyr mutate function)</span>
-mod1_ratings <span class="o">%&gt;%</span> 
+mod2_ratings <span class="o">%&gt;%</span> 
     mutate_if<span class="p">(</span><span class="kp">is.numeric</span><span class="p">,</span> funs<span class="p">(</span><span class="kp">round</span><span class="p">(</span><span class="m">.</span><span class="p">,</span> <span class="m">3</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -1495,21 +1283,73 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
 <table class="table-hover table table-striped">
-<thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">std_error</th><th scope="col">z_value</th><th scope="col">p_value</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
+<thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
 <tbody>
-<tr><td>Intercept    </td><td> 0.230       </td><td>0.084        </td><td> 2.748       </td><td>0.006        </td><td> 0.230       </td><td>1.259        </td></tr>
-<tr><td>Salary_Band.2</td><td>-0.010       </td><td>0.064        </td><td>-0.163       </td><td>0.871        </td><td>-0.010       </td><td>0.990        </td></tr>
-<tr><td>Salary_Band.3</td><td> 0.035       </td><td>0.066        </td><td> 0.526       </td><td>0.599        </td><td> 0.035       </td><td>1.035        </td></tr>
-<tr><td>Salary_Band.4</td><td>-0.015       </td><td>0.064        </td><td>-0.229       </td><td>0.819        </td><td>-0.015       </td><td>0.986        </td></tr>
-<tr><td>Salary_Band.5</td><td>-0.118       </td><td>0.095        </td><td>-1.247       </td><td>0.213        </td><td>-0.118       </td><td>0.889        </td></tr>
-<tr><td>Location.2   </td><td> 0.078       </td><td>0.087        </td><td> 0.899       </td><td>0.369        </td><td> 0.078       </td><td>1.082        </td></tr>
-<tr><td>Location.3   </td><td> 0.177       </td><td>0.078        </td><td> 2.281       </td><td>0.023        </td><td> 0.177       </td><td>1.194        </td></tr>
-<tr><td>Location.4   </td><td> 0.167       </td><td>0.086        </td><td> 1.945       </td><td>0.052        </td><td> 0.167       </td><td>1.182        </td></tr>
-<tr><td>Occupation.2 </td><td>-0.152       </td><td>0.060        </td><td>-2.529       </td><td>0.011        </td><td>-0.152       </td><td>0.859        </td></tr>
-<tr><td>Occupation.3 </td><td>-0.141       </td><td>0.055        </td><td>-2.565       </td><td>0.010        </td><td>-0.141       </td><td>0.869        </td></tr>
-<tr><td>Male.1       </td><td>-0.084       </td><td>0.044        </td><td>-1.913       </td><td>0.056        </td><td>-0.084       </td><td>0.919        </td></tr>
+<tr><td>Intercept    </td><td> 0.219       </td><td> 0.219       </td><td>1.245        </td></tr>
+<tr><td>Salary_Band.1</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Salary_Band.2</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Salary_Band.3</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Salary_Band.4</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Salary_Band.5</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Location.1   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Location.2   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Location.3   </td><td> 0.011       </td><td> 0.011       </td><td>1.011        </td></tr>
+<tr><td>Location.4   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Occupation.1 </td><td> 0.063       </td><td> 0.063       </td><td>1.065        </td></tr>
+<tr><td>Occupation.2 </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Occupation.3 </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
+<tr><td>Male.0       </td><td> 0.008       </td><td> 0.008       </td><td>1.008        </td></tr>
+<tr><td>Male.1       </td><td>-0.008       </td><td>-0.008       </td><td>0.992        </td></tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Check performance of both models against validation &amp; holdout data</span>
+perf1 <span class="o">=</span> h2o.performance<span class="p">(</span>mod1<span class="p">,</span> holdout_aggregated<span class="p">)</span>
+perf2 <span class="o">=</span> h2o.performance<span class="p">(</span>mod2<span class="p">,</span> holdout_aggregated<span class="p">)</span>
+
+<span class="c1"># Check MSE of original model</span>
+<span class="kp">round</span><span class="p">(</span>h2o.mse<span class="p">(</span>perf1<span class="p">),</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea ">
+0.19588
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># And now, MSE of regularised model, automatically 'tuned'</span>
+<span class="kp">round</span><span class="p">(</span>h2o.mse<span class="p">(</span>perf2<span class="p">),</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea ">
+0.19632
 </div>
 </div>
 </div>
@@ -1519,18 +1359,120 @@ mod1_ratings <span class="o">%&gt;%</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The final rating plan takes the form:</p>
-<p>Base rate $\times$ exposure $\times$ intercept $\times$ salary rating $\times$ location rating $\times$ occupation rating $\times$ gender rating</p>
-<p>This simple plan can then be used to estimate the claim rate for an individual or a group of lives with similar features. We can work through the first row in the holdout dataset to see how the model could be used in practice.</p>
+<p>Since the MSE of the new model is larger than that under the original model, the 'tuning' may have actually resulted in overfitting. However, the holdout dataset is only one sample and so it's difficult to draw too many conclusions from this result. This is where cross validation comes in. We can use cross validation to see which model generalises better to new data by examining performance across multiple test datasets.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation">¶</a></h2><p>So far, the model has only been validated using one test set. K-fold cross validation can be used to check that the $\alpha$ parameter selected is generally sound and that the model will generalise well to a number of unseen data sets. The basic idea is as follows:</p>
+<ul>
+<li>Partition the data into k subsets</li>
+<li>Use k-1 subsets as the training data</li>
+<li>Test the model on the remaining subset</li>
+<li>Repeat until all subsets have been used as a test set once</li>
+</ul>
+<p>This will give us mean performance measures across the k subsets, as well as a standard deviation. The 'best' model (from a number of competing models) might be considered to be the one which has the best mean cross validation performance. The next steps describe how to cross validate an existing model in h2o. The alternative is to set the nfolds argument to be non negative when fitting the models in the first place. However, since this will build n+1 models this may be computationally expensive if using grid search (and depending on the size of the dataset and which model you are fitting - GLM is normally quite fast).</p>
+<p>We can select the best performing models in the grid and cross validate each of these to check which has the best mean performance. We can do this using the train and test sets combined. I will use 5 fold cross validation in the following code blocks.</p>
+<p>Note - the cross validation performance metrics will not be directly comparable with those computed on the earlier holdout data, since the testing examples in each k fold will be different to those in the holdout set.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">head</span><span class="p">(</span>holdout<span class="p">,</span><span class="m">1</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Combine train &amp; test data and cross validate the models at the top</span>
+<span class="c1"># of the grid.</span>
+<span class="c1"># Again, use lambda search to choose optimal lambda.</span>
+
+<span class="c1"># The following code is based on a tutorial taken from the H2O website</span>
+df <span class="o">=</span> h2o.rbind<span class="p">(</span>train_aggregated<span class="p">,</span>test_aggregated<span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">){</span>
+  glm <span class="o">&lt;-</span> h2o.getModel<span class="p">(</span>sortedGrid<span class="o">@</span>model_ids<span class="p">[[</span>i<span class="p">]])</span>
+  cvglm <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span>h2o.glm<span class="p">,</span>
+                   <span class="p">{</span>
+                     p <span class="o">&lt;-</span> glm<span class="o">@</span>parameters
+                     p<span class="o">$</span>model_id <span class="o">=</span> <span class="kc">NULL</span>         
+                     p<span class="o">$</span>training_frame <span class="o">=</span> df  <span class="c1"># no validation frame</span>
+                     p<span class="o">$</span>validation_frame <span class="o">=</span> <span class="kc">NULL</span>  
+                     p<span class="o">$</span>offset_column <span class="o">=</span> <span class="s">'Offset'</span>
+                     p<span class="o">$</span>nfolds <span class="o">=</span> <span class="m">5</span>          <span class="c1"># add the cross validation   </span>
+                     p<span class="o">$</span>lambda_search <span class="o">=</span> <span class="bp">T</span>
+                     p
+                   <span class="p">}</span>
+  <span class="p">)</span>
+  <span class="kp">print</span><span class="p">(</span>glm<span class="o">@</span>model_id<span class="p">)</span>
+  <span class="kp">print</span><span class="p">(</span>cvglm<span class="o">@</span>model<span class="o">$</span>cross_validation_metrics_summary<span class="p">[</span><span class="m">3</span><span class="p">,])</span> <span class="c1"># print out mse row</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] "GLMgrid_model_8"
+Cross-Validation Metrics Summary: 
+          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39514202 0.02417593 0.41696805  0.4179402 0.39798224 0.41450343
+    cv_5_valid
+mse 0.32831618
+[1] "GLMgrid_model_6"
+Cross-Validation Metrics Summary: 
+         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.3952421 0.024238229 0.41700536 0.41825843  0.3980208  0.4146654
+    cv_5_valid
+mse 0.32826048
+[1] "GLMgrid_model_7"
+Cross-Validation Metrics Summary: 
+         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.3951722 0.024202611  0.4169403   0.418074  0.3980001  0.4145702
+    cv_5_valid
+mse 0.32827646
+[1] "GLMgrid_model_9"
+Cross-Validation Metrics Summary: 
+          mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39519712 0.024199862 0.41699398 0.41802925  0.3979665  0.4146775
+    cv_5_valid
+mse 0.32831836
+[1] "GLMgrid_model_5"
+Cross-Validation Metrics Summary: 
+          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
+mse 0.39520955 0.02424613 0.41696036  0.4182716 0.39804438  0.4145749
+    cv_5_valid
+mse 0.32819656
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Compare these to cross validated version of baseline model:</span>
+mod1_cv <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span>h2o.glm<span class="p">,</span>
+                         
+                         <span class="p">{</span>
+                           p <span class="o">&lt;-</span> mod1<span class="o">@</span>parameters
+                           p<span class="o">$</span>model_id <span class="o">=</span> <span class="kc">NULL</span>          
+                           p<span class="o">$</span>training_frame <span class="o">=</span> df      
+                           p<span class="o">$</span>validation_frame <span class="o">=</span> <span class="kc">NULL</span>  
+                           p<span class="o">$</span>nfolds <span class="o">=</span> <span class="m">5</span>              
+                           p<span class="o">$</span>offset_column <span class="o">=</span> <span class="s">'Offset'</span>
+                           p
+                         <span class="p">}</span>
+<span class="p">)</span>
+mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_metrics_summary<span class="p">[</span><span class="m">3</span><span class="p">,]</span>
 </pre></div>
 </div>
 </div>
@@ -1541,9 +1483,9 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
 <table class="table-hover table table-striped">
-<thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th><th scope="col">Base_Rate</th><th scope="col">Expected_Deaths</th></tr></thead>
+<thead><tr><th></th><th scope="col">mean</th><th scope="col">sd</th><th scope="col">cv_1_valid</th><th scope="col">cv_2_valid</th><th scope="col">cv_3_valid</th><th scope="col">cv_4_valid</th><th scope="col">cv_5_valid</th></tr></thead>
 <tbody>
-<tr><td>9          </td><td>36.56574   </td><td>1          </td><td>2          </td><td>57991.43   </td><td>4          </td><td>1.124758   </td><td>0          </td><td>36         </td><td>4          </td><td>0.001      </td><td>0.001124758</td></tr>
+<tr><th scope="row">mse</th><td>0.40253404 </td><td>0.026616871</td><td>0.4350453  </td><td>0.41589925 </td><td>0.42091507 </td><td>0.4119179  </td><td>0.32889268 </td></tr>
 </tbody>
 </table>
 </div>
@@ -1555,27 +1497,8 @@ mod1_ratings <span class="o">%&gt;%</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The ratings for a male, occupation class 2, living in location category 4 in salary band 4 are as follows:</p>
-<ul>
-<li>Gender - 0.919</li>
-<li>Occupation - 0.859</li>
-<li>Location - 1.182</li>
-<li>Salary band - 0.986</li>
-</ul>
-<p>So the claim rate would be:</p>
-<p>$$ 0.001 \times 1.124758 \times 0.919 \times 0.859 \times 1.182 \times  0.986 = 0.00103$$</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>You should now be able to fit a basic GLM using the h2o package and use the resulting model to set an insurance rating plan. In part 2 I will cover:</p>
-<ul>
-<li>Cross validating the model</li>
-<li>Automatically tuning the model using h2o's grid search functionality - this allows us to automatically try hundreds (even thousands) of different GLM's, with different input parameters, in order to select the best model for this dataset</li>
-</ul>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>It looks like the tuned model performs better if we look at cross validation performance rather than performance against a single holdout set. So, we might determine that the regularised model generalises best to unseen data. The rating plan we extract should be based on this second model.</p>
+<p>Regularisation has led to a much simpler model. In fact, the only real loadings picked up are for location 3 and occupation class 1 (the effect of gender is negligible).</p>
 </div>
 </div>
 </div>
@@ -1611,14 +1534,11 @@ mod1_ratings <span class="o">%&gt;%</span>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
-    <h4>Part 2 of the Insurance Pricing series</h4>
+    <h4>Part 3 of the Insurance Pricing series</h4>
        <h5>Previous articles</h5>
        <ul>
            <li><a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
-       </ul>
-       <h5>Next articles</h5>
-       <ul>
-           <li><a href="https://josho88.github.io/Mortality GLM 2.html">Life Insurance GLM with H2O: Part 2</a></li>
+           <li><a href="https://josho88.github.io/Mortality GLM.html">Life Insurance GLM with H2O: Part 1</a></li>
        </ul>
 </section>
     <hr/>
@@ -1630,8 +1550,8 @@ mod1_ratings <span class="o">%&gt;%</span>
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'josho88-github-io'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'Mortality GLM';
-                var disqus_url = 'https://josho88.github.io/Mortality GLM.html';
+                    var disqus_identifier = 'Mortality GLM 2';
+                var disqus_url = 'https://josho88.github.io/Mortality GLM 2.html';
 
             var disqus_config = function () {
                 this.language = "en";
@@ -1705,11 +1625,7 @@ mod1_ratings <span class="o">%&gt;%</span>
   <ul class="list-group">
     <li class="list-group-item">
       <h5></i>Previous article</h5>
-      <a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a>
-    </li>
-    <li class="list-group-item">
-      <h5>Next article</h5>
-      <a href="https://josho88.github.io/Mortality GLM 2.html">Life Insurance GLM with H2O: Part 2</a>
+      <a href="https://josho88.github.io/Mortality GLM.html">Life Insurance GLM with H2O: Part 1</a>
     </li>
   </ul>
 </li>
