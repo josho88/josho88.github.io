@@ -1172,7 +1172,7 @@ mod2_ratings &lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-hover table-striped"&gt;
+&lt;table class="table-hover table table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;names&lt;/th&gt;&lt;th scope="col"&gt;coefficients&lt;/th&gt;&lt;th scope="col"&gt;standardized_coefficients&lt;/th&gt;&lt;th scope="col"&gt;rating&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Intercept    &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt;1.245        &lt;/td&gt;&lt;/tr&gt;
@@ -1372,7 +1372,7 @@ mod1_cv&lt;span class="o"&gt;@&lt;/span&gt;model&lt;span class="o"&gt;$&lt;/span
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-hover table-striped"&gt;
+&lt;table class="table-hover table table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope="col"&gt;mean&lt;/th&gt;&lt;th scope="col"&gt;sd&lt;/th&gt;&lt;th scope="col"&gt;cv_1_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_2_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_3_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_4_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_5_valid&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;th scope="row"&gt;mse&lt;/th&gt;&lt;td&gt;0.40253404 &lt;/td&gt;&lt;td&gt;0.026616871&lt;/td&gt;&lt;td&gt;0.4350453  &lt;/td&gt;&lt;td&gt;0.41589925 &lt;/td&gt;&lt;td&gt;0.42091507 &lt;/td&gt;&lt;td&gt;0.4119179  &lt;/td&gt;&lt;td&gt;0.32889268 &lt;/td&gt;&lt;/tr&gt;
