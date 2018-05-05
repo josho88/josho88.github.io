@@ -157,6 +157,12 @@ h1,h2,h3,h4,h5,h6{
   
 }
 
+ /*change orientation of skills divs when viewing on small screen*/ 
+@media screen and (max-width:600px){
+.my-skills .skills-left, .my-skills .skills-center, .my-skills .skills-right{
+  width:100%;
+}
+}
 
 .my-skills i{
   font-size:60px;
@@ -214,6 +220,7 @@ h1,h2,h3,h4,h5,h6{
 }
 }
 
+ /*change orientation of project divs when viewing on small screen*/ 
 @media screen and (max-width:600px){
 .projects .project1, 
 .projects .project2, 
@@ -251,6 +258,17 @@ h1,h2,h3,h4,h5,h6{
   background-size:cover;
 
 }
+
+ /*change margins when viewing on small screen*/ 
+ @media screen and (max-width:600px){
+   .projects .project1, 
+  .projects .project2, 
+  .projects .project3{
+      margin-left:2%;
+      margin-right:2%;
+      margin-top:2%;
+  }
+ }
 
 .projects .overlay{
   width:100%;
