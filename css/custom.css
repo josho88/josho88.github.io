@@ -86,13 +86,13 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /* adjust contact forms for mobile devices*/
-@media screen and (min-width:600px){
+@media screen and (max-width:600px){
   .contact{
     text-align:center;
   }
 }
 
-@media screen and (min-width:600px){
+@media screen and (max-width:600px){
   .contact .col-lg-6{
     width:95%;
     margin-left:2.5%;
@@ -100,7 +100,7 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
-@media screen and (min-width:600px){
+@media screen and (max-width:600px){
 .btn{
   display: block;
     margin: 0 auto;
