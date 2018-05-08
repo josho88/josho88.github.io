@@ -122,6 +122,13 @@ h1,h2,h3,h4,h5,h6{
   text-align:justify;
 }
 
+/* adjust text alignment on about me page for mobile devices*/
+@media screen and (max-width:600px){
+.about-me p{
+  text-align:center;
+}
+}
+
 .about-me:after{
   content:'';
   display:block;
@@ -165,7 +172,7 @@ h1,h2,h3,h4,h5,h6{
 .my-skills{
   /*background-color:#ecf0f1;*/
   padding-top:30px;
-  padding-bottom:30px;
+  padding-bottom:2px;
   text-align:center;
 }
 
