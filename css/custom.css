@@ -68,7 +68,7 @@ h1,h2,h3,h4,h5,h6{
 
 }
 
-.btn{
+.form-group .btn{
   margin-top:10px;
   background-color: white;
   padding:10px 25px;
@@ -80,7 +80,7 @@ h1,h2,h3,h4,h5,h6{
   text-align:center;
 }
 
-.btn:hover{
+.form-group .btn:hover{
   background-color:#2c3e50;
   color:white;
 }
@@ -101,7 +101,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 @media screen and (max-width:600px){
-.btn{
+.form-group .btn{
   display: block;
     margin: 0 auto;
 }
@@ -110,10 +110,16 @@ h1,h2,h3,h4,h5,h6{
 /* about me*/
 
 .about-me{
-  width:100%;
-  text-align:left;
-  padding-bottom:30px;
-  margin-top:-10px;
+  padding-top:20px;
+  width:70%;
+  margin-left:15%;
+  margin-right:15%;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+.about-me p{
+  text-align:justify;
 }
 
 .about-me:after{
@@ -122,40 +128,19 @@ h1,h2,h3,h4,h5,h6{
   clear:both;
 }
 
-.about-me h4{
+.about-me h2{
   position:relative;
+  padding-bottom:30px;
 }
 
-.about-me h4:after{
+.about-me h2:after{
   content:'';
   position:absolute;
-  width:90%;
+  width:71.4%;
   height:2px;
-  left:0%;
-  bottom:-7px;
+  left:14.3%;
+  bottom:15px;
   background-color:#ecf0f1;
-}
-
-.about-me .col-left, .about-me .col-right{
-  width:50%;
-  float: left;
-}
-
-.about-me .col-left{
-  padding-right:5%;
-  margin-left:-2px;
-}
-
-.about-me .col-right{
-  position:relative;
-  padding-right:2%;
-  padding-top:2.5%;
-
-}
-
-
-.about-me .col-left img{
-  max-width:100%;
 }
 
 .about-me a{
@@ -167,6 +152,7 @@ h1,h2,h3,h4,h5,h6{
   /*border-radius:20px;*/
   font-size:15px;
   display: inline-block;
+  margin-top:10px;
 }
 
 .about-me a:hover{
@@ -354,15 +340,17 @@ h1,h2,h3,h4,h5,h6{
 /* homepage*/
 
 .home{
-  padding-top:50px;
+  padding-top:20px;
   width:70%;
   margin-left:15%;
   margin-right:15%;
   text-align:center;
-  padding-bottom:30px;
-  margin-top:-10px;
+  padding-bottom:10px;
 }
 
+.home p{
+  text-align:center;
+}
 
 .home h2{
   padding-bottom:30px;
