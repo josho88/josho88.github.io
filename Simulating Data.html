@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Simulating a Mortality Dataset in R - Josh Olney</title>
+    <title>Simulating a Mortality Dataset in R - SJV Analytics</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
         <meta name="keywords" content="R,RStudio,Simulation" />
         <meta name="description" content="In this post I&#39;ll show you how to simulate a large dataset of mortality claims. Sometimes it&#39;s useful to use simulated data. For example, if you wanted to experiment with new modelling techniques but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you want to create, it&#39;s possible to create entire datasets from scratch." />
 
-        <meta property="og:site_name" content="Josh Olney" />
+        <meta property="og:site_name" content="SJV Analytics" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Simulating a Mortality Dataset in R"/>
         <meta property="og:url" content="https://josho88.github.io/Simulating Data.html"/>
@@ -40,12 +40,12 @@
         <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
 
         <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney ATOM Feed"/>
+              title="SJV Analytics ATOM Feed"/>
 
 
 
         <link href="https://josho88.github.io/feeds/data-exploration.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney Data Exploration ATOM Feed"/>
+              title="SJV Analytics Data Exploration ATOM Feed"/>
 
 </head>
 <body>
@@ -60,7 +60,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
+<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -1158,7 +1158,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age     </td><td>40      </td><td>25      </td><td>normal  </td><td>identity</td></tr>
@@ -1208,7 +1208,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age            </td><td>40             </td><td>25             </td><td>normal         </td><td>identity       </td></tr>
@@ -1266,7 +1266,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age                                                                                                          </td><td>40                                                                                                           </td><td>25.0                                                                                                         </td><td>normal                                                                                                       </td><td>identity                                                                                                     </td></tr>
@@ -1311,7 +1311,7 @@ dt <span class="o">=</span> genData<span class="p">(</span>n <span class="o">=</
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th></tr></thead>
 <tbody>
 <tr><td>1        </td><td>42.08506 </td><td>1        </td><td>3        </td><td>1        </td><td>2.7495713</td><td>38489.57 </td><td>0        </td></tr>
@@ -6880,7 +6880,7 @@ dt<span class="o">$</span>Salary_Band <span class="o">=</span> quant_bin<span cl
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
 <tbody>
 <tr><td>1        </td><td>37.19762 </td><td>1        </td><td>3        </td><td>4        </td><td>2.8019758</td><td>61010.78 </td><td>0        </td><td>37       </td><td>4        </td></tr>

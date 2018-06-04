@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Life Insurance GLM with H2O: Part 1 - Josh Olney</title>
+    <title>Life Insurance GLM with H2O: Part 1 - SJV Analytics</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
         <meta name="keywords" content="R,h2o,modelling,GLM" />
         <meta name="description" content="Here I will show you how to use generalised linear models (GLM) with mortality claims data. We will fit a poisson GLM to model count data using the h2o package. This post will cover: Preparing data Basic h2o functions Use of offsets Fitting a basic GLM Extracting a rating plan from the model This article will be split into two parts - part 1 will cover the above and part 2 will cover cross validation and &#39;tuning&#39; a GLM using h2o&#39;s grid search functionality. Finally, in a later post we will look at how to build simple pricing apps using the models we develop." />
 
-        <meta property="og:site_name" content="Josh Olney" />
+        <meta property="og:site_name" content="SJV Analytics" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Life Insurance GLM with H2O: Part 1"/>
         <meta property="og:url" content="https://josho88.github.io/Mortality GLM.html"/>
@@ -41,12 +41,12 @@
         <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
 
         <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney ATOM Feed"/>
+              title="SJV Analytics ATOM Feed"/>
 
 
 
         <link href="https://josho88.github.io/feeds/statistical-modelling.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Josh Olney Statistical Modelling ATOM Feed"/>
+              title="SJV Analytics Statistical Modelling ATOM Feed"/>
 
 </head>
 <body>
@@ -61,7 +61,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> Josh Olney            </a>
+<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -1160,7 +1160,7 @@ dt <span class="o">=</span> read.csv<span class="p">(</span><span class="s">'Sim
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
 <tbody>
 <tr><td>1       </td><td>37.19762</td><td>1       </td><td>3       </td><td>45585.80</td><td>4       </td><td>1.260529</td><td>0       </td><td>37      </td><td>4       </td></tr>
@@ -1376,7 +1376,7 @@ holdout_aggregated <span class="o">=</span> as.h2o<span class="p">(</span>agg<sp
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Salary_Band</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Expected_Deaths</th></tr></thead>
 <tbody>
 <tr><td>18         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td> 2.085132  </td><td>0          </td><td>0.002085132</td></tr>
@@ -1493,7 +1493,7 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">std_error</th><th scope="col">z_value</th><th scope="col">p_value</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
 <tbody>
 <tr><td>Intercept    </td><td> 0.230       </td><td>0.084        </td><td> 2.748       </td><td>0.006        </td><td> 0.230       </td><td>1.259        </td></tr>
@@ -1539,7 +1539,7 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table table-hover">
+<table class="table table-hover table-striped">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th><th scope="col">Base_Rate</th><th scope="col">Expected_Deaths</th></tr></thead>
 <tbody>
 <tr><td>9          </td><td>36.56574   </td><td>1          </td><td>2          </td><td>57991.43   </td><td>4          </td><td>1.124758   </td><td>0          </td><td>36         </td><td>4          </td><td>0.001      </td><td>0.001124758</td></tr>
