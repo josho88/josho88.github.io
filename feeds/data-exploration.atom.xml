@@ -1046,7 +1046,7 @@ def
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table-hover table table-striped"&gt;
+&lt;table class="table table-striped table-hover"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Age     &lt;/td&gt;&lt;td&gt;40      &lt;/td&gt;&lt;td&gt;25      &lt;/td&gt;&lt;td&gt;normal  &lt;/td&gt;&lt;td&gt;identity&lt;/td&gt;&lt;/tr&gt;
@@ -1096,7 +1096,7 @@ def
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table-hover table table-striped"&gt;
+&lt;table class="table table-striped table-hover"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Age            &lt;/td&gt;&lt;td&gt;40             &lt;/td&gt;&lt;td&gt;25             &lt;/td&gt;&lt;td&gt;normal         &lt;/td&gt;&lt;td&gt;identity       &lt;/td&gt;&lt;/tr&gt;
@@ -1154,7 +1154,7 @@ def
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table-hover table table-striped"&gt;
+&lt;table class="table table-striped table-hover"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;varname&lt;/th&gt;&lt;th scope="col"&gt;formula&lt;/th&gt;&lt;th scope="col"&gt;variance&lt;/th&gt;&lt;th scope="col"&gt;dist&lt;/th&gt;&lt;th scope="col"&gt;link&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Age                                                                                                          &lt;/td&gt;&lt;td&gt;40                                                                                                           &lt;/td&gt;&lt;td&gt;25.0                                                                                                         &lt;/td&gt;&lt;td&gt;normal                                                                                                       &lt;/td&gt;&lt;td&gt;identity                                                                                                     &lt;/td&gt;&lt;/tr&gt;
@@ -1199,7 +1199,7 @@ dt &lt;span class="o"&gt;=&lt;/span&gt; genData&lt;span class="p"&gt;(&lt;/span&
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table-hover table table-striped"&gt;
+&lt;table class="table table-striped table-hover"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Gender&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;42.08506 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;2.7495713&lt;/td&gt;&lt;td&gt;38489.57 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;/tr&gt;
@@ -6768,7 +6768,7 @@ dt&lt;span class="o"&gt;$&lt;/span&gt;Salary_Band &lt;span class="o"&gt;=&lt;/sp
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table-hover table table-striped"&gt;
+&lt;table class="table table-striped table-hover"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;id&lt;/th&gt;&lt;th scope="col"&gt;Age&lt;/th&gt;&lt;th scope="col"&gt;Gender&lt;/th&gt;&lt;th scope="col"&gt;Occupation&lt;/th&gt;&lt;th scope="col"&gt;Location&lt;/th&gt;&lt;th scope="col"&gt;Exposure&lt;/th&gt;&lt;th scope="col"&gt;Salary&lt;/th&gt;&lt;th scope="col"&gt;Claim&lt;/th&gt;&lt;th scope="col"&gt;Age_Last&lt;/th&gt;&lt;th scope="col"&gt;Salary_Band&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;37.19762 &lt;/td&gt;&lt;td&gt;1        &lt;/td&gt;&lt;td&gt;3        &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;td&gt;2.8019758&lt;/td&gt;&lt;td&gt;61010.78 &lt;/td&gt;&lt;td&gt;0        &lt;/td&gt;&lt;td&gt;37       &lt;/td&gt;&lt;td&gt;4        &lt;/td&gt;&lt;/tr&gt;
