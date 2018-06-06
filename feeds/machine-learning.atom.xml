@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SJV Analytics - Machine Learning</title><link href="https://josho88.github.io/" rel="alternate"></link><link href="https://josho88.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>https://josho88.github.io/</id><updated>2018-06-05T20:00:00+01:00</updated><entry><title>Building a Selfie Quote App: Part 1</title><link href="https://josho88.github.io/Selfie_Quote_part1.html" rel="alternate"></link><published>2018-06-05T20:00:00+01:00</published><updated>2018-06-05T20:00:00+01:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-06-05:/Selfie_Quote_part1.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SJV Analytics - Machine Learning</title><link href="https://josho88.github.io/" rel="alternate"></link><link href="https://josho88.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>https://josho88.github.io/</id><updated>2018-06-05T20:00:00+01:00</updated><entry><title>Building a Selfie Quote App: Part 1</title><link href="https://josho88.github.io/Selfie_Quote_p1.html" rel="alternate"></link><published>2018-06-05T20:00:00+01:00</published><updated>2018-06-05T20:00:00+01:00</updated><author><name>Josh Olney</name></author><id>tag:josho88.github.io,2018-06-05:/Selfie_Quote_p1.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -2958,7 +2958,7 @@ mod2_ratings &lt;span class="o"&gt;%&amp;gt;%&lt;/span&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table table-hover table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;names&lt;/th&gt;&lt;th scope="col"&gt;coefficients&lt;/th&gt;&lt;th scope="col"&gt;standardized_coefficients&lt;/th&gt;&lt;th scope="col"&gt;rating&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td&gt;Intercept    &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt; 0.219       &lt;/td&gt;&lt;td&gt;1.245        &lt;/td&gt;&lt;/tr&gt;
@@ -3158,7 +3158,7 @@ mod1_cv&lt;span class="o"&gt;@&lt;/span&gt;model&lt;span class="o"&gt;$&lt;/span
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table class="table table-striped table-hover"&gt;
+&lt;table class="table table-hover table-striped"&gt;
 &lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope="col"&gt;mean&lt;/th&gt;&lt;th scope="col"&gt;sd&lt;/th&gt;&lt;th scope="col"&gt;cv_1_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_2_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_3_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_4_valid&lt;/th&gt;&lt;th scope="col"&gt;cv_5_valid&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;th scope="row"&gt;mse&lt;/th&gt;&lt;td&gt;0.40253404 &lt;/td&gt;&lt;td&gt;0.026616871&lt;/td&gt;&lt;td&gt;0.4350453  &lt;/td&gt;&lt;td&gt;0.41589925 &lt;/td&gt;&lt;td&gt;0.42091507 &lt;/td&gt;&lt;td&gt;0.4119179  &lt;/td&gt;&lt;td&gt;0.32889268 &lt;/td&gt;&lt;/tr&gt;
