@@ -11,7 +11,7 @@
 
 
 
-<link rel="canonical" href="/Mortality GLM.html">
+<link rel="canonical" href="https://josho88.github.io/Mortality GLM.html">
 
         <meta name="author" content="Josh Olney" />
         <meta name="keywords" content="R,h2o,modelling,GLM" />
@@ -20,7 +20,7 @@
         <meta property="og:site_name" content="SJV Analytics" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Life Insurance GLM with H2O: Part 1"/>
-        <meta property="og:url" content="/Mortality GLM.html"/>
+        <meta property="og:url" content="https://josho88.github.io/Mortality GLM.html"/>
         <meta property="og:description" content="Here I will show you how to use generalised linear models (GLM) with mortality claims data. We will fit a poisson GLM to model count data using the h2o package. This post will cover: Preparing data Basic h2o functions Use of offsets Fitting a basic GLM Extracting a rating plan from the model This article will be split into two parts - part 1 will cover the above and part 2 will cover cross validation and &#39;tuning&#39; a GLM using h2o&#39;s grid search functionality. Finally, in a later post we will look at how to build simple pricing apps using the models we develop."/>
         <meta property="article:published_time" content="2018-03-20" />
             <meta property="article:section" content="Statistical Modelling" />
@@ -30,21 +30,25 @@
             <meta property="article:tag" content="GLM" />
             <meta property="article:author" content="Josh Olney" />
             <meta property="og:image"
-                  content="/images/code.png"/>
+                  content="https://josho88.github.io/images/code.png"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://josho88.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="https://josho88.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
-        <link href="/css/custom.css" rel="stylesheet">
+    <link href="https://josho88.github.io/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://josho88.github.io/theme/css/style.css" type="text/css"/>
+        <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
+
+        <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="SJV Analytics ATOM Feed"/>
 
 
 
-
+        <link href="https://josho88.github.io/feeds/statistical-modelling.atom.xml" type="application/atom+xml" rel="alternate"
+              title="SJV Analytics Statistical Modelling ATOM Feed"/>
 
 </head>
 <body>
@@ -58,8 +62,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
+            <a href="https://josho88.github.io/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -84,7 +88,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Mortality GLM.html"
+                    <a href="https://josho88.github.io/Mortality GLM.html"
                        rel="bookmark"
                        title="Permalink to Life Insurance GLM with H2O: Part 1">
                         Life Insurance GLM with H2O: Part 1
@@ -103,17 +107,17 @@
 
 
         <span class="label label-default">Category</span>
-        <a href="/category/statistical-modelling.html">Statistical Modelling</a>
+        <a href="https://josho88.github.io/category/statistical-modelling.html">Statistical Modelling</a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/r.html">R</a>
+	<a href="https://josho88.github.io/tag/r.html">R</a>
         /
-	<a href="/tag/h2o.html">h2o</a>
+	<a href="https://josho88.github.io/tag/h2o.html">h2o</a>
         /
-	<a href="/tag/modelling.html">modelling</a>
+	<a href="https://josho88.github.io/tag/modelling.html">modelling</a>
         /
-	<a href="/tag/glm.html">GLM</a>
+	<a href="https://josho88.github.io/tag/glm.html">GLM</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1158,7 +1162,7 @@ dt <span class="o">=</span> read.csv<span class="p">(</span><span class="s">'Sim
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
 <tbody>
 <tr><td>1       </td><td>37.19762</td><td>1       </td><td>3       </td><td>45585.80</td><td>4       </td><td>1.260529</td><td>0       </td><td>37      </td><td>4       </td></tr>
@@ -1374,7 +1378,7 @@ holdout_aggregated <span class="o">=</span> as.h2o<span class="p">(</span>agg<sp
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Salary_Band</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Expected_Deaths</th></tr></thead>
 <tbody>
 <tr><td>18         </td><td>0          </td><td>1          </td><td>1          </td><td>1          </td><td> 2.085132  </td><td>0          </td><td>0.002085132</td></tr>
@@ -1491,7 +1495,7 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">std_error</th><th scope="col">z_value</th><th scope="col">p_value</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
 <tbody>
 <tr><td>Intercept    </td><td> 0.230       </td><td>0.084        </td><td> 2.748       </td><td>0.006        </td><td> 0.230       </td><td>1.259        </td></tr>
@@ -1537,7 +1541,7 @@ mod1_ratings <span class="o">%&gt;%</span>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Male</th><th scope="col">Occupation</th><th scope="col">Salary</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th><th scope="col">Base_Rate</th><th scope="col">Expected_Deaths</th></tr></thead>
 <tbody>
 <tr><td>9          </td><td>36.56574   </td><td>1          </td><td>2          </td><td>57991.43   </td><td>4          </td><td>1.124758   </td><td>0          </td><td>36         </td><td>4          </td><td>0.001      </td><td>0.001124758</td></tr>
@@ -1611,11 +1615,11 @@ mod1_ratings <span class="o">%&gt;%</span>
     <h4>Part 2 of the Insurance Pricing series</h4>
        <h5>Previous articles</h5>
        <ul>
-           <li><a href="/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
+           <li><a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
        </ul>
        <h5>Next articles</h5>
        <ul>
-           <li><a href="/Mortality GLM 2.html">Life Insurance GLM with H2O: Part 2</a></li>
+           <li><a href="https://josho88.github.io/Mortality GLM 2.html">Life Insurance GLM with H2O: Part 2</a></li>
        </ul>
 </section>
     <hr/>
@@ -1628,7 +1632,7 @@ mod1_ratings <span class="o">%&gt;%</span>
             var disqus_shortname = 'josho88-github-io'; // required: replace example with your forum shortname
 
                     var disqus_identifier = 'Mortality GLM';
-                var disqus_url = '/Mortality GLM.html';
+                var disqus_url = 'https://josho88.github.io/Mortality GLM.html';
 
             var disqus_config = function () {
                 this.language = "en";
@@ -1666,13 +1670,13 @@ mod1_ratings <span class="o">%&gt;%</span>
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="https://josho88.github.io/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="https://josho88.github.io/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="https://josho88.github.io/theme/js/respond.min.js"></script>
 
 
     <!-- Disqus -->
