@@ -49,6 +49,7 @@ h1,h2,h3,h4,h5,h6{
     line-height: 62px;
     height: 62px;
     padding-top: 0;
+    padding-bottom:0;
 }
 
 /* contact form*/
@@ -316,6 +317,7 @@ h1,h2,h3,h4,h5,h6{
   position:relative;
   padding-top: 30px;
   margin-top:0px;
+  padding-bottom:30px;
 }
 
 .projects h2:after{
@@ -326,6 +328,7 @@ h1,h2,h3,h4,h5,h6{
   left:25%;
   bottom:60px;
   background-color:#ecf0f1;
+  display:none; /* remove this for now */
 }
 
 
@@ -416,6 +419,66 @@ h1,h2,h3,h4,h5,h6{
 
 /* homepage*/
 
+.banner-home{
+  width:100%;
+  text-align:center;
+  background-size:cover;
+  background-image:url(/images/banner-2.jpg);
+  overflow:visible;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+  background-color: #C4C4C4;
+  margin: 0 0 0;
+  padding: 200px 0; /*controls padding around inner text & therefore size of banner*/
+  position:relative;
+  margin-top:-20px; /*dodgy way of removing whitsepace under nav*/
+  background-attachment:fixed; /*parallax scrolling*/
+}
+
+.banner-home h1{
+  color:white;
+}
+
+/*mouse scroll effect on banner*/
+.scroll-link {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.mouse {
+  max-width: 2.5rem;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes scroll {
+  0%, 20% {
+  transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes scroll {
+  ...
+  10% {
+  opacity: 1;
+  }
+  100% {
+  transform: translateY(36px) scaleY(2);
+  opacity: 0.01;
+  }
+}
+
+.scroll {
+  animation-name: scroll;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.650, -0.550, 0.250, 1.500);
+  animation-iteration-count: infinite;
+  transform-origin: 50% 20.5px;
+  will-change: transform;
+}
+
 .home{
   padding-top:20px;
   width:70%;
@@ -426,7 +489,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .home p{
-  text-align:center;
+  text-align:justify;
 }
 
 .home h2{
@@ -449,5 +512,144 @@ h1,h2,h3,h4,h5,h6{
 .home a:hover{
   background-color:#2c3e50;
   color:white;
+}
+
+.help{
+  width:100%;
+  height:auto;
+  overflow:auto;
+  text-align:center;
+  padding-bottom:50px;
+}
+
+.help .title{
+  width:100%;
+  text-align:center;
+  padding-top:10px;
+  padding-bottom:20px;
+}
+
+
+.help .help1, 
+.help .help2, 
+.help .help3{
+  width:30%;
+  display: inline-block;
+  float:left;
+  padding-left:3%;
+  padding-right:3%;
+  padding-top:20px;
+}
+
+.help .help1{margin-left:5%;}
+.help .help3{margin-right:5%;}
+
+.help i {
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border:solid 1px;
+    border-color:#bccad6;
+    text-align: center;
+    line-height: 100px;
+    font-size:30px;
+}
+
+.help i:hover{
+  border-color:#2c3e50;
+}
+
+.help h3, .help p{
+  padding:8px;
+  position:relative;
+}
+
+.help .title h2{
+  position:relative;
+}
+.help .title h2:after{
+  content:'';
+  position:absolute;
+  bottom:-25px;
+  width:10%;
+  height:1px;
+  left:45%;
+  background-color:#bccad6;
+}
+
+.services{
+  height:auto;
+  overflow:auto;
+  position:relative;
+  display:inline-block;
+  text-align:center;
+  color:white;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-bottom:5%;
+}
+
+.services .title{
+  width:100%;
+  text-align:center;
+  color:white;
+  position:relative;
+  padding-top:20px;
+}
+
+.services .title h2:after{
+  content:'';
+  position:absolute;
+  bottom:-25px;
+  width:10%;
+  height:1px;
+  left:45%;
+  background-color:white;
+}
+
+.services h2{color:white;}
+.services h3{padding:10px;}
+
+
+
+.services .service1,
+.services .service2,
+.services .service3,
+.services .service4{
+  width:32.5%;
+  height:200px;
+  float:left;
+  position:relative;
+  padding:30px;
+  margin-left:2.5%;
+  margin-right:2.5%;
+}
+
+.services .service1,
+.services .service3{margin-left:15%;}
+
+.services .service2,
+.services .service4{margin-right:15%;}
+
+.services:before{
+  content:' ';
+  display:block;
+  width:100%;
+  height:100%;
+  text-align:center;
+  background-size:100%;
+  background-image:linear-gradient(
+      rgba(44,62,80, 0.45), 
+      rgba(44,62,80, 0.45)
+    ),url(/images/fields.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+  position:absolute;
+  opacity:0.9;
+  background-attachment:fixed; /*parallax scrolling*/
+  overflow:auto;
+  
 }
 

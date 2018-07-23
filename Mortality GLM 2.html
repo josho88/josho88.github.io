@@ -11,7 +11,7 @@
 
 
 
-<link rel="canonical" href="https://josho88.github.io/Mortality GLM 2.html">
+<link rel="canonical" href="/Mortality GLM 2.html">
 
         <meta name="author" content="Josh Olney" />
         <meta name="keywords" content="R,h2o,modelling,GLM,grid search,regularisation" />
@@ -20,7 +20,7 @@
         <meta property="og:site_name" content="SJV Analytics" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Life Insurance GLM with H2O: Part 2"/>
-        <meta property="og:url" content="https://josho88.github.io/Mortality GLM 2.html"/>
+        <meta property="og:url" content="/Mortality GLM 2.html"/>
         <meta property="og:description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here"/>
         <meta property="article:published_time" content="2018-04-30" />
             <meta property="article:section" content="Machine Learning" />
@@ -32,30 +32,26 @@
             <meta property="article:tag" content="regularisation" />
             <meta property="article:author" content="Josh Olney" />
             <meta property="og:image"
-                  content="https://josho88.github.io/images/code.png"/>
+                  content="/images/code.png"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://josho88.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="https://josho88.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://josho88.github.io/theme/css/pygments/friendly.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://josho88.github.io/theme/css/style.css" type="text/css"/>
-        <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
-
-        <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics ATOM Feed"/>
+    <link href="/theme/css/pygments/friendly.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/css/custom.css" rel="stylesheet">
 
 
 
-        <link href="https://josho88.github.io/feeds/machine-learning.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics Machine Learning ATOM Feed"/>
+
 
 </head>
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -64,8 +60,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
+            <a href="/" class="navbar-brand">
+<img class="img-responsive pull-left gap-right" src="/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -90,7 +86,7 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://josho88.github.io/Mortality GLM 2.html"
+                    <a href="/Mortality GLM 2.html"
                        rel="bookmark"
                        title="Permalink to Life Insurance GLM with H2O: Part 2">
                         Life Insurance GLM with H2O: Part 2
@@ -109,21 +105,21 @@
 
 
         <span class="label label-default">Category</span>
-        <a href="https://josho88.github.io/category/machine-learning.html">Machine Learning</a>
+        <a href="/category/machine-learning.html">Machine Learning</a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="https://josho88.github.io/tag/r.html">R</a>
+	<a href="/tag/r.html">R</a>
         /
-	<a href="https://josho88.github.io/tag/h2o.html">h2o</a>
+	<a href="/tag/h2o.html">h2o</a>
         /
-	<a href="https://josho88.github.io/tag/modelling.html">modelling</a>
+	<a href="/tag/modelling.html">modelling</a>
         /
-	<a href="https://josho88.github.io/tag/glm.html">GLM</a>
+	<a href="/tag/glm.html">GLM</a>
         /
-	<a href="https://josho88.github.io/tag/grid-search.html">grid search</a>
+	<a href="/tag/grid-search.html">grid search</a>
         /
-	<a href="https://josho88.github.io/tag/regularisation.html">regularisation</a>
+	<a href="/tag/regularisation.html">regularisation</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1538,8 +1534,8 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
     <h4>Part 3 of the Insurance Pricing series</h4>
        <h5>Previous articles</h5>
        <ul>
-           <li><a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
-           <li><a href="https://josho88.github.io/Mortality GLM.html">Life Insurance GLM with H2O: Part 1</a></li>
+           <li><a href="/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
+           <li><a href="/Mortality GLM.html">Life Insurance GLM with H2O: Part 1</a></li>
        </ul>
 </section>
     <hr/>
@@ -1552,7 +1548,7 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
             var disqus_shortname = 'josho88-github-io'; // required: replace example with your forum shortname
 
                     var disqus_identifier = 'Mortality GLM 2';
-                var disqus_url = 'https://josho88.github.io/Mortality GLM 2.html';
+                var disqus_url = '/Mortality GLM 2.html';
 
             var disqus_config = function () {
                 this.language = "en";
@@ -1590,13 +1586,13 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
       </div>
    </div>
 </footer>
-<script src="https://josho88.github.io/theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://josho88.github.io/theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://josho88.github.io/theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
 
     <!-- Disqus -->
