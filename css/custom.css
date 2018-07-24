@@ -453,20 +453,6 @@ h1,h2,h3,h4,h5,h6{
 }
 }
 
-@media screen and (max-width:600px){
-.home h2{
-  visibility: hidden;
-}
-}
-@media screen and (max-width:600px){ 
-.home:after{
-  content: 'We build analytics solutions';
-  visibility:visible;
-  text-align:center;
-  padding:0;
-}
-}
-
 /*mouse scroll effect on banner*/
 .scroll-link {
   position: absolute;
@@ -617,7 +603,7 @@ h1,h2,h3,h4,h5,h6{
 
 @media screen and (max-width:600px){
 .help{
-  padding-bottom:0px;
+  padding-bottom:0;
 }
 }
 
