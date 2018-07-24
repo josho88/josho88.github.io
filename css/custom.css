@@ -448,10 +448,12 @@ h1,h2,h3,h4,h5,h6{
 }
 
 @media screen and (max-width:600px){
-.home h2 {
+.home h2{
   display: none;
 }
-.home h2:after {
+}
+@media screen and (max-width:600px){ 
+.home h2:after{
   content: 'We build analytics solutions';
 }
 }
@@ -684,7 +686,7 @@ h1,h2,h3,h4,h5,h6{
 @media screen and (max-width:600px){ 
   .services{
     display:none;
-    padding-bottom:0%;
+    padding-bottom:0;
   }
 }
 
