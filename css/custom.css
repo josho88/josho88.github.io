@@ -440,12 +440,7 @@ h1,h2,h3,h4,h5,h6{
   color:white;
 }
 
-@media screen and (max-width:600px){
-.banner-home{
-  background-image:none;
-
-}
-}
+/* don't show main banner section on mobiles*/
 @media screen and (max-width:600px){
 .banner-home{
   display:none;
@@ -676,19 +671,8 @@ h1,h2,h3,h4,h5,h6{
   
 }
 
-@media screen and (max-width:600px){
-.services .service1,
-.services .service2,
-.services .service3,
-.services .service4{
-  width:96%;
-  margin-left:2%;
-  margin-right:2%;
-  height:auto;
-}
-}
-
-@media screen and (max-width:600px){
+/* don't show services section on mobiles*/
+@media screen and (max-width:600px){ 
   .services{
     display:none;
   }
