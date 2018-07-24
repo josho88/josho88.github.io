@@ -445,16 +445,18 @@ h1,h2,h3,h4,h5,h6{
   background-image:none;
 
 }
-
+}
+@media screen and (max-width:600px){
 .banner-home{
   color:#2c3e50;
 }
-
+}
+@media screen and (max-width:600px){
 .home h2{
   display:none;
 }
 }
-
+}
 /*mouse scroll effect on banner*/
 .scroll-link {
   position: absolute;
@@ -687,6 +689,13 @@ h1,h2,h3,h4,h5,h6{
   width:96%;
   margin-left:2%;
   margin-right:2%;
+  height:auto;
 }
+}
+
+@media screen and (max-width:600px){
+  .services{
+    height:auto;
+  }
 }
 
