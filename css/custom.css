@@ -361,6 +361,12 @@ h1,h2,h3,h4,h5,h6{
 }
 }
 
+@media screen and (max-width:600px){
+.projects{
+ padding-top:0px; 
+}
+}
+
 .projects .project1{
   margin-top:1.5%;
   margin-left:2%;
@@ -453,7 +459,7 @@ h1,h2,h3,h4,h5,h6{
 }
 }
 @media screen and (max-width:600px){ 
-.home h2:before{
+.home:after{
   content: 'We build analytics solutions';
   visibility:visible;
 }
