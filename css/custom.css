@@ -440,6 +440,12 @@ h1,h2,h3,h4,h5,h6{
   color:white;
 }
 
+@media screen and (max-width:600px){
+.banner-home{
+  background-size: 100% 100%;
+}
+}
+
 /*mouse scroll effect on banner*/
 .scroll-link {
   position: absolute;
