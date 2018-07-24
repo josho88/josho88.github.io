@@ -462,6 +462,8 @@ h1,h2,h3,h4,h5,h6{
 .home:after{
   content: 'We build analytics solutions';
   visibility:visible;
+  text-align:center;
+  padding:0;
 }
 }
 
@@ -613,6 +615,11 @@ h1,h2,h3,h4,h5,h6{
 }
 }
 
+@media screen and (max-width:600px){
+.help{
+  padding-bottom:0px;
+}
+}
 
 .services{
   height:auto;
@@ -693,7 +700,6 @@ h1,h2,h3,h4,h5,h6{
 @media screen and (max-width:600px){ 
   .services{
     display:none;
-    padding-bottom:0;
   }
 }
 
