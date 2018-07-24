@@ -584,6 +584,16 @@ h1,h2,h3,h4,h5,h6{
   background-color:#bccad6;
 }
 
+.help .help1,
+.help .help2,
+.help .help3{
+  width:96%;
+  margin-left:2%;
+  margin-right:2%;
+}
+
+
+
 .services{
   height:auto;
   overflow:auto;
@@ -657,5 +667,16 @@ h1,h2,h3,h4,h5,h6{
   background-attachment:fixed; /*parallax scrolling*/
   overflow:auto;
   
+}
+
+@media screen and (max-width:600px){
+.services .service1,
+.services .service2,
+.services .service3,
+.services .service4{
+  width:96%;
+  margin-left:2%;
+  margin-right:2%;
+}
 }
 
