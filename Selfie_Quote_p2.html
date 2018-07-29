@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Life Insurance GLM with H2O: Part 2 - SJV Analytics</title>
+    <title>Building a Selfie Quote App: Part 2 - SJV Analytics</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,28 +11,28 @@
 
 
 
-<link rel="canonical" href="https://josho88.github.io/Mortality GLM 2.html">
+<link rel="canonical" href="https://josho88.github.io/Selfie_Quote_p2.html">
 
         <meta name="author" content="Josh Olney" />
-        <meta name="keywords" content="R,h2o,modelling,GLM,grid search,regularisation" />
-        <meta name="description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here" />
+        <meta name="keywords" content="Python,R,Shiny,cnn,keras,deep learning" />
+        <meta name="description" content="In a previous post I looked at how to create an age/gender classifier using Keras. In this post we&#39;ll look at the final product - a web app that uses the classifier to generate a life insurance quote. To get from the python model to the finished product involves a few steps:" />
 
         <meta property="og:site_name" content="SJV Analytics" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Life Insurance GLM with H2O: Part 2"/>
-        <meta property="og:url" content="https://josho88.github.io/Mortality GLM 2.html"/>
-        <meta property="og:description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here"/>
-        <meta property="article:published_time" content="2018-04-30" />
+        <meta property="og:title" content="Building a Selfie Quote App: Part 2"/>
+        <meta property="og:url" content="https://josho88.github.io/Selfie_Quote_p2.html"/>
+        <meta property="og:description" content="In a previous post I looked at how to create an age/gender classifier using Keras. In this post we&#39;ll look at the final product - a web app that uses the classifier to generate a life insurance quote. To get from the python model to the finished product involves a few steps:"/>
+        <meta property="article:published_time" content="2018-07-29" />
             <meta property="article:section" content="Machine Learning" />
+            <meta property="article:tag" content="Python" />
             <meta property="article:tag" content="R" />
-            <meta property="article:tag" content="h2o" />
-            <meta property="article:tag" content="modelling" />
-            <meta property="article:tag" content="GLM" />
-            <meta property="article:tag" content="grid search" />
-            <meta property="article:tag" content="regularisation" />
+            <meta property="article:tag" content="Shiny" />
+            <meta property="article:tag" content="cnn" />
+            <meta property="article:tag" content="keras" />
+            <meta property="article:tag" content="deep learning" />
             <meta property="article:author" content="Josh Olney" />
             <meta property="og:image"
-                  content="https://josho88.github.io/images/code.png"/>
+                  content="https://josho88.github.io/images/selfie.jpeg"/>
 
 
 
@@ -90,10 +90,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://josho88.github.io/Mortality GLM 2.html"
+                    <a href="https://josho88.github.io/Selfie_Quote_p2.html"
                        rel="bookmark"
-                       title="Permalink to Life Insurance GLM with H2O: Part 2">
-                        Life Insurance GLM with H2O: Part 2
+                       title="Permalink to Building a Selfie Quote App: Part 2">
+                        Building a Selfie Quote App: Part 2
                     </a>
                 </h1>
             </header>
@@ -103,7 +103,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-04-30T20:00:00+01:00"> Mon 30 April 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-07-29T20:00:00+01:00"> Sun 29 July 2018</time>
     </span>
 
 
@@ -113,17 +113,17 @@
 
 
 <span class="label label-default">Tags</span>
+	<a href="https://josho88.github.io/tag/python.html">Python</a>
+        /
 	<a href="https://josho88.github.io/tag/r.html">R</a>
         /
-	<a href="https://josho88.github.io/tag/h2o.html">h2o</a>
+	<a href="https://josho88.github.io/tag/shiny.html">Shiny</a>
         /
-	<a href="https://josho88.github.io/tag/modelling.html">modelling</a>
+	<a href="https://josho88.github.io/tag/cnn.html">cnn</a>
         /
-	<a href="https://josho88.github.io/tag/glm.html">GLM</a>
+	<a href="https://josho88.github.io/tag/keras.html">keras</a>
         /
-	<a href="https://josho88.github.io/tag/grid-search.html">grid search</a>
-        /
-	<a href="https://josho88.github.io/tag/regularisation.html">regularisation</a>
+	<a href="https://josho88.github.io/tag/deep-learning.html">deep learning</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1103,11 +1103,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Following on from a previous post, this article discusses:</p>
+<p>In a <a href="https://josho88.github.io/Selfie_Quote_p1.html">previous post</a> I looked at how to create an age/gender classifier using Keras. In this post we'll look at the final product - a web app that uses the classifier to generate a life insurance quote. To get from the python model to the finished product involves a few steps:</p>
 <ul>
-<li>Assessing how well the GLM generalises to new data with cross validation</li>
-<li>Automated GLM selection using grid search</li>
+<li>The model is loaded into an R session with the R Keras package</li>
+<li>A new image is imported and used to generate predictions for age and gender</li>
+<li>The age and gender values are used in conjunction with standard actuarial tables to generate a premium</li>
 </ul>
+<p>I use a 'shiny' app to provide the user with an interface to actually produce the quote. In the background, it's basically just running through the steps described above. We've given the user the ability to vary the level of cover and term they want - the premium will update automatically. This is something that R 'shiny' is great for.</p>
+<p>First things first, here is the final app - it's been styled using the semantic.shiny package and custom CSS.</p>
+<p><a href="https://josho88.shinyapps.io/selfie-quote/">Selfie Quote Shiny App - link</a></p>
+<p><img alt="alt text" class="img-responsive" src="images/full_shot.png"/></p>
+<p>To calculate the single premium I have used actuarial commutation functions. If you're not familiar with these, don't worry too much. The actual pricing basis I use isn't really important and is really just for demonstration purposes.</p>
 </div>
 </div>
 </div>
@@ -1115,243 +1121,68 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Previously, we looked at using H2O's GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered <a href="https://josho88.github.io/Mortality%20GLM.html">here</a>.</p>
-<p>The previous model was built using a simulated dataset containing 1.5m records. Each record represents an individual and the columns contain their age, gender, occupation, location, salary details, exposure (how long, in years, the individual was insured) and whether or not a claim was made under their policy.</p>
-<p>The dataset was split into training data (60%), test data (20%) and holdout data (20%). However, the model we extracted actually only used the training data. Next, I'll use the test and holdout sets, as well as cross validation, to refine the model and check that it actually generalises well to new data.</p>
-<p>First, check the performance of the baseline model against the test and holdout datasets - this will allow us to see if any changes we make have a positive effect on the model.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Check performance of baseline model against holdout</span>
-h2o.performance<span class="p">(</span>mod1<span class="p">,</span> newdata <span class="o">=</span> holdout_aggregated<span class="p">)</span>
+<h2 id="Loading-a-Keras-Model-into-R">Loading a Keras Model into R<a class="anchor-link" href="#Loading-a-Keras-Model-into-R">¶</a></h2><p>To load the model into R, use the R Keras package. To install this, use <code>install.packages('keras')</code>. If for some reason you don't already have the Keras python package installed you can use the <code>install_keras()</code> function to install it.</p>
+<p>To load the model simply execute <code>load_model_hdf5('wide_res_py.h5')</code> in your R console or in the shiny script.</p>
+<h2 id="Loading-an-Image">Loading an Image<a class="anchor-link" href="#Loading-an-Image">¶</a></h2><p>The loading of images is taken care of by the shiny app. I use a file input (styled in CSS) in the ui function.</p>
+<div class="highlight"><pre><span></span>fileInput<span class="p">(</span><span class="s">'photo'</span><span class="p">,</span> label <span class="o">=</span> <span class="s">'Upload an Image'</span><span class="p">,</span> accept <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">'.jpg'</span><span class="p">,</span> <span class="s">'.jpeg'</span><span class="p">,</span> <span class="s">'.png'</span><span class="p">))</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_text output_subarea ">
-<pre>H2ORegressionMetrics: glm
+<p>The server function can then access this image and pass it to the Keras model which predicts age and gender.</p>
+<h2 id="Keras-R-Functions">Keras R Functions<a class="anchor-link" href="#Keras-R-Functions">¶</a></h2><p>This is done in the shiny server function, once an image has been loaded by the user. To generate predictions, convert the image to a 4D tensor with a single element in the batch dimension, then use the <code>predict</code> function. For example:</p>
+<div class="highlight"><pre><span></span>img <span class="o">&lt;-</span> image_load<span class="p">(</span>img_path<span class="p">,</span> target_size <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">64</span><span class="p">,</span><span class="m">64</span><span class="p">))</span>
+x <span class="o">&lt;-</span> image_to_array<span class="p">(</span>img<span class="p">)</span>
 
-MSE:  0.1958794
-RMSE:  0.4425826
-MAE:  0.2249019
-RMSLE:  0.2507581
-Mean Residual Deviance :  0.458425
-R^2 :  0.3866104
-Null Deviance :1726.763
-Null D.o.F. :3758
-Residual Deviance :1723.22
-Residual D.o.F. :3748
-AIC :2897.024
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Adding-Regularisation">Adding Regularisation<a class="anchor-link" href="#Adding-Regularisation">¶</a></h2><p>Now, we can experiment with adding regularisation to see if the model can be improved. A detailed discussion of regularisation is beyond the scope of this post. Effectively though, it serves to simplify the GLM and reduces the chance of overfitting to the training set.</p>
-<p>Regularisation involves adding a penalty to the loss function used during coefficient estimation. There are two types of penalty that can be applied, $l_1$ and $l_2$. In both cases, adding a penalty shrinks the model coefficients. However, the shrinkage is applied differently depending on which penalty is used.</p>
-<p>The $l_1$ (LASSO) penalty penalises the sum of the absolute coefficients. Coefficients will shrink in absolute terms and therefore when a sufficiently large penalty is applied coefficients will reduce to 0 (reducing parameters to 0 removes them from the model). Essentially, this stops the model fitting to noise in the data by removing certain features.</p>
-<p>The $l_2$ (ridge) penalty shrinks coefficients proportionally and does not remove any coefficients from the model.</p>
-<p>According to the h2o documentaion, a combination of the $l_1$ and $l_2$ penalty (elastic net) is beneficial because $l_1$ induces sparsity, while $l_2$ gives stability and encourages the grouping effect (where a group of correlated variables tend to be dropped or added into the model simultaneously).</p>
-<p>H2O allows us to fit an elastic net GLM by passing additional parameters into the model. The $\lambda$ parameter controls the strength of the penalty we wish to apply and the $\alpha$ parameter controls the distribution between the $l_1$ and $l_2$ penalties.</p>
-<ul>
-<li>Alpha - a value of 1.0 for alpha represents LASSO, and an alpha value of 0.0 produces ridge reguression.<br/></li>
-<li>Lambda - The lambda parameter controls the amount of regularization applied. If lambda is 0.0, no regularization is applied, and the alpha parameter is ignored. </li>
-<li>If no value is specified for alpha and/or lambda, h2o will use default settings. Default alpha = 0.5, default lambda is calculated by h2o.</li>
-</ul>
-<p>We don't know beforehand which parameters for $\alpha$ and $\lambda$ will be optimal. Rather than manually trying lots of different values for these parameters it is much easier to use grid search over $\alpha$ in h2o and set lambda_search = TRUE (this will automatically try and select the optimal value for $\lambda$ for a model). Grid search allows us to try lots of different values for $\alpha$ and assess which model performs best against a validation frame.</p>
-<p>The following code will build a 'grid' of models. First, we need to define which values of $\alpha$ to try. This is achieved with the <code>seq()</code> function which is defined below to generate a sequence of numbers from 0.01 to 0.95 in increments of 0.01. Trying all of these values for $\alpha$ will result in 96 models being built. These values are stored as a list variable called 'hypers'. Next, instead of <code>h2o.glm()</code> use <code>h2o.grid()</code>. This requires that we specify the algorithm as 'glm'. Also, pass in the 'hypers' list with the hyper_params argument. Note that lambda_search is set to TRUE.</p>
+<span class="c1"># ensure we have a 4d tensor with single element in the batch dimension,</span>
+x <span class="o">&lt;-</span> array_reshape<span class="p">(</span>x<span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kp">dim</span><span class="p">(</span>x<span class="p">)))</span>
+
+<span class="c1"># make predictions then decode and print them</span>
+preds <span class="o">&lt;-</span> model <span class="o">%&gt;%</span> predict<span class="p">(</span>x<span class="p">)</span>
+</pre></div>
+<h2 id="Premium-Calculations">Premium Calculations<a class="anchor-link" href="#Premium-Calculations">¶</a></h2><p>I have made use of the 'life contingencies' R package to perform the pricing calculations - this is a really useful package for performing actuarial calculations quickly and efficiently. It can calculate actuarial values for n-year term assurances, endowments, whole life assurance policies and so on. All you will need to work with this package is a life table. A life table represents survivorship of a population - for each age in the table, starting at 0, we track how many people are still alive at the next age, all the way up to some limiting age (say, 100). We can then calculate annual mortality probabilities for each age and use these for valuing different life products (or rather, the life contingencies package can do this for us!). I have used <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/bulletins/englishlifetablesno17/2015-09-01">'English Life Tables No. 17'</a>.</p>
+<p>The app reads in the ELT Excel tables (using the readxl package), converts these to actuarial tables that the life contingencies package can work with and then uses the built-in functions provided with the package to calculate premiums (allowing for profit and expenses!). If you're interested, the code for this part is below.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Add regularisation - does this improve the model?</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># pull in elt17 and check calcs</span>
 
-hypers <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0.95</span><span class="p">,</span> <span class="m">0.01</span><span class="p">))</span>
+eltMale <span class="o">=</span> <span class="kp">as.data.frame</span><span class="p">(</span>read_excel<span class="p">(</span>path <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">getwd</span><span class="p">(),</span> <span class="s">'/AM92/elt17.xls'</span><span class="p">,</span>sep<span class="o">=</span><span class="s">""</span><span class="p">),</span>
+                                   sheet <span class="o">=</span> <span class="s">'ELT17'</span><span class="p">,</span> range <span class="o">=</span> <span class="s">'D9:D121'</span><span class="p">,</span> col_names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">))</span>
 
-grid <span class="o">=</span> h2o.grid<span class="p">(</span>algorithm <span class="o">=</span> <span class="s">'glm'</span><span class="p">,</span>
-                grid_id <span class="o">=</span> <span class="s">'GLMgrid'</span><span class="p">,</span>
-                x <span class="o">=</span> predictors<span class="p">,</span>
-                y <span class="o">=</span> response<span class="p">,</span>
-                training_frame <span class="o">=</span> train_aggregated<span class="p">,</span>
-                validation_frame <span class="o">=</span> test_aggregated<span class="p">,</span>
-                family <span class="o">=</span> <span class="s">'poisson'</span><span class="p">,</span>
-                offset_column <span class="o">=</span> offset<span class="p">,</span>
-                lambda_search <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-                hyper_params <span class="o">=</span> hypers<span class="p">,</span>
-                seed <span class="o">=</span> <span class="m">123</span><span class="p">)</span>
+eltFemale <span class="o">=</span> <span class="kp">as.data.frame</span><span class="p">(</span>read_excel<span class="p">(</span>path <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">getwd</span><span class="p">(),</span> <span class="s">'/AM92/elt17.xls'</span><span class="p">,</span>sep<span class="o">=</span><span class="s">""</span><span class="p">),</span>
+                                     sheet <span class="o">=</span> <span class="s">'ELT17'</span><span class="p">,</span> range <span class="o">=</span> <span class="s">'N9:N121'</span><span class="p">,</span> col_names <span class="o">=</span> <span class="kc">FALSE</span><span class="p">))</span>
 
-<span class="c1"># sort the grid in terms of mse (low --&gt; high) and pick out the best performing model</span>
-sortedGrid <span class="o">=</span> h2o.getGrid<span class="p">(</span><span class="s">'GLMgrid'</span><span class="p">,</span> sort_by <span class="o">=</span> <span class="s">'mse'</span><span class="p">,</span> decreasing <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 
-<span class="c1"># Extract the 'best' model</span>
-<span class="c1"># (i.e the model stored at the top of the grid)</span>
-mod2 <span class="o">=</span> h2o.getModel<span class="p">(</span>sortedGrid<span class="o">@</span>model_ids<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+<span class="c1"># convert to actuarial life tables - all we need is a vector of ages (starting at 0)</span>
+<span class="c1"># and corresponding alive population at each age</span>
+eltMaleAct <span class="o">=</span> new<span class="p">(</span><span class="s">"actuarialtable"</span><span class="p">,</span>x<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">112</span><span class="p">,</span>by<span class="o">=</span><span class="m">1</span><span class="p">),</span> lx<span class="o">=</span>eltMale<span class="o">$</span>X__1<span class="p">,</span>
+                 interest<span class="o">=</span><span class="m">0.04</span><span class="p">,</span> name<span class="o">=</span><span class="s">"example actuarialtable"</span><span class="p">)</span>
+
+eltFemaleAct <span class="o">=</span> new<span class="p">(</span><span class="s">"actuarialtable"</span><span class="p">,</span>x<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">112</span><span class="p">,</span>by<span class="o">=</span><span class="m">1</span><span class="p">),</span> lx<span class="o">=</span>eltFemale<span class="o">$</span>X__1<span class="p">,</span>
+                 interest<span class="o">=</span><span class="m">0.04</span><span class="p">,</span> name<span class="o">=</span><span class="s">"example actuarialtable"</span><span class="p">)</span>
+
+<span class="c1"># Now, in the shiny server function we do the following:</span>
+
+<span class="c1"># set fixed expense &amp; profit assumption</span>
+    fixed_expense <span class="o">=</span> <span class="m">500</span>
+    profit <span class="o">=</span> <span class="m">0.05</span>
+    
+    <span class="c1"># calc will be different depending on whether male/female - use ifelse statement</span>
+    <span class="c1"># (note, age() &amp; gender() are PREDICTED using keras)</span>
+    <span class="kr">if</span><span class="p">(</span>gender<span class="p">()</span> <span class="o">==</span> <span class="s">'M'</span><span class="p">){</span>
+      comm_function <span class="o">=</span> Axn<span class="p">(</span>actuarialtable <span class="o">=</span> eltMaleAct<span class="p">,</span>
+                          x <span class="o">=</span> age<span class="p">(),</span> n <span class="o">=</span> input<span class="o">$</span>term<span class="p">)</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+      comm_function <span class="o">=</span> Axn<span class="p">(</span>actuarialtable <span class="o">=</span> eltFemaleAct<span class="p">,</span>
+                          x <span class="o">=</span> age<span class="p">(),</span> n <span class="o">=</span> input<span class="o">$</span>term<span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># return premium</span>
+    <span class="p">(</span>input<span class="o">$</span>amt <span class="o">*</span> comm_function  <span class="o">+</span> fixed_expense<span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">+</span>profit<span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [7]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># The sorted grid looks like:</span>
-sortedGrid
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_text output_subarea ">
-<pre>H2O Grid Details
-================
-
-Grid ID: GLMgrid 
-Used hyper parameters: 
-  -  alpha 
-Number of models: 96 
-Number of failed models: 0 
-
-Hyper-Parameter Search Summary: ordered by increasing mse
-   alpha       model_ids                 mse
-1 [0.08] GLMgrid_model_8 0.19413408070930224
-2 [0.06] GLMgrid_model_6  0.1941498061682495
-3 [0.07] GLMgrid_model_7  0.1941535475088932
-4 [0.09] GLMgrid_model_9 0.19416204194644499
-5 [0.05] GLMgrid_model_5 0.19416543267945913
-
----
-    alpha        model_ids                 mse
-91 [0.01]  GLMgrid_model_1 0.19422795701805917
-92 [0.11] GLMgrid_model_11  0.1942491959396608
-93 [0.12] GLMgrid_model_12 0.19425718714512488
-94 [0.03]  GLMgrid_model_3 0.19425860139279355
-95 [0.04]  GLMgrid_model_4 0.19425889315723813
-96 [0.13] GLMgrid_model_13 0.19426459133010185</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Extracting the ratings</span>
-mod2_ratings <span class="o">=</span> mod2<span class="o">@</span>model<span class="o">$</span>coefficients_table
-mod2_ratings<span class="o">$</span>rating <span class="o">=</span> <span class="kp">exp</span><span class="p">(</span>mod2_ratings<span class="o">$</span>coefficients<span class="p">)</span>
-
-<span class="c1"># View the table of coefficients</span>
-<span class="c1"># (some rounding has been applied using dplyr mutate function)</span>
-mod2_ratings <span class="o">%&gt;%</span> 
-    mutate_if<span class="p">(</span><span class="kp">is.numeric</span><span class="p">,</span> funs<span class="p">(</span><span class="kp">round</span><span class="p">(</span><span class="m">.</span><span class="p">,</span> <span class="m">3</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
-<thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
-<tbody>
-<tr><td>Intercept    </td><td> 0.219       </td><td> 0.219       </td><td>1.245        </td></tr>
-<tr><td>Salary_Band.1</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Salary_Band.2</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Salary_Band.3</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Salary_Band.4</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Salary_Band.5</td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Location.1   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Location.2   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Location.3   </td><td> 0.011       </td><td> 0.011       </td><td>1.011        </td></tr>
-<tr><td>Location.4   </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Occupation.1 </td><td> 0.063       </td><td> 0.063       </td><td>1.065        </td></tr>
-<tr><td>Occupation.2 </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Occupation.3 </td><td> 0.000       </td><td> 0.000       </td><td>1.000        </td></tr>
-<tr><td>Male.0       </td><td> 0.008       </td><td> 0.008       </td><td>1.008        </td></tr>
-<tr><td>Male.1       </td><td>-0.008       </td><td>-0.008       </td><td>0.992        </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Check performance of both models against validation &amp; holdout data</span>
-perf1 <span class="o">=</span> h2o.performance<span class="p">(</span>mod1<span class="p">,</span> holdout_aggregated<span class="p">)</span>
-perf2 <span class="o">=</span> h2o.performance<span class="p">(</span>mod2<span class="p">,</span> holdout_aggregated<span class="p">)</span>
-
-<span class="c1"># Check MSE of original model</span>
-<span class="kp">round</span><span class="p">(</span>h2o.mse<span class="p">(</span>perf1<span class="p">),</span><span class="m">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-0.19588
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># And now, MSE of regularised model, automatically 'tuned'</span>
-<span class="kp">round</span><span class="p">(</span>h2o.mse<span class="p">(</span>perf2<span class="p">),</span><span class="m">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-0.19632
-</div>
 </div>
 </div>
 </div>
@@ -1360,7 +1191,10 @@ perf2 <span class="o">=</span> h2o.performance<span class="p">(</span>mod2<span 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since the MSE of the new model is larger than that under the original model, the 'tuning' may have actually resulted in overfitting. However, the holdout dataset is only one sample and so it's difficult to draw too many conclusions from this result. This is where cross validation comes in. We can use cross validation to see which model generalises better to new data by examining performance across multiple test datasets.</p>
+<h2 id="Using-the-App">Using the App<a class="anchor-link" href="#Using-the-App">¶</a></h2><p>A user can simply hit the 'upload an image' button and choose a .png or .jpg file on their local machine. This will automatically be passed through the Keras model and the age and gender predictions will be stored. A datatable showing the predicted age, gender and single premium will be returned in the 'Your Quote' section of the app.</p>
+<p><img alt="alt text" class="img-responsive" src="images/quote.png"/></p>
+<p>The user can alter their cover level and preferred term using the shiny slider inputs and the datatable will automatically update.</p>
+<p><img alt="alt text" class="img-responsive" src="images/bars.png"/></p>
 </div>
 </div>
 </div>
@@ -1368,138 +1202,7 @@ perf2 <span class="o">=</span> h2o.performance<span class="p">(</span>mod2<span 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation">¶</a></h2><p>So far, the model has only been validated using one test set. K-fold cross validation can be used to check that the $\alpha$ parameter selected is generally sound and that the model will generalise well to a number of unseen data sets. The basic idea is as follows:</p>
-<ul>
-<li>Partition the data into k subsets</li>
-<li>Use k-1 subsets as the training data</li>
-<li>Test the model on the remaining subset</li>
-<li>Repeat until all subsets have been used as a test set once</li>
-</ul>
-<p>This will give us mean performance measures across the k subsets, as well as a standard deviation. The 'best' model (from a number of competing models) might be considered to be the one which has the best mean cross validation performance. The next steps describe how to cross validate an existing model in h2o. The alternative is to set the nfolds argument to be non negative when fitting the models in the first place. However, since this will build n+1 models this may be computationally expensive if using grid search (and depending on the size of the dataset and which model you are fitting - GLM is normally quite fast).</p>
-<p>We can select the best performing models in the grid and cross validate each of these to check which has the best mean performance. We can do this using the train and test sets combined. I will use 5 fold cross validation in the following code blocks.</p>
-<p>Note - the cross validation performance metrics will not be directly comparable with those computed on the earlier holdout data, since the testing examples in each k fold will be different to those in the holdout set.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Combine train &amp; test data and cross validate the models at the top</span>
-<span class="c1"># of the grid.</span>
-<span class="c1"># Again, use lambda search to choose optimal lambda.</span>
-
-<span class="c1"># The following code is based on a tutorial taken from the H2O website</span>
-df <span class="o">=</span> h2o.rbind<span class="p">(</span>train_aggregated<span class="p">,</span>test_aggregated<span class="p">)</span>
-
-<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">){</span>
-  glm <span class="o">&lt;-</span> h2o.getModel<span class="p">(</span>sortedGrid<span class="o">@</span>model_ids<span class="p">[[</span>i<span class="p">]])</span>
-  cvglm <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span>h2o.glm<span class="p">,</span>
-                   <span class="p">{</span>
-                     p <span class="o">&lt;-</span> glm<span class="o">@</span>parameters
-                     p<span class="o">$</span>model_id <span class="o">=</span> <span class="kc">NULL</span>         
-                     p<span class="o">$</span>training_frame <span class="o">=</span> df  <span class="c1"># no validation frame</span>
-                     p<span class="o">$</span>validation_frame <span class="o">=</span> <span class="kc">NULL</span>  
-                     p<span class="o">$</span>offset_column <span class="o">=</span> <span class="s">'Offset'</span>
-                     p<span class="o">$</span>nfolds <span class="o">=</span> <span class="m">5</span>          <span class="c1"># add the cross validation   </span>
-                     p<span class="o">$</span>lambda_search <span class="o">=</span> <span class="bp">T</span>
-                     p
-                   <span class="p">}</span>
-  <span class="p">)</span>
-  <span class="kp">print</span><span class="p">(</span>glm<span class="o">@</span>model_id<span class="p">)</span>
-  <span class="kp">print</span><span class="p">(</span>cvglm<span class="o">@</span>model<span class="o">$</span>cross_validation_metrics_summary<span class="p">[</span><span class="m">3</span><span class="p">,])</span> <span class="c1"># print out mse row</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] "GLMgrid_model_8"
-Cross-Validation Metrics Summary: 
-          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
-mse 0.39514202 0.02417593 0.41696805  0.4179402 0.39798224 0.41450343
-    cv_5_valid
-mse 0.32831618
-[1] "GLMgrid_model_6"
-Cross-Validation Metrics Summary: 
-         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
-mse 0.3952421 0.024238229 0.41700536 0.41825843  0.3980208  0.4146654
-    cv_5_valid
-mse 0.32826048
-[1] "GLMgrid_model_7"
-Cross-Validation Metrics Summary: 
-         mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
-mse 0.3951722 0.024202611  0.4169403   0.418074  0.3980001  0.4145702
-    cv_5_valid
-mse 0.32827646
-[1] "GLMgrid_model_9"
-Cross-Validation Metrics Summary: 
-          mean          sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
-mse 0.39519712 0.024199862 0.41699398 0.41802925  0.3979665  0.4146775
-    cv_5_valid
-mse 0.32831836
-[1] "GLMgrid_model_5"
-Cross-Validation Metrics Summary: 
-          mean         sd cv_1_valid cv_2_valid cv_3_valid cv_4_valid
-mse 0.39520955 0.02424613 0.41696036  0.4182716 0.39804438  0.4145749
-    cv_5_valid
-mse 0.32819656
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># Compare these to cross validated version of baseline model:</span>
-mod1_cv <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span>h2o.glm<span class="p">,</span>
-                         
-                         <span class="p">{</span>
-                           p <span class="o">&lt;-</span> mod1<span class="o">@</span>parameters
-                           p<span class="o">$</span>model_id <span class="o">=</span> <span class="kc">NULL</span>          
-                           p<span class="o">$</span>training_frame <span class="o">=</span> df      
-                           p<span class="o">$</span>validation_frame <span class="o">=</span> <span class="kc">NULL</span>  
-                           p<span class="o">$</span>nfolds <span class="o">=</span> <span class="m">5</span>              
-                           p<span class="o">$</span>offset_column <span class="o">=</span> <span class="s">'Offset'</span>
-                           p
-                         <span class="p">}</span>
-<span class="p">)</span>
-mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_metrics_summary<span class="p">[</span><span class="m">3</span><span class="p">,]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
-<thead><tr><th></th><th scope="col">mean</th><th scope="col">sd</th><th scope="col">cv_1_valid</th><th scope="col">cv_2_valid</th><th scope="col">cv_3_valid</th><th scope="col">cv_4_valid</th><th scope="col">cv_5_valid</th></tr></thead>
-<tbody>
-<tr><th scope="row">mse</th><td>0.40253404 </td><td>0.026616871</td><td>0.4350453  </td><td>0.41589925 </td><td>0.42091507 </td><td>0.4119179  </td><td>0.32889268 </td></tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>It looks like the tuned model performs better if we look at cross validation performance rather than performance against a single holdout set. So, we might determine that the regularised model generalises best to unseen data. The rating plan we extract should be based on this second model.</p>
-<p>Regularisation has led to a much simpler model. In fact, the only real loadings picked up are for location 3 and occupation class 1 (the effect of gender is negligible).</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>I haven't covered all the code in great detail here - the reason being, some of it is reasonably complex! But hopefully this gives you an idea of what you can achieve and may help you generate ideas when considering how to deploy some of your own deep learning models. If you'd like to see the full R shiny code then feel free to leave a comment or get in touch and I will share this with you.</p>
 </div>
 </div>
 </div>
@@ -1535,11 +1238,10 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
-    <h4>Part 3 of the Insurance Pricing series</h4>
+    <h4>Part 2 of the Selfie Quote series</h4>
        <h5>Previous articles</h5>
        <ul>
-           <li><a href="https://josho88.github.io/Simulating Data.html">Simulating a Mortality Dataset in R</a></li>
-           <li><a href="https://josho88.github.io/Mortality GLM.html">Life Insurance GLM with H2O: Part 1</a></li>
+           <li><a href="https://josho88.github.io/Selfie_Quote_p1.html">Building a Selfie Quote App: Part 1</a></li>
        </ul>
 </section>
     <hr/>
@@ -1551,8 +1253,8 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'josho88-github-io'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'Mortality GLM 2';
-                var disqus_url = 'https://josho88.github.io/Mortality GLM 2.html';
+                    var disqus_identifier = 'Selfie_Quote_p2';
+                var disqus_url = 'https://josho88.github.io/Selfie_Quote_p2.html';
 
             var disqus_config = function () {
                 this.language = "en";
