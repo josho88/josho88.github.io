@@ -429,7 +429,7 @@ h1,h2,h3,h4,h5,h6{
   margin-top:1.5%;
   margin-left:1.5%;
   margin-right:1.5%;
-  background:url(/images/code.png);
+  background:url(/images/robots.jpeg);
   background-size:cover;
 }
 
@@ -437,7 +437,7 @@ h1,h2,h3,h4,h5,h6{
   margin-top:1.5%;
   margin-left:1.5%;
   margin-right:2%;
-  background:url(/images/misc.png);
+  background:url(/images/model.jpg);
   background-size:cover;
 
 }
@@ -816,11 +816,11 @@ h1,h2,h3,h4,h5,h6{
     color: white;
 }
 
-#myFooter .google:hover {
+#myFooter .github:hover {
     color: white;
 }
 
-#myFooter .twitter:hover {
+#myFooter .linkedin:hover {
     color: white;
 }
 
