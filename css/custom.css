@@ -20,7 +20,7 @@ a.anchor-link {
 
 body {
     font-family: 'Raleway', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.728571;
 }
 
@@ -46,12 +46,44 @@ h1,h2,h3,h4,h5,h6{
 /* update nav bar*/
 .navbar-brand,
 .navbar-nav li a {
-    line-height: 62px;
-    height: 62px;
+    line-height: 65px;
+    height: 65px;
     padding-top: 0;
     padding-bottom:0;
+    font-family: 'Raleway', sans-serif;
 }
 
+.navbar-default .navbar-nav>li>a{
+  /*color:#bccad6*/
+  color:#d6dfe6; /*slightly lighter shade*/
+  
+} /* change navbar text color/*
+
+/* pull menu elements to the right*/
+.navbar-nav{
+  float:right;
+  margin-right:0%;
+  font-family: 'Raleway', sans-serif;
+  font-size:15px;
+}
+
+.navbar-header{
+  float:left;
+}
+
+.navbar-nav li{
+  padding-left:18px;
+  padding-right:18px;
+
+}
+
+/* reposition logo*/
+.img-responsive {
+  padding: 5px;
+  padding-top:10px;
+  padding-bottom:10px;
+  /*margin-top: 4px;*/
+}
 /* contact form*/
 
 .contact{
@@ -179,6 +211,23 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /* about me*/
+
+.banner-about{
+  width:100%;
+  text-align:center;
+  background-size:cover;
+  background-image:url(/images/fields.jpg);
+  overflow:visible;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+  background-color: #C4C4C4;
+  margin: 0 0 0;
+  padding: 115px 0; /*controls padding around inner text & therefore size of banner*/
+  position:relative;
+  margin-top:-20px; /*dodgy way of removing whitsepace under nav*/
+  background-attachment:fixed; /*parallax scrolling*/
+}
 
 .about-me{
   padding-top:20px;
@@ -372,7 +421,7 @@ h1,h2,h3,h4,h5,h6{
   margin-left:2%;
   margin-right:1.5%;
   /*background-image:url(/images/notepad.png); changed as interfered with chrome*/ 
-  background:url(/images/notepad.png);
+  background:url(/images/selfie.jpeg);
   background-size:cover;
 }
 
@@ -417,12 +466,6 @@ h1,h2,h3,h4,h5,h6{
   font-weight:bold;
 }
 
-/* reposition logo*/
-.img-responsive {
-  padding: 5px;
-  margin-top: 4px;
-}
-
 /* homepage*/
 
 .banner-home{
@@ -442,7 +485,7 @@ h1,h2,h3,h4,h5,h6{
   background-attachment:fixed; /*parallax scrolling*/
 }
 
-.banner-home h1{
+.banner-home h1, .banner-about h1{
   color:white;
 }
 
@@ -689,3 +732,244 @@ h1,h2,h3,h4,h5,h6{
   }
 }
 
+
+/* footer */
+#myFooter {
+    background-color:  #78797b;
+    color: white;
+    padding-top: 30px;
+}
+
+#myFooter .col-sm-2{
+  text-align:right;
+  
+}
+
+#myFooter .col-sm-2 a{
+  font-family: 'Raleway', sans-serif;
+}
+
+#myFooter .footer-copyright {
+    background-color: #78797b;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+#myFooter .row {
+    margin-bottom: 0px;
+}
+
+#myFooter .footer-copyright p {
+    margin: 3px;
+    color: #ccc;
+}
+
+#myFooter ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+
+#myFooter .col-sm-2, .col-sm-3{
+
+}
+
+#myFooter a {
+    color: #d2d1d1;
+    text-decoration: none;
+}
+
+#myFooter a:hover,
+#myFooter a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+#myFooter .social-networks {
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 16px;
+}
+
+#myFooter .social-networks a {
+    font-size: 32px;
+    color: #d2d1d1;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+#myFooter img{
+  padding:10px;
+}
+
+#myFooter .social-networks p {
+  color: #d2d1d1;
+
+}
+
+#myFooter .social-networks a:hover {
+    text-decoration: none;
+}
+
+#myFooter .facebook:hover {
+    color: white;
+}
+
+#myFooter .google:hover {
+    color: white;
+}
+
+#myFooter .twitter:hover {
+    color: white;
+}
+
+
+
+@media screen and (max-width: 767px) {
+    #myFooter {
+        text-align: center;
+    }
+}
+
+
+/* CSS used for positioning the footers at the bottom of the page. */
+/* You can remove this. */
+
+.content{
+   flex: 1 0 auto;
+   -webkit-flex: 1 0 auto;
+   min-height: 100px;
+}
+
+#myFooter{
+   flex: 0 0 auto;
+   -webkit-flex: 0 0 auto;
+}
+
+
+.banner-training{
+  width:100%;
+  text-align:center;
+  background-size:cover;
+  background-image:url(/images/training2.jpg);
+  overflow:visible;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+  background-color: #C4C4C4;
+  margin: 0 0 0;
+  padding: 115px 0; /*controls padding around inner text & therefore size of banner*/
+  position:relative;
+  margin-top:-20px; /*dodgy way of removing whitsepace under nav*/
+  background-attachment:fixed; /*parallax scrolling*/
+}
+
+.banner-training h1{
+  color:white;
+}
+
+.training{
+  padding-top:20px;
+  width:80%;
+  margin-left:10%;
+  margin-right:10%;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+.training p{
+  text-align:justify;
+}
+
+/* adjust text alignment on about me page for mobile devices*/
+@media screen and (max-width:600px){
+.training p{
+  text-align:center;
+}
+}
+
+.training:after{
+  content:'';
+  display:block;
+  clear:both;
+}
+
+.training h2{
+  position:relative;
+  padding-bottom:30px;
+}
+
+.training h2:after{
+  content:'';
+  position:absolute;
+  width:71.4%;
+  height:2px;
+  left:14.3%;
+  bottom:15px;
+  background-color:#ecf0f1;
+}
+
+.training a{
+  background-color: white;
+  padding:10px 25px;
+  text-decoration:none;
+  color:#2c3e50;
+  border: 1px solid #2c3e50;
+  /*border-radius:20px;*/
+  font-size:15px;
+  display: inline-block;
+  margin-top:10px;
+}
+
+.training a:hover{
+  background-color:#2c3e50;
+  color:white;
+}
+
+.courses{
+  height:auto;
+  overflow:auto;
+  position:relative;
+  display:inline-block;
+  text-align:center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-bottom:5%;
+}
+
+.courses .course-1,
+.courses .course-2,
+.courses .course-3,
+.courses .course-4,
+.courses .course-5,
+.courses .course-6{
+  width:23.32%;
+  height:300px;
+  float:left;
+  position:relative;
+  padding:30px;
+  margin-left:2.5%;
+  margin-right:2.5%;
+  border-bottom:solid 1px #bccad6;
+  color:#2c3e50;
+}
+
+.courses .course-1,
+.courses .course-4{
+  margin-left:10%;
+}
+
+.courses .course-3,
+.courses .course-6{
+  margin-right:10%;
+}
+
+.courses .course-1:hover,
+.courses .course-2:hover,
+.courses .course-3:hover,
+.courses .course-4:hover,
+.courses .course-5:hover,
+.courses .course-6:hover{
+  color:#78797b;
+}

@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Simulating a Mortality Dataset in R - SJV Analytics</title>
+    <title>Simulating a Mortality Dataset in R - SVA Solutions</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
         <meta name="keywords" content="R,RStudio,Simulation" />
         <meta name="description" content="In this post I&#39;ll show you how to simulate a large dataset of mortality claims. Sometimes it&#39;s useful to use simulated data. For example, if you wanted to experiment with new modelling techniques but were unable to find a useful dataset, it may be easiest just to create your own. Alternatively, you may simply wish to supplement existing data with simulated data. If you have some assumptions about the variables you want to create, it&#39;s possible to create entire datasets from scratch." />
 
-        <meta property="og:site_name" content="SJV Analytics" />
+        <meta property="og:site_name" content="SVA Solutions" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Simulating a Mortality Dataset in R"/>
         <meta property="og:url" content="https://josho88.github.io/Simulating Data.html"/>
@@ -42,12 +42,12 @@
         <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
 
         <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics ATOM Feed"/>
+              title="SVA Solutions ATOM Feed"/>
 
 
 
         <link href="https://josho88.github.io/feeds/data-exploration.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics Data Exploration ATOM Feed"/>
+              title="SVA Solutions Data Exploration ATOM Feed"/>
 
 </head>
 <body>
@@ -62,13 +62,14 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
+<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/transparent.png" width="90"/>             </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/index.html"> <i class="fa fa-location-arrow"></i>  Home</a></li>
                     <li><a href="/blog_index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
                     <li><a href="/pages/about.html"> <i class="fa fa-info"></i>  About</a></li>
+                    <li><a href="/pages/training.html"> <i class="fa fa-user"></i>  Training</a></li>
                     <li><a href="/pages/contact.html"> <i class="fa fa-envelope"></i>  Contact</a></li>
                 
             </ul>
@@ -1160,7 +1161,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age     </td><td>40      </td><td>25      </td><td>normal  </td><td>identity</td></tr>
@@ -1210,7 +1211,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age            </td><td>40             </td><td>25             </td><td>normal         </td><td>identity       </td></tr>
@@ -1268,7 +1269,7 @@ def
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">varname</th><th scope="col">formula</th><th scope="col">variance</th><th scope="col">dist</th><th scope="col">link</th></tr></thead>
 <tbody>
 <tr><td>Age                                                                                                          </td><td>40                                                                                                           </td><td>25.0                                                                                                         </td><td>normal                                                                                                       </td><td>identity                                                                                                     </td></tr>
@@ -1313,7 +1314,7 @@ dt <span class="o">=</span> genData<span class="p">(</span>n <span class="o">=</
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th></tr></thead>
 <tbody>
 <tr><td>1        </td><td>42.08506 </td><td>1        </td><td>3        </td><td>1        </td><td>2.7495713</td><td>38489.57 </td><td>0        </td></tr>
@@ -6882,7 +6883,7 @@ dt<span class="o">$</span>Salary_Band <span class="o">=</span> quant_bin<span cl
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">id</th><th scope="col">Age</th><th scope="col">Gender</th><th scope="col">Occupation</th><th scope="col">Location</th><th scope="col">Exposure</th><th scope="col">Salary</th><th scope="col">Claim</th><th scope="col">Age_Last</th><th scope="col">Salary_Band</th></tr></thead>
 <tbody>
 <tr><td>1        </td><td>37.19762 </td><td>1        </td><td>3        </td><td>4        </td><td>2.8019758</td><td>61010.78 </td><td>0        </td><td>37       </td><td>4        </td></tr>
@@ -6988,17 +6989,63 @@ dt<span class="o">$</span>Salary_Band <span class="o">=</span> quant_bin<span cl
     </div>
 </div>
 <footer>
+   <div class="content">
+</div>
+    <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img class="img-footer" src="https://josho88.github.io/images/brandmark-design.png" width="175"/>
+                </div>
+                <div class="col-sm-2">
+                  
+
+
+                </div>
+                <div class="col-sm-2">
+                  
+
+
+                </div>
+                <div class="col-sm-2">
+                    <ul>
+                        <li><a href = "/pages/about.html">About</a></li>
+                        <li><a href = "/pages/contact.html">Contact</a></li>
+                        <li><a href = "/blog_index.html">Blog</a></li>
+                    </ul>
+
+
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-github"></i></a>
+                        <a href="#" class="google"><i class="fa fa-facebook"></i></a>
+                        <p>info@sva.com</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2018 SVA Solutions | All Rights Reserved </p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</footer><!-- <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 Josh Olney
+         <div class="col-xs-10">&copy; 2018 SVA Solutions
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
          <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
       </div>
    </div>
-</footer>
+</footer> -->
+
 <script src="https://josho88.github.io/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->

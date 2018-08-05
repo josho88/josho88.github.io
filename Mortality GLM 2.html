@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab" rel="stylesheet" type="text/css">
     
-    <title>Life Insurance GLM with H2O: Part 2 - SJV Analytics</title>
+    <title>Life Insurance GLM with H2O: Part 2 - SVA Solutions</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
         <meta name="keywords" content="R,h2o,modelling,GLM,grid search,regularisation" />
         <meta name="description" content="Following on from a previous post, this article discusses: Assessing how well the GLM generalises to new data with cross validation Automated GLM selection using grid search Previously, we looked at using H2O&#39;s GLM function to set a rating plan for life insurance contracts. Importing and preparing the data, the use of offsets and fitting the GLM with h2o were all covered here" />
 
-        <meta property="og:site_name" content="SJV Analytics" />
+        <meta property="og:site_name" content="SVA Solutions" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Life Insurance GLM with H2O: Part 2"/>
         <meta property="og:url" content="https://josho88.github.io/Mortality GLM 2.html"/>
@@ -45,12 +45,12 @@
         <link href="https://josho88.github.io/css/custom.css" rel="stylesheet">
 
         <link href="https://josho88.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics ATOM Feed"/>
+              title="SVA Solutions ATOM Feed"/>
 
 
 
         <link href="https://josho88.github.io/feeds/machine-learning.atom.xml" type="application/atom+xml" rel="alternate"
-              title="SJV Analytics Machine Learning ATOM Feed"/>
+              title="SVA Solutions Machine Learning ATOM Feed"/>
 
 </head>
 <body>
@@ -65,13 +65,14 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://josho88.github.io/" class="navbar-brand">
-<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/Logomakr_7DHhAo.png" width="55"/> SJV Analytics            </a>
+<img class="img-responsive pull-left gap-right" src="https://josho88.github.io/images/transparent.png" width="90"/>             </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/index.html"> <i class="fa fa-location-arrow"></i>  Home</a></li>
                     <li><a href="/blog_index.html"> <i class="fa fa-list-ul"></i>  Projects</a></li>
                     <li><a href="/pages/about.html"> <i class="fa fa-info"></i>  About</a></li>
+                    <li><a href="/pages/training.html"> <i class="fa fa-user"></i>  Training</a></li>
                     <li><a href="/pages/contact.html"> <i class="fa fa-envelope"></i>  Contact</a></li>
                 
             </ul>
@@ -1283,7 +1284,7 @@ mod2_ratings <span class="o">%&gt;%</span>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th scope="col">names</th><th scope="col">coefficients</th><th scope="col">standardized_coefficients</th><th scope="col">rating</th></tr></thead>
 <tbody>
 <tr><td>Intercept    </td><td> 0.219       </td><td> 0.219       </td><td>1.245        </td></tr>
@@ -1483,7 +1484,7 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
-<table class="table-striped table-hover table">
+<table class="table-hover table-striped table">
 <thead><tr><th></th><th scope="col">mean</th><th scope="col">sd</th><th scope="col">cv_1_valid</th><th scope="col">cv_2_valid</th><th scope="col">cv_3_valid</th><th scope="col">cv_4_valid</th><th scope="col">cv_5_valid</th></tr></thead>
 <tbody>
 <tr><th scope="row">mse</th><td>0.40253404 </td><td>0.026616871</td><td>0.4350453  </td><td>0.41589925 </td><td>0.42091507 </td><td>0.4119179  </td><td>0.32889268 </td></tr>
@@ -1579,17 +1580,63 @@ mod1_cv<span class="o">@</span>model<span class="o">$</span>cross_validation_met
     </div>
 </div>
 <footer>
+   <div class="content">
+</div>
+    <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img class="img-footer" src="https://josho88.github.io/images/brandmark-design.png" width="175"/>
+                </div>
+                <div class="col-sm-2">
+                  
+
+
+                </div>
+                <div class="col-sm-2">
+                  
+
+
+                </div>
+                <div class="col-sm-2">
+                    <ul>
+                        <li><a href = "/pages/about.html">About</a></li>
+                        <li><a href = "/pages/contact.html">Contact</a></li>
+                        <li><a href = "/blog_index.html">Blog</a></li>
+                    </ul>
+
+
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-github"></i></a>
+                        <a href="#" class="google"><i class="fa fa-facebook"></i></a>
+                        <p>info@sva.com</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2018 SVA Solutions | All Rights Reserved </p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</footer><!-- <footer>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 Josh Olney
+         <div class="col-xs-10">&copy; 2018 SVA Solutions
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
          <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
       </div>
    </div>
-</footer>
+</footer> -->
+
 <script src="https://josho88.github.io/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
