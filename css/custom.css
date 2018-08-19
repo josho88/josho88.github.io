@@ -386,7 +386,8 @@ h1,h2,h3,h4,h5,h6{
 .projects .project2, 
 .projects .project3,
 .projects .project4,
-.projects .project5{
+.projects .project5,
+.projects .project6{
   height:300px;
   width:30%;
   float:left;
@@ -401,7 +402,8 @@ h1,h2,h3,h4,h5,h6{
 .projects .project2, 
 .projects .project3,
 .projects .project4,
-.projects .project5{
+.projects .project5,
+.projects .project6{
   height:296px;
   width:96%;
   float:left;
@@ -447,7 +449,6 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .projects .project4{
-  width:46.5%;
   margin-top:1.5%;
   margin-left:2%;
   margin-right:1.5%;
@@ -457,14 +458,23 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .projects .project5{
-  width:46.5%;
   margin-top:1.5%;
   margin-left:1.5%;
-  margin-right:2%;
+  margin-right:1.5%;
   margin-top:3%;
   background:url(/images/portrait2.jpeg);
   background-size:cover;
 }
+
+.projects .project6{
+  margin-top:1.5%;
+  margin-left:1.5%;
+  margin-right:2%;
+  margin-top:3%;
+  background:url(/images/houses.jpg);
+  background-size:cover;
+}
+
 
 .projects .overlay{
   width:100%;
@@ -1002,10 +1012,7 @@ h1,h2,h3,h4,h5,h6{
  .holds-the-iframe {
   height:100%;
   width:100%;
-  background:url(/images/Spinner-1s-200px.gif) center center no-repeat;
+  background:url(/images/loader1.gif) center center no-repeat;
  }
 
-iframe{
-  overflow:hidden;
-}
- 
+
